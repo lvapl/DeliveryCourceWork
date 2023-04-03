@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace DeliveryService.MVVM.Model.Repositories
 {
@@ -19,27 +20,29 @@ namespace DeliveryService.MVVM.Model.Repositories
 
         public void Add(Worker worker)
         {
-            throw new NotImplementedException();
+            _context.Workers.Add(worker);
+            _context.SaveChanges();
         }        
 
         public void Edit(Worker worker)
         {
-            throw new NotImplementedException();
+            _context.Workers.Update(worker);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Worker> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Workers.ToList();
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _context.Workers.Remove(GetById(id));
         }
 
         public Worker GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Workers.Find(id) ?? throw new ArgumentNullException();
         }
 
         public Worker? GetWorkerByLoginAndPassword(string login, byte[] password)

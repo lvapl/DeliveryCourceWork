@@ -1,4 +1,6 @@
-﻿using DeliveryService.MVVM.Model;
+﻿using AutoMapper;
+using DeliveryService.MVVM.Model;
+using DeliveryService.MVVM.Model.DTO;
 using DeliveryService.MVVM.Model.Repositories;
 using DeliveryService.MVVM.View;
 using DeliveryService.Services;
@@ -18,7 +20,7 @@ namespace DeliveryService
     /// </summary>
     public partial class App : Application
     {
-        private ServiceProvider _serviceProvider;
+        public static ServiceProvider _serviceProvider;
 
         public App()
         {
@@ -29,12 +31,21 @@ namespace DeliveryService
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DsContext, DsContext>();
-            services.AddSingleton<LoginWindow, LoginWindow>();
-            services.AddSingleton<MainWindow, MainWindow>();
-            services.AddScoped<IWorkerRepository, WorkerRepository>();
-            services.AddScoped<IEncryptionService, EncryptionService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddDbContext<DsContext>();
+            services.AddSingleton<LoginWindow>();
+            services.AddSingleton<MainWindow>();
+            services.AddSingleton<IWorkerRepository, WorkerRepository>();
+            services.AddSingleton<IEncryptionService, EncryptionService>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IWorkerGeneralInfoService, WorkerGeneralInfoService>();
+            services.AddAutoMapper(cfg => {
+                cfg.CreateMap<Worker, WorkerGeneralInfoDTO>().IncludeMembers(x => x.IdNavigation, x => x.Position);
+                cfg.CreateMap<User, WorkerGeneralInfoDTO>(MemberList.None);
+                cfg.CreateMap<Position, WorkerGeneralInfoDTO>(MemberList.None);
+            });
+            services.AddSingleton<WorkerGeneralInfoService>();
+            
+
         }
 
         protected override void OnStartup(StartupEventArgs e)

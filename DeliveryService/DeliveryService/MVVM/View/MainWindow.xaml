@@ -69,5 +69,8 @@
             </TreeView>
         </DockPanel>
 
+        <Frame Grid.Row="1"
+               Grid.Column="2"
+               Content="{Binding WorkerGeneralInfoPage}"/>
     </Grid>
 </Window>
