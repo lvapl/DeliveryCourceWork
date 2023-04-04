@@ -71,6 +71,6 @@
 
         <Frame Grid.Row="1"
                Grid.Column="2"
-               Content="{Binding WorkerGeneralInfoPage}"/>
+               Content="{Binding CurrentPage, Converter={StaticResource AppPageConverter}}"/>
     </Grid>
 </Window>

@@ -139,3 +139,4 @@ C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\Deliver
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\bin\Debug\net6.0-windows\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\WorkerGeneralInfoPage.g.cs
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\WorkerGeneralInfoPage.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
