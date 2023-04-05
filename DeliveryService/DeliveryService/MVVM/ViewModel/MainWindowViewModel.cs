@@ -13,5 +13,17 @@ namespace DeliveryService.MVVM.ViewModel
     {
         public AppPages CurrentPage { get; set; } = AppPages.WorkerGeneralInfo;
 
+        private RelayCommand? _changePageCommand;
+
+        public RelayCommand ChangePageCommand
+        {
+            get
+            {
+                return _changePageCommand ?? (_changePageCommand = new RelayCommand((object? obj) =>
+                {
+                    CurrentPage = (AppPages)obj;
+                }));
+            }
+        }
     }
 }

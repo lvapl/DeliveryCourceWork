@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dyIUTQXxc5VUau7ZnyFIiGnSAmBl2AZv60agIEADUtpk0j5rdo3UgNWHR4Ue5cSAzzTvF0OsPDvl944ZZHnFzA==",
+  "dgSpecHash": "/Tc45KHxIJhWf+z6aKMV8OyP8Cn/CK6OCyCW5uhhMyTUcGw+hfVZB8tuaezYpGxlvnBcxYopbQn6VyQWKx1j2w==",
   "success": true,
   "projectFilePath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\clash\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\clash\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",

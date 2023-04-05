@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace DeliveryService.Converters
 {
-    public class AppPageConverter : IValueConverter
+    public class AppPageConverter : ConverterBase<AppPageConverter>
     {
-        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is AppPages && targetType == typeof(Page))
+            if (value is AppPages)
             {
                 switch (value) 
                 {
@@ -28,9 +29,9 @@ namespace DeliveryService.Converters
             return null;
         }
 
-        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Page && targetType == typeof(AppPages))
+            if (value is Page)
             {
                 switch(value)
                 {

@@ -4,73 +4,98 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeliveryService.MVVM.View"
+        xmlns:converters="clr-namespace:DeliveryService.Converters"
+        xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1200">
-    <Window.Resources>
-        <Style TargetType="TreeViewItem">
-            <Setter Property="Margin" Value="0 2 0 2"/>
-        </Style>
-    </Window.Resources>
+        Title="MainWindow" 
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="650" Width="1200">
+    <Border Background="{StaticResource BackgroundLightBrush}" CornerRadius="21">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-    <Grid Background="#F8F9FA">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="110" Width="*"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition MinWidth="110" Width="5*"/>
-        </Grid.ColumnDefinitions>
+            
+            
+            <!--Left Menu-->
+            <Grid Grid.Row="1" 
+                  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+                <Button Style="{StaticResource MenuButton}"
+                        HorizontalAlignment="Left"
+                        Margin="5 5 0 40">
+                    <Icons:PackIconMaterial Kind="Menu" 
+                                            Width="15"
+                                            Height="15"/>
+                </Button>
 
-        <GridSplitter Grid.Column="1"
-                      Grid.Row="1"
-                      VerticalAlignment="Stretch" 
-                      HorizontalAlignment="Center" 
-                      Width="5"/>
+                <Border Grid.Row="1"
+                        Background="{StaticResource PrimaryColorBruh}"
+                        CornerRadius="0 50 0 0">
+                    <DockPanel>
+                        <!--Avatar-->
+                        <Border Width="80"
+                                Height="80"
+                                Background="White"
+                                CornerRadius="100"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Left"
+                                Margin="20 -30 0 0"
+                                Padding="3">
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding }"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        
+                        <!--FirstName-->
+                        <TextBlock Text="Алексей"
+                                   Foreground="White"
+                                   FontSize="22"
+                                   FontWeight="SemiBold"
+                                   DockPanel.Dock="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="45 15 0 5"/>
+                        
+                        <!--Position-->
+                        <TextBlock Text="Администратор"
+                                   Foreground="{StaticResource TextWhiteFaded}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   DockPanel.Dock="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="35 0 0 10"/>
 
-        <StackPanel Grid.Row="0"
-                    Grid.ColumnSpan="3"
-                    Background="#C47400"
-                    Orientation="Horizontal">
+                        <Separator DockPanel.Dock="Top" 
+                                   Height="0.8"
+                                   Margin="25"
+                                   Background="{StaticResource TextWhiteFaded}"/>
 
-            <TextBlock Text="Delivery Service"
-                       FontSize="14"
-                       Margin="5 5 15 5"
-                       FontWeight="DemiBold"/>
-        </StackPanel>
-
-
-        <DockPanel Grid.Row="1"
-                   Background="#1F2933">
-            <TextBlock DockPanel.Dock="Top"
-                       Text="Обозреватель:"
-                       Foreground="#FFF"
-                       Margin="5 5 0 5"/>
-            <TreeView Grid.Column="0" 
-                      Background="Transparent"
-                      BorderBrush="Transparent">
-                <TreeViewItem Header="Пользователи"
-                              Foreground="#FFF">
-                    <TreeViewItem Header="Основные сведения"
-                                  Foreground="#FFF"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Пользователи"
-                              Foreground="#FFF">
-                    <TreeViewItem Header="Основные сведения"
-                                  Foreground="#FFF"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Пользователи"
-                              Foreground="#FFF">
-                    <TreeViewItem Header="Основные сведения"
-                                  Foreground="#FFF"/>
-                </TreeViewItem>
-            </TreeView>
-        </DockPanel>
-
-        <Frame Grid.Row="1"
-               Grid.Column="2"
-               Content="{Binding CurrentPage, Converter={StaticResource AppPageConverter}}"/>
-    </Grid>
+                        <StackPanel DockPanel.Dock="Top">
+                            <Button Style="{StaticResource MenuSectionButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:PackIconMaterial Kind="Account"/>
+                                    <TextBlock Text="Работники"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>                 
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

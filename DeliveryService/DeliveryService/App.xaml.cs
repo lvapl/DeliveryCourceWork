@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DeliveryService.Converters;
 using DeliveryService.MVVM.Model;
 using DeliveryService.MVVM.Model.DTO;
 using DeliveryService.MVVM.Model.Repositories;
@@ -44,7 +45,7 @@ namespace DeliveryService
                 cfg.CreateMap<Position, WorkerGeneralInfoDTO>(MemberList.None);
             });
             services.AddSingleton<WorkerGeneralInfoService>();
-            
+            services.AddScoped<AppPageConverter>();
 
         }
 

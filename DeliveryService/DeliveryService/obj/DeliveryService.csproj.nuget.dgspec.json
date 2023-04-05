@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "MahApps.Metro.IconPacks.Material": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
               "version": "[7.0.4, )"
