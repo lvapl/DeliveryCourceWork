@@ -6,7 +6,7 @@
 
     <SolidColorBrush x:Key="BackgroundLightBrush" Color="#F5F5F5"/>
 
-    <SolidColorBrush x:Key="BackgroundMouseOver" Color="#EDEDED"/>
+    <SolidColorBrush x:Key="BackgroundMouseOver" Color="#2FEDEDED"/>
 
     <SolidColorBrush x:Key="TextWhite" Color="White"/>
 

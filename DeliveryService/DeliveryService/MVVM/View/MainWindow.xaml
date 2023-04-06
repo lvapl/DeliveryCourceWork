@@ -11,7 +11,9 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        Height="650" Width="1200">
+        MaxHeight="{Binding MaxHight}"
+        MinHeight="650"
+        MinWidth="1200">
     <Border Background="{StaticResource BackgroundLightBrush}" CornerRadius="21">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,7 +22,7 @@
             </Grid.ColumnDefinitions>
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -44,7 +46,7 @@
 
                 <Border Grid.Row="1"
                         Background="{StaticResource PrimaryColorBruh}"
-                        CornerRadius="0 50 0 0">
+                        CornerRadius="0 50 0 20">
                     <DockPanel>
                         <!--Avatar-->
                         <Border Width="80"
@@ -88,14 +90,89 @@
                         <StackPanel DockPanel.Dock="Top">
                             <Button Style="{StaticResource MenuSectionButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="Account"/>
-                                    <TextBlock Text="Работники"/>
+                                    <Icons:PackIconMaterial Kind="AccountDetails"
+                                                            Style="{StaticResource MenuSectionButtonIcon}"/>
+                                    <TextBlock Text="Сотрудники"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource MenuSectionButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:PackIconMaterial Kind="Account"
+                                                            Style="{StaticResource MenuSectionButtonIcon}"/>
+                                    <TextBlock Text="Пользователи"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource MenuSectionButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:PackIconMaterial Kind="TruckDelivery"
+                                                            Style="{StaticResource MenuSectionButtonIcon}"/>
+                                    <TextBlock Text="Доставки"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource MenuSectionButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:PackIconMaterial Kind="Store24Hour"
+                                                            Style="{StaticResource MenuSectionButtonIcon}"/>
+                                    <TextBlock Text="Склады"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource MenuSectionButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:PackIconMaterial Kind="StoreMarker"
+                                                            Style="{StaticResource MenuSectionButtonIcon}"/>
+                                    <TextBlock Text="Точки выдачи"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
                     </DockPanel>                 
                 </Border>
             </Grid>
+
+            
+            <Grid Grid.Row="0"
+                  Grid.ColumnSpan="2">
+                <DockPanel x:Name="spControlPanel"
+                            Background="Transparent"
+                            Margin="5 0 5 0"
+                            MouseLeftButtonDown="spControlPanel_MouseLeftButtonDown">
+                    <TextBlock Text="Delivery Service"
+                               Margin="5 0 0 0"
+                               VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                FlowDirection="RightToLeft">
+                        <Button Style="{StaticResource ControlButton}"
+                                Background="Red"
+                                Margin="5 0 5 0"
+                                Command="{Binding CloseWindowCommand}">
+                            <Icons:PackIconMaterial Kind="Close"
+                                                    Width="8"
+                                                    Height="8"/>
+                        </Button>
+                        <Button Style="{StaticResource ControlButton}"
+                                Background="Yellow"
+                                Margin="5 0 5 0"
+                                Command="{Binding MaximazeWindowCommand}">
+                            <Icons:PackIconMaterial Kind="SquareRoundedOutline"
+                                                    Width="8"
+                                                    Height="8"/>
+                        </Button>
+                        <Button Style="{StaticResource ControlButton}"
+                                Background="LawnGreen"
+                                Margin="5 0 5 0"
+                                Command="{Binding MinimizeWindowCommand}">
+                            <Icons:PackIconMaterial Kind="Minus"
+                                                    Width="8"
+                                                    Height="8"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <Frame Grid.Row="1"
+                   Grid.Column="1"
+                   Content="{Binding CurrentPage, Converter={converters:AppPageConverter}}"/>
         </Grid>
     </Border>
+    
 </Window>
