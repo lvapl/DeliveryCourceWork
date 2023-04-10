@@ -53,7 +53,7 @@ namespace DeliveryService.MVVM.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DeliveryService;component/mvvm/view/workergeneralinfopage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DeliveryService;V1.0.0.0;component/mvvm/view/workergeneralinfopage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\MVVM\View\WorkerGeneralInfoPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

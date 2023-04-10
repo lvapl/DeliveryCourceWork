@@ -12,6 +12,7 @@ namespace DeliveryService.MVVM.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        #region Private Fields
         private Window _window;
 
         private RelayCommand? _changePageCommand;
@@ -22,7 +23,10 @@ namespace DeliveryService.MVVM.ViewModel
 
         private RelayCommand? _minimizeWindowCommand;
 
+        private AppPages? _currentPage;
+        #endregion
 
+        #region Properties
         public double MaxHight
         {
             get
@@ -31,7 +35,15 @@ namespace DeliveryService.MVVM.ViewModel
             }
         }
 
-        public AppPages CurrentPage { get; set; } = AppPages.WorkerGeneralInfo;
+        public AppPages? CurrentPage 
+        {
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand ChangePageCommand
         {
@@ -39,7 +51,7 @@ namespace DeliveryService.MVVM.ViewModel
             {
                 return _changePageCommand ?? (_changePageCommand = new RelayCommand((object? obj) =>
                 {
-                    CurrentPage = (AppPages)obj;
+                    CurrentPage = (AppPages?)obj;
                     
                 }));
             }
@@ -84,7 +96,7 @@ namespace DeliveryService.MVVM.ViewModel
                 }));
             }
         }
-
+        #endregion
 
         public MainWindowViewModel(Window window)
         {

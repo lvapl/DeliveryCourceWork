@@ -7,6 +7,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Resources\Styles\Colors.xaml" />
                 <ResourceDictionary Source="\Resources\Styles\Buttons.xaml" />
+                <ResourceDictionary Source="\Resources\Styles\Texts.xaml" />
+                <ResourceDictionary Source="\Resources\Styles\TextBoxes.xaml" />
+                <ResourceDictionary Source="\Resources\Styles\ComboBoxes.xaml" />
+                <ResourceDictionary Source="\Resources\Styles\DataGrids.xaml" />
+                <ResourceDictionary Source="\Resources\Styles\Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

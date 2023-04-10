@@ -38,6 +38,7 @@ namespace DeliveryService.MVVM.Model.Repositories
         public void Remove(int id)
         {
             _context.Workers.Remove(GetById(id));
+            _context.SaveChanges();
         }
 
         public Worker GetById(int id)

@@ -27,5 +27,9 @@ namespace DeliveryService.MVVM.Model.DTO
         public int PassportSeries { get; set; }
 
         public string TelephoneNumber { get; set; } = null!;
+
+        public int? AddressId { get; set; }
+
+        public int? PassportAddressId { get; set; }
     }
 }

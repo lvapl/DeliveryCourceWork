@@ -6,15 +6,17 @@
         xmlns:local="clr-namespace:DeliveryService.MVVM.View"
         xmlns:converters="clr-namespace:DeliveryService.Converters"
         xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:Pages="clr-namespace:DeliveryService.Enums"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="MainWindow"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         MaxHeight="{Binding MaxHight}"
         MinHeight="650"
         MinWidth="1200">
-    <Border Background="{StaticResource BackgroundLightBrush}" CornerRadius="21">
+    <Border Background="{StaticResource BackgroundLightBrush}" 
+            CornerRadius="21">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -75,7 +77,7 @@
                         
                         <!--Position-->
                         <TextBlock Text="Администратор"
-                                   Foreground="{StaticResource TextWhiteFaded}"
+                                   Foreground="{StaticResource TextWhiteFadedColorBrush}"
                                    FontSize="16"
                                    FontWeight="SemiBold"
                                    DockPanel.Dock="Top"
@@ -85,44 +87,54 @@
                         <Separator DockPanel.Dock="Top" 
                                    Height="0.8"
                                    Margin="25"
-                                   Background="{StaticResource TextWhiteFaded}"/>
+                                   Background="{StaticResource TextWhiteFadedColorBrush}"/>
 
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource MenuSectionButton}">
+                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                         Command="{Binding ChangePageCommand}"
+                                         CommandParameter="{x:Static Pages:AppPages.Worker}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:PackIconMaterial Kind="AccountDetails"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                     <TextBlock Text="Сотрудники"/>
                                 </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource MenuSectionButton}">
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                         Command="{Binding ChangePageCommand}"
+                                         CommandParameter="{x:Null}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:PackIconMaterial Kind="Account"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                     <TextBlock Text="Пользователи"/>
                                 </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource MenuSectionButton}">
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                         Command="{Binding ChangePageCommand}"
+                                         CommandParameter="{x:Null}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:PackIconMaterial Kind="TruckDelivery"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                     <TextBlock Text="Доставки"/>
                                 </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource MenuSectionButton}">
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                         Command="{Binding ChangePageCommand}"
+                                         CommandParameter="{x:Null}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:PackIconMaterial Kind="Store24Hour"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                     <TextBlock Text="Склады"/>
                                 </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource MenuSectionButton}">
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                         Command="{Binding ChangePageCommand}"
+                                         CommandParameter="{x:Null}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:PackIconMaterial Kind="StoreMarker"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                     <TextBlock Text="Точки выдачи"/>
                                 </StackPanel>
-                            </Button>
+                            </RadioButton>
                         </StackPanel>
                     </DockPanel>                 
                 </Border>
@@ -132,9 +144,9 @@
             <Grid Grid.Row="0"
                   Grid.ColumnSpan="2">
                 <DockPanel x:Name="spControlPanel"
-                            Background="Transparent"
-                            Margin="5 0 5 0"
-                            MouseLeftButtonDown="spControlPanel_MouseLeftButtonDown">
+                           Background="Transparent"
+                           Margin="5 0 10 0"
+                           MouseLeftButtonDown="spControlPanel_MouseLeftButtonDown">
                     <TextBlock Text="Delivery Service"
                                Margin="5 0 0 0"
                                VerticalAlignment="Center"/>
@@ -142,28 +154,25 @@
                     <StackPanel Orientation="Horizontal"
                                 FlowDirection="RightToLeft">
                         <Button Style="{StaticResource ControlButton}"
-                                Background="Red"
-                                Margin="5 0 5 0"
+                                Background="{StaticResource ControlCloseColorBrush}"
                                 Command="{Binding CloseWindowCommand}">
                             <Icons:PackIconMaterial Kind="Close"
-                                                    Width="8"
-                                                    Height="8"/>
+                                                    Width="10"
+                                                    Height="10"/>
                         </Button>
                         <Button Style="{StaticResource ControlButton}"
-                                Background="Yellow"
-                                Margin="5 0 5 0"
+                                Background="{StaticResource ControlMaxColorBrush}"
                                 Command="{Binding MaximazeWindowCommand}">
                             <Icons:PackIconMaterial Kind="SquareRoundedOutline"
-                                                    Width="8"
-                                                    Height="8"/>
+                                                    Width="10"
+                                                    Height="10"/>
                         </Button>
                         <Button Style="{StaticResource ControlButton}"
-                                Background="LawnGreen"
-                                Margin="5 0 5 0"
+                                Background="{StaticResource ControlMinColorBrush}"
                                 Command="{Binding MinimizeWindowCommand}">
                             <Icons:PackIconMaterial Kind="Minus"
-                                                    Width="8"
-                                                    Height="8"/>
+                                                    Width="10"
+                                                    Height="10"/>
                         </Button>
                     </StackPanel>
                 </DockPanel>
@@ -171,7 +180,8 @@
 
             <Frame Grid.Row="1"
                    Grid.Column="1"
-                   Content="{Binding CurrentPage, Converter={converters:AppPageConverter}}"/>
+                   Content="{Binding CurrentPage, Converter={converters:AppPageConverter}}"
+                   NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>
     

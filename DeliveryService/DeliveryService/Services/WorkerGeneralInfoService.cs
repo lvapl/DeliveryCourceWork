@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DeliveryService.Mappers;
 using DeliveryService.MVVM.Model;
 using DeliveryService.MVVM.Model.DTO;
 using DeliveryService.MVVM.Model.Repositories;
@@ -12,25 +13,25 @@ namespace DeliveryService.Services
 {
     public class WorkerGeneralInfoService : IWorkerGeneralInfoService
     {
-        private IMapper _mapper;
         private IWorkerRepository _workerRepository;
 
-        public WorkerGeneralInfoService( IMapper mapper, IWorkerRepository workerRepository)
+        public WorkerGeneralInfoService(IWorkerRepository workerRepository)
         {
-            _mapper = mapper;
             _workerRepository = workerRepository;
         }
 
         public void Add(WorkerGeneralInfoDTO workerGeneralInfoDTO)
         {
             Worker worker = new Worker();
+            WorkerMapper.Map(workerGeneralInfoDTO, worker);
+            _workerRepository.Add(worker);
         }
 
         public void Edit(WorkerGeneralInfoDTO workerGeneralInfoDTO)
         {
             Worker worker = _workerRepository.GetById(workerGeneralInfoDTO.Id);
-
-            _workerRepository.Edit(_mapper.Map(workerGeneralInfoDTO, worker));
+            WorkerMapper.Map(workerGeneralInfoDTO, worker);
+            _workerRepository.Edit(worker);
         }
 
         public void Remove(int id)
@@ -40,12 +41,12 @@ namespace DeliveryService.Services
 
         public WorkerGeneralInfoDTO GetById(int id)
         {
-            return _mapper.Map<WorkerGeneralInfoDTO>(_workerRepository.GetById(id));
+            return WorkerMapper.Map(_workerRepository.GetById(id));
         }
 
         public IEnumerable<WorkerGeneralInfoDTO> GetAll()
         {
-            return _mapper.Map<IEnumerable<WorkerGeneralInfoDTO>>(_workerRepository.GetAll());
+            return WorkerMapper.MapAll(_workerRepository.GetAll());
         }
     }
 }

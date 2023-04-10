@@ -19,7 +19,7 @@ namespace DeliveryService.MVVM.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
-        #region Fields
+        #region Private Fields
 
         private string _login;
         private RelayCommand _loginCommand;
@@ -78,10 +78,12 @@ namespace DeliveryService.MVVM.ViewModel
             _mainWindow = mainWindow;
         }
 
+        #region Methods
         public void ShowMainWindow()
         {
             _mainWindow.Show();
             _loginWindow.Close();
         }
+        #endregion
     }
 }

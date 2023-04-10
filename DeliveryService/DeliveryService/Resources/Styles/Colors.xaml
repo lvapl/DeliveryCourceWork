@@ -1,14 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="PrimaryColorBruh" Color="#00CED1"/>
-    
-    <SolidColorBrush x:Key="SecondaryColorBrush" Color="#1F2933"/>
+    <Color x:Key="PrimaryColor">#3b7475</Color>
+    <SolidColorBrush x:Key="PrimaryColorBruh" Color="{StaticResource PrimaryColor}"/>
 
-    <SolidColorBrush x:Key="BackgroundLightBrush" Color="#F5F5F5"/>
+    <Color x:Key="PrimaryFadedColor">#00DEE1</Color>
+    <SolidColorBrush x:Key="PrimaryFadedColorBruh" Color="{StaticResource PrimaryFadedColor}"/>
 
-    <SolidColorBrush x:Key="BackgroundMouseOver" Color="#2FEDEDED"/>
+    <Color x:Key="SecondaryColor">#1F2933</Color>
+    <SolidColorBrush x:Key="SecondaryColorBrush" Color="{StaticResource SecondaryColor}"/>
 
-    <SolidColorBrush x:Key="TextWhite" Color="White"/>
+    <Color x:Key="BackgroudLightColor">#EFEFEF</Color>
+    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroudLightColor}"/>
 
-    <SolidColorBrush x:Key="TextWhiteFaded" Color="#D0FFFF"/>
+    <Color x:Key="BackgroundMouseOverColor">#4FEDEDED</Color>
+    <SolidColorBrush x:Key="BackgroundMouseOverColorBrush" Color="{StaticResource BackgroundMouseOverColor}"/>
+
+    <Color x:Key="TextWhiteColor">#FFF</Color>
+    <SolidColorBrush x:Key="TextWhiteColorBrush" Color="{StaticResource TextWhiteColor}"/>
+
+    <Color x:Key="TextWhiteFadedColor">#D0FFFF</Color>
+    <SolidColorBrush x:Key="TextWhiteFadedColorBrush" Color="{StaticResource TextWhiteFadedColor}"/>
+
+    <Color x:Key="TextBlackColor">#000</Color>
+    <SolidColorBrush x:Key="TextBlackColorBrush" Color="{StaticResource TextBlackColor}"/>
+
+    <Color x:Key="TextGrayColor">#888</Color>
+    <SolidColorBrush x:Key="TextGrayColorBrush" Color="{StaticResource TextGrayColor}"/>
+
+    <Color x:Key="ControlCloseColor">#F17979</Color>
+    <SolidColorBrush x:Key="ControlCloseColorBrush" Color="{StaticResource ControlCloseColor}"/>
+
+    <Color x:Key="ControlMaxColor">#F8E274</Color>
+    <SolidColorBrush x:Key="ControlMaxColorBrush" Color="{StaticResource ControlMaxColor}"/>
+
+    <Color x:Key="ControlMinColor">#86F483</Color>
+    <SolidColorBrush x:Key="ControlMinColorBrush" Color="{StaticResource ControlMinColor}"/>
 </ResourceDictionary>

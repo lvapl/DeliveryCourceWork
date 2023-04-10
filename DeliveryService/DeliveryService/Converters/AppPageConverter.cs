@@ -20,13 +20,13 @@ namespace DeliveryService.Converters
             {
                 switch (value) 
                 {
-                    case AppPages.WorkerGeneralInfo:
-                        return new WorkerGeneralInfoPage();
+                    case AppPages.Worker:
+                        return new WorkerPage();
                     default:
-                        return null;
+                        return new EmptyPage();
                 }
             }
-            return null;
+            return new EmptyPage();
         }
 
         public override object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -35,8 +35,8 @@ namespace DeliveryService.Converters
             {
                 switch(value)
                 {
-                    case WorkerGeneralInfoPage:
-                        return AppPages.WorkerGeneralInfo;
+                    case WorkerPage:
+                        return AppPages.Worker;
                     default:
                         return null;
                 }
