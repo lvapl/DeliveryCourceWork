@@ -1,5 +1,5 @@
 ﻿using DeliveryService.Enums;
-using DeliveryService.MVVM.View;
+using DeliveryService.View;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

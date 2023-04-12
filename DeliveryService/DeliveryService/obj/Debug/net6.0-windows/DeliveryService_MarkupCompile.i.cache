@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\App.xaml
-13-1440752490
+131414023412
 
-601214513325
+60-1004945301
 228143665372
-MVVM\View\EmptyPage.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\WorkerPage.xaml;MVVM\View\Worker\WorkerEdit.xaml;MVVM\View\Worker\WorkerGeneralInfoPage.xaml;Resources\Styles\Buttons.xaml;Resources\Styles\Colors.xaml;Resources\Styles\ComboBoxes.xaml;Resources\Styles\DataGrids.xaml;Resources\Styles\Icons.xaml;Resources\Styles\TextBoxes.xaml;Resources\Styles\Texts.xaml;
+Resources\Styles\Buttons.xaml;Resources\Styles\Colors.xaml;Resources\Styles\ComboBoxes.xaml;Resources\Styles\DataGrids.xaml;Resources\Styles\Icons.xaml;Resources\Styles\TextBoxes.xaml;Resources\Styles\Texts.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\Pages\EmptyPage.xaml;View\Pages\WorkerPage.xaml;View\Pages\Worker\WorkerEdit.xaml;View\Pages\Worker\WorkerGeneralInfoPage.xaml;
 
 False
 

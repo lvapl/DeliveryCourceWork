@@ -6,65 +6,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="MVVM\View\EmptyPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\LoginWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\MainWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\WorkerPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\Worker\WorkerEdit.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\Worker\WorkerGeneralInfoPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="MVVM\View\EmptyPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\LoginWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\WorkerPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\Worker\WorkerEdit.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\Worker\WorkerGeneralInfoPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\Colors.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\Buttons.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\ComboBoxes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\DataGrids.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\Icons.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\TextBoxes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Styles\Texts.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
 </Project>

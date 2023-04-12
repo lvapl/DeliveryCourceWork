@@ -66,8 +66,6 @@ C:\Users\clash\source\repos\DeliveryService\DeliveryService\obj\Debug\net6.0-win
 C:\Users\clash\source\repos\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\LoginWindow.baml
 C:\Users\clash\source\repos\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService.csproj.CopyComplete
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService.csproj.AssemblyReference.cache
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\LoginWindow.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\MainWindow.g.cs
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService_MarkupCompile.cache
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService_MarkupCompile.lref
@@ -122,8 +120,6 @@ C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\Deliver
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\bin\Debug\net6.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\LoginWindow.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\MainWindow.baml
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService.g.resources
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\DeliveryService.AssemblyInfoInputs.cache
@@ -142,17 +138,21 @@ C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\Deliver
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Material.dll
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\Buttons.baml
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\Colors.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\WorkerPage.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\WorkerPage.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\Texts.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\TextBoxes.baml
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\ComboBoxes.baml
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\DataGrids.baml
 C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\Icons.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\EmptyPage.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\EmptyPage.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\Worker\WorkerEdit.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\Worker\WorkerGeneralInfoPage.g.cs
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\Worker\WorkerEdit.baml
-C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\MVVM\View\Worker\WorkerGeneralInfoPage.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\TextBoxes.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\Resources\Styles\Texts.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\LoginWindow.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\MainWindow.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\EmptyPage.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\WorkerPage.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\Worker\WorkerEdit.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\Worker\WorkerGeneralInfoPage.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\LoginWindow.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\MainWindow.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\EmptyPage.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\WorkerPage.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\Worker\WorkerEdit.baml
+C:\Users\clash\OneDrive\Документы\Work\ISP\3 course\Course work\DeliveryService\DeliveryService\obj\Debug\net6.0-windows\View\Pages\Worker\WorkerGeneralInfoPage.baml

@@ -1,6 +1,6 @@
 ﻿using DeliveryService.Enums;
-using DeliveryService.MVVM.View;
-using DeliveryService.MVVM.View.Worker;
+using DeliveryService.View;
+using DeliveryService.View.Worker;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

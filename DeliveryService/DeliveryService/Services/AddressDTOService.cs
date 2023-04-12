@@ -1,7 +1,7 @@
-﻿using DeliveryService.Mappers;
-using DeliveryService.MVVM.Model;
-using DeliveryService.MVVM.Model.DTO;
-using DeliveryService.MVVM.Model.Repositories;
+﻿using DeliveryService.DTO;
+using DeliveryService.Mappers;
+using DeliveryService.Model;
+using DeliveryService.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace DeliveryService.Services
 
         public AddressDTOService(IAddressRepository addressRepository)
         {
-            this.addressRepository = addressRepository;
+            _addressRepository = addressRepository;
         }
 
         public void Add(AddressDTO addressDTO)
