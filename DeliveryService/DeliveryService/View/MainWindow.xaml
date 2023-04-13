@@ -9,49 +9,45 @@
         xmlns:Pages="clr-namespace:DeliveryService.Enums"
         mc:Ignorable="d"
         Title="MainWindow"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
+        Style="{StaticResource WinChrome}"
         MaxHeight="{Binding MaxHight}"
         MinHeight="650"
         MinWidth="1200">
-    <Border Background="{StaticResource BackgroundLightBrush}" 
-            CornerRadius="21">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+
+        <!--Left Menu-->
+        <Grid Grid.Row="1" 
+                  Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            
-            
-            <!--Left Menu-->
-            <Grid Grid.Row="1" 
-                  Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Button Style="{StaticResource MenuButton}"
+            <Button Style="{StaticResource MenuButton}"
                         HorizontalAlignment="Left"
                         Margin="5 5 0 40">
-                    <Icons:PackIconMaterial Kind="Menu" 
+                <Icons:PackIconMaterial Kind="Menu" 
                                             Width="15"
                                             Height="15"/>
-                </Button>
+            </Button>
 
-                <Border Grid.Row="1"
+            <Border Grid.Row="1"
                         Background="{StaticResource PrimaryColorBruh}"
                         CornerRadius="0 50 0 20">
-                    <DockPanel>
-                        <!--Avatar-->
-                        <Border Width="80"
+                <DockPanel>
+                    <!--Avatar-->
+                    <Border Width="80"
                                 Height="80"
                                 Background="White"
                                 CornerRadius="100"
@@ -59,24 +55,24 @@
                                 HorizontalAlignment="Left"
                                 Margin="20 -30 0 0"
                                 Padding="3">
-                            <Ellipse>
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding }"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Border>
-                        
-                        <!--FirstName-->
-                        <TextBlock Text="Алексей"
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding }"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+
+                    <!--FirstName-->
+                    <TextBlock Text="Алексей"
                                    Foreground="White"
                                    FontSize="22"
                                    FontWeight="SemiBold"
                                    DockPanel.Dock="Top"
                                    HorizontalAlignment="Left"
                                    Margin="45 15 0 5"/>
-                        
-                        <!--Position-->
-                        <TextBlock Text="Администратор"
+
+                    <!--Position-->
+                    <TextBlock Text="Администратор"
                                    Foreground="{StaticResource TextWhiteFadedColorBrush}"
                                    FontSize="16"
                                    FontWeight="SemiBold"
@@ -84,105 +80,103 @@
                                    HorizontalAlignment="Left"
                                    Margin="35 0 0 10"/>
 
-                        <Separator DockPanel.Dock="Top" 
+                    <Separator DockPanel.Dock="Top" 
                                    Height="0.8"
                                    Margin="25"
                                    Background="{StaticResource TextWhiteFadedColorBrush}"/>
 
-                        <StackPanel DockPanel.Dock="Top">
-                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                    <StackPanel DockPanel.Dock="Top">
+                        <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
                                          CommandParameter="{x:Static Pages:AppPages.Worker}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="AccountDetails"
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:PackIconMaterial Kind="AccountDetails"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
-                                    <TextBlock Text="Сотрудники"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                <TextBlock Text="Сотрудники"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
                                          CommandParameter="{x:Null}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="Account"
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:PackIconMaterial Kind="Account"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
-                                    <TextBlock Text="Пользователи"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                <TextBlock Text="Пользователи"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
                                          CommandParameter="{x:Null}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="TruckDelivery"
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:PackIconMaterial Kind="TruckDelivery"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
-                                    <TextBlock Text="Доставки"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                <TextBlock Text="Доставки"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
                                          CommandParameter="{x:Null}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="Store24Hour"
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:PackIconMaterial Kind="Store24Hour"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
-                                    <TextBlock Text="Склады"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Style="{StaticResource MenuSectionButton}"
+                                <TextBlock Text="Склады"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
                                          CommandParameter="{x:Null}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icons:PackIconMaterial Kind="StoreMarker"
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:PackIconMaterial Kind="StoreMarker"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
-                                    <TextBlock Text="Точки выдачи"/>
-                                </StackPanel>
-                            </RadioButton>
-                        </StackPanel>
-                    </DockPanel>                 
-                </Border>
-            </Grid>
+                                <TextBlock Text="Точки выдачи"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
 
-            
-            <Grid Grid.Row="0"
+        <!--Control Panel-->
+        <Grid Grid.Row="0"
                   Grid.ColumnSpan="2">
-                <DockPanel x:Name="spControlPanel"
+            <DockPanel x:Name="spControlPanel"
                            Background="Transparent"
-                           Margin="5 0 10 0"
-                           MouseLeftButtonDown="spControlPanel_MouseLeftButtonDown">
-                    <TextBlock Text="Delivery Service"
+                           Margin="5 0 10 0">
+                <TextBlock Text="Delivery Service"
                                Margin="5 0 0 0"
                                VerticalAlignment="Center"/>
 
-                    <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                                 FlowDirection="RightToLeft">
-                        <Button Style="{StaticResource ControlButton}"
+                    <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlCloseColorBrush}"
                                 Command="{Binding CloseWindowCommand}">
-                            <Icons:PackIconMaterial Kind="Close"
+                        <Icons:PackIconMaterial Kind="Close"
                                                     Width="10"
                                                     Height="10"/>
-                        </Button>
-                        <Button Style="{StaticResource ControlButton}"
+                    </Button>
+                    <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlMaxColorBrush}"
                                 Command="{Binding MaximazeWindowCommand}">
-                            <Icons:PackIconMaterial Kind="SquareRoundedOutline"
+                        <Icons:PackIconMaterial Kind="SquareRoundedOutline"
                                                     Width="10"
                                                     Height="10"/>
-                        </Button>
-                        <Button Style="{StaticResource ControlButton}"
+                    </Button>
+                    <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlMinColorBrush}"
                                 Command="{Binding MinimizeWindowCommand}">
-                            <Icons:PackIconMaterial Kind="Minus"
+                        <Icons:PackIconMaterial Kind="Minus"
                                                     Width="10"
                                                     Height="10"/>
-                        </Button>
-                    </StackPanel>
-                </DockPanel>
-            </Grid>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
 
-            <Frame Grid.Row="1"
+        <Frame Grid.Row="1"
                    Grid.Column="1"
                    Content="{Binding CurrentPage, Converter={converters:AppPageConverter}}"
-                   NavigationUIVisibility="Hidden"/>
-        </Grid>
-    </Border>
-    
+                   NavigationUIVisibility="Hidden"
+                   Margin="0 0 5 10"/>
+    </Grid>
 </Window>

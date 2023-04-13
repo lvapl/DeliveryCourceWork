@@ -23,26 +23,32 @@ namespace DeliveryService.Services
         {
             Address address = new Address();
 
+            AddressMapper.Map(addressDTO, address);
+
+            _addressRepository.Add(address);
         }
 
         public void Edit(AddressDTO addressDTO)
         {
-            throw new NotImplementedException();
+            Address address = _addressRepository.GetById(addressDTO.Id);
+            AddressMapper.Map(addressDTO, address);
+
+            _addressRepository.Edit(address);
         }
 
         public IEnumerable<AddressDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return AddressMapper.MapAll(_addressRepository.GetAll());
         }
 
         public AddressDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            return AddressMapper.Map(_addressRepository.GetById(id));
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _addressRepository.Remove(id);
         }
     }
 }

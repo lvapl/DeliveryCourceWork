@@ -54,7 +54,8 @@
                 <Button Grid.Column="1"
                         Grid.RowSpan="2"
                         Style="{StaticResource SelectionAddRowButton}"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right"
+                        Command="{Binding AddWorkerCommand}">
 
                 </Button>
             </Grid>

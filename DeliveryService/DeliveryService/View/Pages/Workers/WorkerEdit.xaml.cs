@@ -1,4 +1,4 @@
-﻿using DeliveryService.ViewModel.Pages.Worker;
+﻿using DeliveryService.ViewModel.Pages.Workers;
 using DeliveryService.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace DeliveryService.View.Worker
+namespace DeliveryService.View.Workers
 {
     /// <summary>
     /// Логика взаимодействия для WorkerEdit.xaml
@@ -28,16 +28,6 @@ namespace DeliveryService.View.Worker
         {
             InitializeComponent();
             this.DataContext = new WorkerEditViewModel(this, workerId);
-        }
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        private void spControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
-
-            SendMessage(helper.Handle, 162, 2, 0);
         }
     }
 }

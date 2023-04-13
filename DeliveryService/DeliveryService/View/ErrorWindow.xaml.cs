@@ -1,6 +1,4 @@
-﻿using DeliveryService.ViewModel.Pages.Worker;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DeliveryService.View.Worker
+namespace DeliveryService.View
 {
     /// <summary>
-    /// Логика взаимодействия для WorkerGeneralInfoPage.xaml
+    /// Логика взаимодействия для ErrorWindow.xaml
     /// </summary>
-    public partial class WorkerGeneralInfoPage : Page
+    public partial class ErrorWindow : Window
     {
-        public WorkerGeneralInfoPage()
+        public ErrorWindow()
         {
             InitializeComponent();
-            this.DataContext = new WorkerGeneralInfoViewModel();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using DeliveryService.DTO;
-using DeliveryService.View.Worker;
 using DeliveryService.Services;
-using DeliveryService.ViewModel;
+using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DeliveryService.ViewModel.Pages.Worker
+namespace DeliveryService.ViewModel.Pages.Workers
 {
     public class WorkerGeneralInfoViewModel : ViewModelBase
     {
@@ -23,8 +22,6 @@ namespace DeliveryService.ViewModel.Pages.Worker
         private RelayCommand? _editWorkerCommand;
 
         private RelayCommand? _deleteWorkerCommand;
-
-        private RelayCommand? _addWorkerCommand;
         #endregion
 
         #region Properties
@@ -65,19 +62,6 @@ namespace DeliveryService.ViewModel.Pages.Worker
                         _service.Remove((int)obj);
                         UpdateData();
                     }
-                }));
-            }
-        }
-
-        public RelayCommand? AddWorkerCommand
-        {
-            get
-            {
-                return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
-                {
-                    Window window = new WorkerEdit();
-                    window.ShowDialog();
-                    UpdateData();
                 }));
             }
         }

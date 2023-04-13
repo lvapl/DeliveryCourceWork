@@ -343,8 +343,11 @@ namespace DeliveryService.Mappers
                     address.House = null;
                 }
             }
+        }
 
-
+        public static IEnumerable<AddressDTO> MapAll(IEnumerable<Address> addresses)
+        {
+            return addresses.ToList().ConvertAll<AddressDTO>(x => Map(x));
         }
     }
 }

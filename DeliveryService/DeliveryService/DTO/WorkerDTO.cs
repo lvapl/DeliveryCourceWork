@@ -16,6 +16,8 @@ namespace DeliveryService.DTO
 
         public string? Patronymic { get; set; }
 
+        public int PositionId { get; set; }
+
         public string Title { get; set; } = null!;
 
         public string Login { get; set; } = null!;

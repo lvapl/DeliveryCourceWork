@@ -23,7 +23,8 @@ namespace DeliveryService.ViewModel
 
         private string _login;
         private RelayCommand _loginCommand;
-        private RelayCommand _showPasswordCommand;
+        private RelayCommand _closeWindowCommand;
+        private RelayCommand _minimizeWindowCommand;
 
         private MainWindow _mainWindow;
         private LoginWindow _loginWindow;
@@ -58,17 +59,28 @@ namespace DeliveryService.ViewModel
                 }));
             }
         }
-        public RelayCommand ShowPasswordCommand
+        
+        public RelayCommand CloseWindowCommand
         {
             get
             {
-                return _showPasswordCommand ?? (_showPasswordCommand = new RelayCommand(obj =>
+                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
                 {
-
+                    App.Current.Shutdown();
                 }));
             }
         }
 
+        public RelayCommand MinimizeWindowCommand
+        {
+            get
+            {
+                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                {
+                    _loginWindow.WindowState = WindowState.Minimized;
+                }));
+            }
+        }
         #endregion
 
         public LoginViewModel(IAuthenticationService authenticationService, MainWindow mainWindow, LoginWindow loginWindow)

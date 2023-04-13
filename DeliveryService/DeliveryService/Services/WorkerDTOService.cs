@@ -23,6 +23,9 @@ namespace DeliveryService.Services
         public void Add(WorkerDTO workerGeneralInfoDTO)
         {
             Worker worker = new Worker();
+            User user = new User();
+
+            worker.IdNavigation = user;
             WorkerMapper.Map(workerGeneralInfoDTO, worker);
             _workerRepository.Add(worker);
         }

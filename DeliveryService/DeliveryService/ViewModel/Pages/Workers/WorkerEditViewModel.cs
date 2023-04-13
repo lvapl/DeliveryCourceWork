@@ -1,6 +1,8 @@
 ﻿using DeliveryService.DTO;
+using DeliveryService.Model;
+using DeliveryService.Repository;
 using DeliveryService.Services;
-using DeliveryService.ViewModel;
+using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DeliveryService.ViewModel.Pages.Worker
+namespace DeliveryService.ViewModel.Pages.Workers
 {
     public class WorkerEditViewModel : ViewModelBase
     {
@@ -19,7 +21,11 @@ namespace DeliveryService.ViewModel.Pages.Worker
 
         private ObservableCollection<AddressDTO> _addresses;
 
-        private IWorkerDTOService _service;
+        private ObservableCollection<Position> _positions;
+
+        private IWorkerDTOService _workerService;
+        private IAddressDTOService _addressService;
+        private IPositionRepository _positionRepository;
 
         private Window _window;
 
@@ -30,6 +36,8 @@ namespace DeliveryService.ViewModel.Pages.Worker
         private RelayCommand? _saveCommand;
 
         private RelayCommand? _cancelWindowCommand;
+
+        private RelayCommand? _editPasswordCommand;
         #endregion
 
         #region Properties
@@ -71,8 +79,16 @@ namespace DeliveryService.ViewModel.Pages.Worker
             {
                 return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
                 {
-                    _service.Edit(_worker);
-                    _window.Close();
+                    if(_worker.Id != 0)
+                    {
+                        _workerService.Edit(_worker);
+                        _window.Close();
+                    }
+                    else
+                    {
+                        _workerService.Add(_worker);
+                        _window.Close();
+                    }
                 }));
             }
         }
@@ -87,21 +103,55 @@ namespace DeliveryService.ViewModel.Pages.Worker
                 }));
             }
         }
+
+        public RelayCommand EditPasswordCommand
+        {
+            get
+            {
+                return _editPasswordCommand ?? (_editPasswordCommand = new RelayCommand((obj) =>
+                {
+                    Window window = new WorkerEditPassword(_worker);
+                    window.Show();
+                }));
+            }
+        }
+
+        public ObservableCollection<Position> Positions
+        {
+            get => _positions;
+        }
         #endregion
 
         public WorkerEditViewModel(Window window, int? workerId)
         {
             _window = window;
 
-            _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
+            _workerService = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
+            _addressService = App.ServiceProvider.GetRequiredService<IAddressDTOService>();
+            _positionRepository = App.ServiceProvider.GetRequiredService<IPositionRepository>();
+
+            _addresses = new ObservableCollection<AddressDTO>(_addressService.GetAll());
+            _positions = new ObservableCollection<Position>(_positionRepository.GetAll());
+
             if (workerId == null)
             {
                 _worker = new WorkerDTO();
             }
             else
             {
-                _worker = _service.GetById((int)workerId);
+                _worker = _workerService.GetById((int)workerId);
             }
+        }
+
+        private bool IsFieldsEmpty()
+        {
+            return string.IsNullOrWhiteSpace(_worker.FirstName)
+                || string.IsNullOrWhiteSpace(_worker.LastName)
+                || string.IsNullOrWhiteSpace(_worker.Title)
+                || string.IsNullOrWhiteSpace(_worker.TelephoneNumber)
+                || _worker.Password != null
+                || _worker.PassportNumber != 0
+                || _worker.PassportSeries != 0;
         }
     }
 }

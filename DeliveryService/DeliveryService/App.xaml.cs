@@ -2,7 +2,6 @@
 using DeliveryService.Converters;
 using DeliveryService.Model;
 using DeliveryService.DTO;
-using DeliveryService.ViewModel.Pages.Worker;
 using DeliveryService.Repository;
 using DeliveryService.Services;
 using DeliveryService.View;
@@ -42,6 +41,9 @@ namespace DeliveryService
             services.AddSingleton<IEncryptionService, EncryptionService>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IWorkerDTOService, WorkerDTOService>();
+            services.AddSingleton<IAddressRepository, AdderssRepository>();
+            services.AddSingleton<IAddressDTOService, AddressDTOService>();
+            services.AddSingleton<IPositionRepository, PositionRepository>();
 
             services.AddSingleton<AppPageConverter>();
 

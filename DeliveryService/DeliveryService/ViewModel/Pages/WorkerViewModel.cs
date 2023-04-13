@@ -1,9 +1,11 @@
 ﻿using DeliveryService.Enums;
+using DeliveryService.View.Workers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages
 {
@@ -12,6 +14,8 @@ namespace DeliveryService.ViewModel.Pages
         private WorkerPages? _currentPage = WorkerPages.WorkerGeneralInfo;
 
         private RelayCommand? _changePageCommand;
+
+        private RelayCommand? _addWorkerCommand;
 
         public WorkerPages? CurrentPage
         {
@@ -31,6 +35,18 @@ namespace DeliveryService.ViewModel.Pages
                 {
                     CurrentPage = (WorkerPages?)obj;
 
+                }));
+            }
+        }
+
+        public RelayCommand? AddWorkerCommand
+        {
+            get
+            {
+                return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
+                {
+                    Window window = new WorkerEdit(null);
+                    window.ShowDialog();
                 }));
             }
         }

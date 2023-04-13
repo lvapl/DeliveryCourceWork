@@ -6,6 +6,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Update="View\ErrorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\Workers\WorkerEditPassword.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\Styles\Windows.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Workers\WorkerEditPassword.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

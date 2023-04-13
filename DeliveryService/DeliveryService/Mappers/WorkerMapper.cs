@@ -20,6 +20,7 @@ namespace DeliveryService.Mappers
                 FirstName = worker.IdNavigation.Firstname,
                 LastName = worker.IdNavigation.Lastname,
                 Patronymic = worker.IdNavigation.Patronymic,
+                PositionId = worker.PositionId,
                 Title = worker.Position.Title,
                 PassportNumber = worker.IdNavigation.PassportNumber,
                 PassportSeries = worker.IdNavigation.PassportSeries,
@@ -37,7 +38,7 @@ namespace DeliveryService.Mappers
             worker.IdNavigation.Firstname = workerDTO.FirstName;
             worker.IdNavigation.Lastname = workerDTO.LastName;
             worker.IdNavigation.Patronymic = workerDTO.Patronymic;
-            worker.Position.Title = workerDTO.Title;
+            worker.PositionId = workerDTO.PositionId;
             worker.IdNavigation.PassportNumber = workerDTO.PassportNumber;
             worker.IdNavigation.PassportSeries = workerDTO.PassportSeries;
             worker.IdNavigation.TelephoneNumber = workerDTO.TelephoneNumber;
