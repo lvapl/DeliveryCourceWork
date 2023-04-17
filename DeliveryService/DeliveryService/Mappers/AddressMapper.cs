@@ -18,10 +18,10 @@ namespace DeliveryService.Mappers
             return new AddressDTO
             {
                 Id = address.Id,
-                Country = address.Country?.Title,
-                City = address.City?.Title,
-                Street = address.Street?.Title,
-                House = address.House?.Number,
+                Country = address.Country == null ? null : address.Country.Title,
+                City = address.City == null ? null : address.City.Title,
+                Street = address.Street == null ? null : address.Street.Title,
+                House = address.House == null ? null : address.House.Number,
                 Postcode = address.Postcode
             };
         }

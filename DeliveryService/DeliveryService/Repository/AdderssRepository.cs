@@ -36,7 +36,7 @@ namespace DeliveryService.Repository
 
         public Address GetById(int id)
         {
-            return _context.Addresses.Find(id) ?? throw new ArgumentNullException();
+            return _context.Addresses.Find(id) ?? throw new Exception();
         }
 
         public void Remove(int id)

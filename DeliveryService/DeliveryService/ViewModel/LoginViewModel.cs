@@ -1,4 +1,5 @@
 ﻿using DeliveryService.Model;
+using DeliveryService.Repository;
 using DeliveryService.Services;
 using DeliveryService.View;
 using Microsoft.Data.SqlClient;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,11 +27,15 @@ namespace DeliveryService.ViewModel
         private RelayCommand _loginCommand;
         private RelayCommand _closeWindowCommand;
         private RelayCommand _minimizeWindowCommand;
+        private bool _errorMessageVisibility;
 
         private MainWindow _mainWindow;
         private LoginWindow _loginWindow;
 
+        private MainWindowViewModel? _mainWindowViewModel;
+
         private IAuthenticationService _authenticationService;
+        private DsContext _context;
 
         #endregion
 
@@ -49,12 +55,21 @@ namespace DeliveryService.ViewModel
         {
             get
             {
+                ErrorMessageVisibility = false;
                 return _loginCommand ?? (_loginCommand = new RelayCommand((obj) =>
                 {
                     var isValidWorker = _authenticationService.AuthenticateWorker(new System.Net.NetworkCredential(_login, (obj as PasswordBox).Password));
                     if (isValidWorker)
                     {
+                        if (_mainWindowViewModel != null)
+                        {
+                            _mainWindowViewModel.CurrentWorker = _context.Workers.FirstOrDefault(x => x.Login == _login);
+                        }
                         ShowMainWindow();
+                    }
+                    else
+                    {
+                        ErrorMessageVisibility = true;
                     }
                 }));
             }
@@ -81,13 +96,25 @@ namespace DeliveryService.ViewModel
                 }));
             }
         }
+
+        public bool ErrorMessageVisibility
+        {
+            get => _errorMessageVisibility;
+            set
+            {
+                _errorMessageVisibility = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
-        public LoginViewModel(IAuthenticationService authenticationService, MainWindow mainWindow, LoginWindow loginWindow)
+        public LoginViewModel(IAuthenticationService authenticationService, DsContext context, MainWindow mainWindow, LoginWindow loginWindow)
         {
             _authenticationService = authenticationService;
             _loginWindow = loginWindow;
             _mainWindow = mainWindow;
+            _context = context;
+            _mainWindowViewModel = (MainWindowViewModel?)mainWindow.DataContext;
         }
 
         #region Methods
@@ -95,6 +122,8 @@ namespace DeliveryService.ViewModel
         {
             _mainWindow.Show();
             _loginWindow.Close();
+
+            ErrorMessageVisibility = false;
         }
         #endregion
     }

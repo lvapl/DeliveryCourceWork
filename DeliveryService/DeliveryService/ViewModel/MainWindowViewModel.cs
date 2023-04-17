@@ -1,4 +1,5 @@
 ﻿using DeliveryService.Enums;
+using DeliveryService.Model;
 using DeliveryService.View;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace DeliveryService.ViewModel
         private RelayCommand? _minimizeWindowCommand;
 
         private AppPages? _currentPage;
+
+        private Worker? _currentWorker;
         #endregion
 
         #region Properties
@@ -94,6 +97,16 @@ namespace DeliveryService.ViewModel
                         _window.WindowState = WindowState.Maximized;
                     }
                 }));
+            }
+        }
+
+        public Worker? CurrentWorker
+        {
+            get => _currentWorker;
+            set
+            {
+                _currentWorker = value;
+                OnPropertyChanged();
             }
         }
         #endregion

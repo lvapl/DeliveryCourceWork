@@ -44,7 +44,7 @@ namespace DeliveryService.Repository
 
         public Worker GetById(int id)
         {
-            return _context.Workers.Find(id) ?? throw new ArgumentNullException();
+            return _context.Workers.Find(id) ?? throw new Exception();
         }
 
         public Worker? GetWorkerByLoginAndPassword(string login, byte[] password)

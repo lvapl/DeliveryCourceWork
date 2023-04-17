@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
+using DeliveryService.View;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryService.Model;
@@ -57,8 +59,16 @@ public partial class DsContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseLazyLoadingProxies();
-        optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
+        try
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
+        }
+        catch (Exception e)
+        {
+            Window window = new ErrorWindow("Не удалось подключится к базе данных. Обратитесь к администратору.");
+            window.ShowDialog();
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

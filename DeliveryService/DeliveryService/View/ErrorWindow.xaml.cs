@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryService.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace DeliveryService.View
     /// </summary>
     public partial class ErrorWindow : Window
     {
-        public ErrorWindow()
+        public ErrorWindow(string message)
         {
             InitializeComponent();
+            this.DataContext = new ErrorViewModel(this, message);
         }
     }
 }

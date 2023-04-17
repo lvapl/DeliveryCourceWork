@@ -22,6 +22,10 @@ namespace DeliveryService.Converters
                 {
                     case AppPages.Worker:
                         return new WorkerPage();
+                    case AppPages.User:
+                        return new UserPage();
+                    case AppPages.Delivery:
+                        return new DeliveryPage();
                     default:
                         return new EmptyPage();
                 }
@@ -37,6 +41,10 @@ namespace DeliveryService.Converters
                 {
                     case WorkerPage:
                         return AppPages.Worker;
+                    case UserPage:
+                        return AppPages.User;
+                    case DeliveryPage:
+                        return AppPages.Delivery;
                     default:
                         return null;
                 }

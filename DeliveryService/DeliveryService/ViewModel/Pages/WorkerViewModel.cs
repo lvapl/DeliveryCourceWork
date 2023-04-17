@@ -15,7 +15,7 @@ namespace DeliveryService.ViewModel.Pages
 
         private RelayCommand? _changePageCommand;
 
-        private RelayCommand? _addWorkerCommand;
+        
 
         public WorkerPages? CurrentPage
         {
@@ -35,18 +35,6 @@ namespace DeliveryService.ViewModel.Pages
                 {
                     CurrentPage = (WorkerPages?)obj;
 
-                }));
-            }
-        }
-
-        public RelayCommand? AddWorkerCommand
-        {
-            get
-            {
-                return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
-                {
-                    Window window = new WorkerEdit(null);
-                    window.ShowDialog();
                 }));
             }
         }

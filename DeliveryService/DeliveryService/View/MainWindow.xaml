@@ -57,13 +57,13 @@
                                 Padding="3">
                         <Ellipse>
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding }"/>
+                                <ImageBrush ImageSource="{Binding CurrentWorker.Image.WorkerImage1}"/>
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
 
                     <!--FirstName-->
-                    <TextBlock Text="Алексей"
+                    <TextBlock Text="{Binding CurrentWorker.IdNavigation.Firstname}"
                                    Foreground="White"
                                    FontSize="22"
                                    FontWeight="SemiBold"
@@ -72,7 +72,7 @@
                                    Margin="45 15 0 5"/>
 
                     <!--Position-->
-                    <TextBlock Text="Администратор"
+                    <TextBlock Text="{Binding CurrentWorker.Position.Title}"
                                    Foreground="{StaticResource TextWhiteFadedColorBrush}"
                                    FontSize="16"
                                    FontWeight="SemiBold"
@@ -97,7 +97,7 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Null}">
+                                         CommandParameter="{x:Static Pages:AppPages.User}">
                             <StackPanel Orientation="Horizontal">
                                 <Icons:PackIconMaterial Kind="Account"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
@@ -106,7 +106,7 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Null}">
+                                         CommandParameter="{x:Static Pages:AppPages.Delivery}">
                             <StackPanel Orientation="Horizontal">
                                 <Icons:PackIconMaterial Kind="TruckDelivery"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>

@@ -21,6 +21,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
 
         private RelayCommand? _editWorkerCommand;
 
+        private RelayCommand? _addWorkerCommand;
+
         private RelayCommand? _deleteWorkerCommand;
         #endregion
 
@@ -62,6 +64,19 @@ namespace DeliveryService.ViewModel.Pages.Workers
                         _service.Remove((int)obj);
                         UpdateData();
                     }
+                }));
+            }
+        }
+
+        public RelayCommand? AddWorkerCommand
+        {
+            get
+            {
+                return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
+                {
+                    Window window = new WorkerEdit(null);
+                    window.ShowDialog();
+                    UpdateData();
                 }));
             }
         }

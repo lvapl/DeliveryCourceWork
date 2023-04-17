@@ -8,6 +8,8 @@ namespace DeliveryService.Enums
 {
     public enum AppPages
     {
-        Worker
+        Worker,
+        User,
+        Delivery
     }
 }

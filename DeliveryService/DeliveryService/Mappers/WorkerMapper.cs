@@ -1,5 +1,6 @@
 ﻿using DeliveryService.DTO;
 using DeliveryService.Model;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace DeliveryService.Mappers
 {
     public class WorkerMapper
     {
+        private static DsContext _context = App.ServiceProvider.GetRequiredService<DsContext>();
+
         public static WorkerDTO Map(Worker worker)
         {
             return new WorkerDTO
@@ -26,8 +29,8 @@ namespace DeliveryService.Mappers
                 PassportSeries = worker.IdNavigation.PassportSeries,
                 TelephoneNumber = worker.IdNavigation.TelephoneNumber,
                 Address = worker.IdNavigation.Address == null ? null : AddressMapper.Map(worker.IdNavigation.Address),
-                PassportAddress = worker.IdNavigation.PassportAddressNavigation == null ? null : AddressMapper.Map(worker.IdNavigation.PassportAddressNavigation)
-                
+                PassportAddress = worker.IdNavigation.PassportAddressNavigation == null ? null : AddressMapper.Map(worker.IdNavigation.PassportAddressNavigation),
+                WorkerImage = worker.Image == null ? null : worker.Image.WorkerImage1
             };
         }
 
@@ -42,15 +45,24 @@ namespace DeliveryService.Mappers
             worker.IdNavigation.PassportNumber = workerDTO.PassportNumber;
             worker.IdNavigation.PassportSeries = workerDTO.PassportSeries;
             worker.IdNavigation.TelephoneNumber = workerDTO.TelephoneNumber;
+
+            if (workerDTO.WorkerImage != null)
+            {
+                WorkerImage image = new WorkerImage() { WorkerImage1 = workerDTO.WorkerImage };
+                _context.WorkerImages.Add(image);
+                _context.SaveChanges();
+                worker.Image = image;
+            }
+
             if (workerDTO.Address != null)
             {
                 AddressMapper.Map(workerDTO.Address, worker.IdNavigation.Address ?? (worker.IdNavigation.Address = new Address()));
             }
+
             if (workerDTO.PassportAddress != null)
             {
                 AddressMapper.Map(workerDTO.PassportAddress, worker.IdNavigation.PassportAddressNavigation ?? (worker.IdNavigation.PassportAddressNavigation = new Address()));
             }
-            
         }
 
         public static IEnumerable<WorkerDTO> MapAll(IEnumerable<Worker> workers)

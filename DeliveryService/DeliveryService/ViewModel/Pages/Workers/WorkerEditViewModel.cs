@@ -2,11 +2,14 @@
 using DeliveryService.Model;
 using DeliveryService.Repository;
 using DeliveryService.Services;
+using DeliveryService.View;
 using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +21,6 @@ namespace DeliveryService.ViewModel.Pages.Workers
     {
         #region Private Fields
         private WorkerDTO _worker;
-
-        private ObservableCollection<AddressDTO> _addresses;
-
-        private ObservableCollection<Position> _positions;
 
         private IWorkerDTOService _workerService;
         private IAddressDTOService _addressService;
@@ -38,6 +37,12 @@ namespace DeliveryService.ViewModel.Pages.Workers
         private RelayCommand? _cancelWindowCommand;
 
         private RelayCommand? _editPasswordCommand;
+
+        private RelayCommand? _editAddressCommand;
+
+        private RelayCommand? _editPassportAddressCommand;
+
+        private RelayCommand? _chooseImageCommand;
         #endregion
 
         #region Properties
@@ -116,9 +121,66 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
-        public ObservableCollection<Position> Positions
+        public RelayCommand EditAddressCommand
         {
-            get => _positions;
+            get
+            {
+                return _editAddressCommand ?? (_editAddressCommand = new RelayCommand((obj) =>
+                {
+                    if (Worker.Address == null)
+                    {
+                        Worker.Address = new AddressDTO();
+                    }
+
+                    Window window = new AddressEdit(Worker.Address);
+                    window.Show();
+                }));
+            }
+        }
+
+        public RelayCommand EditPassportAddressCommand
+        {
+            get
+            {
+                return _editPassportAddressCommand ?? (_editPassportAddressCommand = new RelayCommand((obj) =>
+                {
+                    if (Worker.PassportAddress == null)
+                    {
+                        Worker.PassportAddress = new AddressDTO();
+                    }
+
+                    Window window = new AddressEdit(Worker.PassportAddress);
+                    window.Show();
+                }));
+            }
+        }
+
+        public ObservableCollection<Position>? Positions{ get => new ObservableCollection<Position>(_positionRepository.GetAll()); }
+
+        public Position? Position
+        {
+            get => _positionRepository.GetById(_worker.PositionId);
+            set
+            {
+                _worker.PositionId = value == null ? _worker.PositionId : value.Id;
+            }
+        }
+
+        public RelayCommand? ChooseImageCommand
+        {
+            get
+            {
+                return _chooseImageCommand ?? (_chooseImageCommand = new RelayCommand((obj) =>
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image Files (*.png; *.bmp; *.jpg; *.gif; *.jpeg) | *.png; *.bmp; *.jpg; *.gif; *.jpeg | All files(*.*) | *.*";
+                    if (openFileDialog.ShowDialog() ?? false)
+                    {
+                        Worker.WorkerImage = File.ReadAllBytes(openFileDialog.FileName);
+                    }
+                    
+                }));
+            }
         }
         #endregion
 
@@ -129,9 +191,6 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _workerService = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
             _addressService = App.ServiceProvider.GetRequiredService<IAddressDTOService>();
             _positionRepository = App.ServiceProvider.GetRequiredService<IPositionRepository>();
-
-            _addresses = new ObservableCollection<AddressDTO>(_addressService.GetAll());
-            _positions = new ObservableCollection<Position>(_positionRepository.GetAll());
 
             if (workerId == null)
             {

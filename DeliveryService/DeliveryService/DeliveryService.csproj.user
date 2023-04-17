@@ -7,7 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\AddressEdit.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\ErrorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\Users\UserEdit.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\Users\UserGeneralInfoPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Workers\WorkerEditPassword.xaml.cs">
@@ -18,7 +27,28 @@
     <Page Update="Resources\Styles\Windows.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\AddressEdit.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\DeliveryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Delivery\DeliveryGeneralInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Delivery\DeliveryEdit.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\UserPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Users\UserEdit.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Users\UserGeneralInfoPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Workers\WorkerEditPassword.xaml">

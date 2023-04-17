@@ -44,6 +44,11 @@ namespace DeliveryService
             services.AddSingleton<IAddressRepository, AdderssRepository>();
             services.AddSingleton<IAddressDTOService, AddressDTOService>();
             services.AddSingleton<IPositionRepository, PositionRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserDTOService, UserDTOService>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IDeliveryDTOService, DeliveryDTOService>();
+            services.AddSingleton<IPickUpPointRepository, PickUpPointRepository>();
 
             services.AddSingleton<AppPageConverter>();
 
@@ -51,8 +56,17 @@ namespace DeliveryService
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
             var loginWindow = ServiceProvider.GetRequiredService<LoginWindow>();
             loginWindow.Show();
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+
+            Window window = new ErrorWindow(e.Exception.Message);
+            window.ShowDialog();
         }
     }
 }

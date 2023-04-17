@@ -35,7 +35,7 @@ namespace DeliveryService.Repository
 
         public Position GetById(int id)
         {
-            return _context.Positions.Find(id) ?? throw new ArgumentNullException();
+            return _context.Positions.Find(id) ?? throw new Exception();
         }
 
         public void Remove(int id)

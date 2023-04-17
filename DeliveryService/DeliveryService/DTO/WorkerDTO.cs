@@ -33,5 +33,7 @@ namespace DeliveryService.DTO
         public AddressDTO? Address { get; set; }
 
         public AddressDTO? PassportAddress { get; set; }
+
+        public byte[]? WorkerImage { get; set; }
     }
 }

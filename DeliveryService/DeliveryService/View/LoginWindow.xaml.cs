@@ -23,10 +23,10 @@ namespace DeliveryService.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow(IAuthenticationService authenticationService, MainWindow mainWindow)
+        public LoginWindow(IAuthenticationService authenticationService, DsContext context, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = new LoginViewModel(authenticationService, mainWindow, this);
+            DataContext = new LoginViewModel(authenticationService, context, mainWindow, this);
         }
     }
 }

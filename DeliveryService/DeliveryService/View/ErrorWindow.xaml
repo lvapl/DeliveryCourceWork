@@ -4,9 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeliveryService.View"
+        xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="ErrorWindow" Height="450" Width="800">
+        Title="ErrorWindow" Height="300" Width="550"
+        Style="{StaticResource WinChrome}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
         
+        <!--#region Controls-->
+        <StackPanel x:Name="spControl">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="10 8"
+                        FlowDirection="RightToLeft">
+                <Button Style="{StaticResource ControlButton}"
+                        Background="{StaticResource ControlCloseColorBrush}"
+                        Command="{Binding CloseWindowCommand}">
+                    <Icons:PackIconMaterial Kind="Close"
+                                            Width="10"
+                                            Height="10"/>
+                </Button>
+                <Button Style="{StaticResource ControlButton}"
+                        Background="{StaticResource ControlMinColorBrush}"
+                        Command="{Binding MinimizeWindowCommand}">
+                    <Icons:PackIconMaterial Kind="Minus"
+                                            Width="10"
+                                            Height="10"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <!--#endregion-->
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Ошибка!"
+                       Style="{StaticResource SelectionTitle}"
+                       Margin="0 15"/>
+            <TextBlock Text="{Binding Message}"
+                       MaxWidth="350"
+                       TextWrapping="WrapWithOverflow"/>
+        </StackPanel>
+
+        <!--#region Buttons-->
+        <Button Content="Закрыть"
+                Grid.Row="2"
+                Style="{StaticResource EditButtons}"
+                HorizontalAlignment="Center"
+                Command="{Binding CloseWindowCommand}"/>
+        <!--#endregion-->
     </Grid>
 </Window>

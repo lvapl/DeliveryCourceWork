@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <!--Top Menu-->
         <Grid>
@@ -75,7 +76,7 @@
                                         CornerRadius="50"
                                         Margin="0 0 10 0"
                                         VerticalAlignment="Center">
-                                    <Image Source="{Binding }"
+                                    <Image Source="{Binding WorkerImage}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"/>
                                 </Border>
@@ -152,5 +153,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Grid.Row="2"
+                Style="{StaticResource SelectionAddRowButton}"
+                HorizontalAlignment="Right"
+                Command="{Binding AddWorkerCommand}">
+
+        </Button>
     </Grid>
 </Page>
