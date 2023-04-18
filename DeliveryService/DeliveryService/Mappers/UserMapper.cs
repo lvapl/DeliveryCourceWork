@@ -37,11 +37,11 @@ namespace DeliveryService.Mappers
             user.PassportNumber = userDTO.PassportNumber;
             if (userDTO.Address != null)
             {
-                AddressMapper.Map(userDTO.Address, user.Address ?? (user.Address = new Address()));
+                AddressMapper.Map(userDTO.Address, (user.Address = new Address()));
             }
             if (userDTO.PassportAddress != null)
             {
-                AddressMapper.Map(userDTO.PassportAddress, user.PassportAddressNavigation ?? (user.PassportAddressNavigation = new Address()));
+                AddressMapper.Map(userDTO.PassportAddress, (user.PassportAddressNavigation = new Address()));
             }
         }
 

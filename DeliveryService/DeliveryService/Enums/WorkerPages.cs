@@ -8,6 +8,7 @@ namespace DeliveryService.Enums
 {
     public enum WorkerPages
     {
-        WorkerGeneralInfo
+        WorkerGeneralInfo,
+        WorkerPassword
     }
 }

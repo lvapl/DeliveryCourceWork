@@ -14,10 +14,12 @@ namespace DeliveryService.Services
     public class WorkerDTOService : IWorkerDTOService
     {
         private IWorkerRepository _workerRepository;
+        private IUserRepository _userRepository;
 
-        public WorkerDTOService(IWorkerRepository workerRepository)
+        public WorkerDTOService(IWorkerRepository workerRepository, IUserRepository userRepository)
         {
             _workerRepository = workerRepository;
+            _userRepository = userRepository;
         }
 
         public void Add(WorkerDTO workerGeneralInfoDTO)
@@ -27,6 +29,9 @@ namespace DeliveryService.Services
 
             worker.IdNavigation = user;
             WorkerMapper.Map(workerGeneralInfoDTO, worker);
+
+            _userRepository.Add(user);
+
             _workerRepository.Add(worker);
         }
 

@@ -66,7 +66,7 @@ namespace DeliveryService.ViewModel
             {
                 return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
                 {
-                    _window.Close();
+                    App.Current.Shutdown();
                 }));
             }
         }

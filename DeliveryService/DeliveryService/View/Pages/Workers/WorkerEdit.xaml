@@ -76,7 +76,7 @@
                                 Style="{StaticResource EditField}"/>
                     <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="200"
                               ItemsSource="{Binding Positions}"
-                              SelectedIndex="{Binding Position}">
+                              SelectedItem="{Binding Position}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}"/>

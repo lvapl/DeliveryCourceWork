@@ -94,11 +94,11 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
-        public ObservableCollection<Tariff>? Tariffs { get => new ObservableCollection<Tariff>(_context.Tariffs.ToList()); }
+        public ObservableCollection<Tariff>? Tariffs { get => new ObservableCollection<Tariff>(_context.Tariffs); }
 
         public Tariff? Tariff
         {
-            get => _delivery.TariffId == null ? null : _context.Tariffs.Find(_delivery.TariffId);
+            get => _delivery.TariffId == null ? null : _context.Tariffs.Find((int)_delivery.TariffId);
             set
             {
                 _delivery.TariffId = value == null ? null : value.Id;
@@ -167,6 +167,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             _deliveryService = App.ServiceProvider.GetRequiredService<IDeliveryDTOService>();
             _userRepository = App.ServiceProvider.GetRequiredService<IUserRepository>();
             _pointRepository = App.ServiceProvider.GetRequiredService<IPickUpPointRepository>();
+            _context = App.ServiceProvider.GetRequiredService<DsContext>();
 
             if (deliveryId == null)
             {

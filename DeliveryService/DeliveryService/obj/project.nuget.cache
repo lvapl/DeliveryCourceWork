@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/Tc45KHxIJhWf+z6aKMV8OyP8Cn/CK6OCyCW5uhhMyTUcGw+hfVZB8tuaezYpGxlvnBcxYopbQn6VyQWKx1j2w==",
+  "dgSpecHash": "OJnk56IHVcXNb0FI1zMwAx4mgMHq9WL0xfMje65eCkzzqoo5rOwMPx+qL4K9aO4CQ+Ub7+bcXsDCjgtCWU9Q5A==",
   "success": true,
   "projectFilePath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
   "expectedPackageFiles": [
@@ -46,6 +46,7 @@
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\clash\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

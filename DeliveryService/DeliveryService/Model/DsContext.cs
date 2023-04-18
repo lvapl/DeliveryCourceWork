@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
-using DeliveryService.View;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryService.Model;
@@ -59,16 +57,8 @@ public partial class DsContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        try
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
-        }
-        catch (Exception e)
-        {
-            Window window = new ErrorWindow("Не удалось подключится к базе данных. Обратитесь к администратору.");
-            window.ShowDialog();
-        }
+        optionsBuilder.UseLazyLoadingProxies();
+        optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -111,8 +101,7 @@ public partial class DsContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title)
-                .HasMaxLength(100)
-                .IsFixedLength()
+                .IsUnicode(false)
                 .HasColumnName("title");
         });
 
@@ -124,8 +113,7 @@ public partial class DsContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title)
-                .HasMaxLength(100)
-                .IsFixedLength()
+                .IsUnicode(false)
                 .HasColumnName("title");
         });
 
@@ -195,8 +183,7 @@ public partial class DsContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Number)
-                .HasMaxLength(50)
-                .IsFixedLength()
+                .IsUnicode(false)
                 .HasColumnName("number");
         });
 
@@ -281,8 +268,7 @@ public partial class DsContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title)
-                .HasMaxLength(100)
-                .IsFixedLength()
+                .IsUnicode(false)
                 .HasColumnName("title");
         });
 
@@ -308,7 +294,7 @@ public partial class DsContext : DbContext
 
             entity.ToTable("users");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id).ValueGeneratedOnAdd().HasColumnName("id");
             entity.Property(e => e.AddressId).HasColumnName("address_id");
             entity.Property(e => e.Firstname)
                 .IsUnicode(false)

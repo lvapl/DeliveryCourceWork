@@ -28,8 +28,6 @@ namespace DeliveryService.Mappers
 
         public static void Map(AddressDTO addressDTO, Address address)
         {
-            address.Id = addressDTO.Id;
-
             address.Postcode = addressDTO.Postcode;
 
             if (addressDTO.CountryId != null)

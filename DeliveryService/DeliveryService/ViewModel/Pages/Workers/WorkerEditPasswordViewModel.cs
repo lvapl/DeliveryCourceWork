@@ -1,5 +1,8 @@
-﻿using DeliveryService.DTO;
+﻿using CredentialChecker;
+using CredentialChecker.Enums;
+using DeliveryService.DTO;
 using DeliveryService.Services;
+using DeliveryService.View;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,7 +15,7 @@ using System.Windows.Controls;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
-    public class WorkerEditPasswordViewModel
+    public class WorkerEditPasswordViewModel : ViewModelBase
     {
         #region Private Fields
         private WorkerDTO _worker;
@@ -28,19 +31,49 @@ namespace DeliveryService.ViewModel.Pages.Workers
         private RelayCommand? _minimizeWindowCommand;
 
         private RelayCommand? _cancelWindowCommand;
+
+        private string? _password;
+
+        private int _progressPassword;
         #endregion
 
         #region Properties
+        public string? Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                ShowValidationPassword();
+                OnPropertyChanged();
+            }
+        }
+
+        public int ProgressPassword
+        {
+            get => _progressPassword;
+            set
+            {
+                _progressPassword = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand SaveCommand
         {
             get
             {
                 return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
                 {
-                    if ((obj as PasswordBox).Password != null)
+                    if ((int)PasswordChecker.Check(_password) > 1 && _password != null)
                     {
-                        _worker.Password = _service.EncryptPassword((obj as PasswordBox).Password);
+                        _worker.Password = _service.EncryptPassword(_password);
                         _window.Close();
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Пароль не введён или слишком простой.");
+                        window.ShowDialog();
                     }
                 }));
             }
@@ -85,6 +118,13 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _worker = worker;
             _window = window;
             _service = App.ServiceProvider.GetRequiredService<IEncryptionService>();
+        }
+
+        public void ShowValidationPassword()
+        {
+            PasswordDifficulty passwordDifficulty = PasswordChecker.Check(_password);
+
+            ProgressPassword = (int)passwordDifficulty * 25;
         }
     }
 }

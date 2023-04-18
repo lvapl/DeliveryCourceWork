@@ -43,11 +43,6 @@
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
                                  CommandParameter="{x:Static Pages:UserPages.UserGenerlaInfo}"/>
-                    <RadioButton GroupName="SubSelection"
-                                 Content="ЫВЗАОз"
-                                 Style="{StaticResource SubSectionButton}"
-                                 Command="{Binding ChangePageCommand}"
-                                 CommandParameter="{x:Null}"/>
                 </StackPanel>
             </Grid>
 

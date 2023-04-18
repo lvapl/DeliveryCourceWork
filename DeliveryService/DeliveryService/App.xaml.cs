@@ -65,7 +65,18 @@ namespace DeliveryService
         {
             e.Handled = true;
 
-            Window window = new ErrorWindow(e.Exception.Message);
+            string message;
+
+            switch (e.Exception)
+            {
+                case Microsoft.Data.SqlClient.SqlException:
+                    message = "Возникли проблемы с подключением к базе данных. Обратитесь к администратору";
+                    break;
+                default:
+                    message = e.Exception.Message;
+                    break;
+            }
+            Window window = new ErrorWindow(message);
             window.ShowDialog();
         }
     }

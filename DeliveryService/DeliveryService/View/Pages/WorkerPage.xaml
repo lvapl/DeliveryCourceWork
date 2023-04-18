@@ -48,7 +48,7 @@
                                  Content="Пароли"
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
-                                 CommandParameter="{x:Null}"/>
+                                 CommandParameter="{x:Static Pages:WorkerPages.WorkerPassword}"/>
                 </StackPanel>
             </Grid>
 

@@ -1,5 +1,6 @@
 ﻿using DeliveryService.Enums;
 using DeliveryService.View;
+using DeliveryService.View.Pages.Workers;
 using DeliveryService.View.Workers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace DeliveryService.Converters
                 {
                     case WorkerPages.WorkerGeneralInfo:
                         return new WorkerGeneralInfoPage();
+                    case WorkerPages.WorkerPassword:
+                        return new WorkerPasswordPage();
                     default:
                         return new EmptyPage();
                 }
@@ -38,6 +41,8 @@ namespace DeliveryService.Converters
                 {
                     case WorkerGeneralInfoPage:
                         return WorkerPages.WorkerGeneralInfo;
+                    case WorkerPasswordPage:
+                        return WorkerPages.WorkerPassword;
                     default:
                         return null;
                 }

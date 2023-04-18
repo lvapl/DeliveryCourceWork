@@ -56,12 +56,12 @@ namespace DeliveryService.Mappers
 
             if (workerDTO.Address != null)
             {
-                AddressMapper.Map(workerDTO.Address, worker.IdNavigation.Address ?? (worker.IdNavigation.Address = new Address()));
+                AddressMapper.Map(workerDTO.Address, (worker.IdNavigation.Address = new Address()));
             }
 
             if (workerDTO.PassportAddress != null)
             {
-                AddressMapper.Map(workerDTO.PassportAddress, worker.IdNavigation.PassportAddressNavigation ?? (worker.IdNavigation.PassportAddressNavigation = new Address()));
+                AddressMapper.Map(workerDTO.PassportAddress, (worker.IdNavigation.PassportAddressNavigation = new Address()));
             }
         }
 

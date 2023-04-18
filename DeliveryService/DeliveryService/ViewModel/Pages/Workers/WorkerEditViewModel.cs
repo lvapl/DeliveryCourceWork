@@ -133,7 +133,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
 
                     Window window = new AddressEdit(Worker.Address);
-                    window.Show();
+                    window.ShowDialog();
+                    OnPropertyChanged(nameof(Worker));
                 }));
             }
         }
@@ -150,7 +151,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
 
                     Window window = new AddressEdit(Worker.PassportAddress);
-                    window.Show();
+                    window.ShowDialog();
+                    OnPropertyChanged(nameof(Worker));
                 }));
             }
         }
@@ -159,10 +161,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
 
         public Position? Position
         {
-            get => _positionRepository.GetById(_worker.PositionId);
+            get => _worker.PositionId == 0 ? null : _positionRepository.GetById(_worker.PositionId);
             set
             {
                 _worker.PositionId = value == null ? _worker.PositionId : value.Id;
+                OnPropertyChanged();
             }
         }
 
@@ -200,17 +203,6 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 _worker = _workerService.GetById((int)workerId);
             }
-        }
-
-        private bool IsFieldsEmpty()
-        {
-            return string.IsNullOrWhiteSpace(_worker.FirstName)
-                || string.IsNullOrWhiteSpace(_worker.LastName)
-                || string.IsNullOrWhiteSpace(_worker.Title)
-                || string.IsNullOrWhiteSpace(_worker.TelephoneNumber)
-                || _worker.Password != null
-                || _worker.PassportNumber != 0
-                || _worker.PassportSeries != 0;
         }
     }
 }
