@@ -31,6 +31,7 @@ namespace DeliveryService.Services
             WorkerMapper.Map(workerGeneralInfoDTO, worker);
 
             _userRepository.Add(user);
+            worker.Id = user.Id;
 
             _workerRepository.Add(worker);
         }

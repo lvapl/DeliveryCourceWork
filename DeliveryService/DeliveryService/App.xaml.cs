@@ -49,6 +49,8 @@ namespace DeliveryService
             services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IDeliveryDTOService, DeliveryDTOService>();
             services.AddSingleton<IPickUpPointRepository, PickUpPointRepository>();
+            services.AddSingleton<IStorageRepository, StorageRepository>();
+            services.AddSingleton<IStorageDTOService, StorageDTOService>();
 
             services.AddSingleton<AppPageConverter>();
 

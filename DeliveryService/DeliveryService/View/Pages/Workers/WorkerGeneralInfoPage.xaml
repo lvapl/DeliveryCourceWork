@@ -37,7 +37,8 @@
 
                     <TextBox x:Name="tbSearch"
                              Height="30"
-                             Style="{StaticResource TextBoxSearch}"/>
+                             Style="{StaticResource TextBoxSearch}"
+                             Text="{Binding TextBoxSearch, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Icons:PackIconMaterial Kind="Magnify"
                                             Width="15"
@@ -75,10 +76,14 @@
                                         Height="25" 
                                         CornerRadius="50"
                                         Margin="0 0 10 0"
-                                        VerticalAlignment="Center">
-                                    <Image Source="{Binding WorkerImage}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"/>
+                                        VerticalAlignment="Center"
+                                        Background="{StaticResource BackgroundLightBrush}">
+                                    <Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding WorkerImage}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    
                                 </Border>
 
                                 <TextBlock Text="{Binding FirstName}"

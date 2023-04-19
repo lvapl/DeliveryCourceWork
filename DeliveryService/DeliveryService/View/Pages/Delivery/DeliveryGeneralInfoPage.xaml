@@ -37,7 +37,8 @@
 
                     <TextBox x:Name="tbSearch"
                              Height="30"
-                             Style="{StaticResource TextBoxSearch}"/>
+                             Style="{StaticResource TextBoxSearch}"
+                             Text="{Binding TextBoxSearch, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Icons:PackIconMaterial Kind="Magnify"
                                             Width="15"

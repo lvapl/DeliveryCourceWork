@@ -12,6 +12,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\Pages\Storages\StorageEdit.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\StoragePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\Storages\StorageGeneralInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Pages\Workers\WorkerPasswordPage.xaml">
       <SubType>Designer</SubType>
     </Page>

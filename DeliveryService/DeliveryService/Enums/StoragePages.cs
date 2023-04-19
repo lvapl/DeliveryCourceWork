@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeliveryService.Enums
 {
-    public enum AppPages
+    public enum StoragePages
     {
-        Worker,
-        User,
-        Delivery,
-        Storage
+        StorageGeneralInfo
     }
 }

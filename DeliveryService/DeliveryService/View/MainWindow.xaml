@@ -44,7 +44,7 @@
 
             <Border Grid.Row="1"
                         Background="{StaticResource PrimaryColorBruh}"
-                        CornerRadius="0 50 0 20">
+                        CornerRadius="0 50 0 17">
                 <DockPanel>
                     <!--Avatar-->
                     <Border Width="80"
@@ -115,7 +115,7 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Null}">
+                                         CommandParameter="{x:Static Pages:AppPages.Storage}">
                             <StackPanel Orientation="Horizontal">
                                 <Icons:PackIconMaterial Kind="Store24Hour"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>

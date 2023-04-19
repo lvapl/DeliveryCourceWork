@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OJnk56IHVcXNb0FI1zMwAx4mgMHq9WL0xfMje65eCkzzqoo5rOwMPx+qL4K9aO4CQ+Ub7+bcXsDCjgtCWU9Q5A==",
+  "dgSpecHash": "AcXBFJjdETopuQdGeq+NA+xbbTdz6OnnNwSwehRK/jvG6TbsngQooJjljPAC2kuI2QjZGqSBN8Z0Jqfg73PotA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+  "projectFilePath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\clash\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\clash\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

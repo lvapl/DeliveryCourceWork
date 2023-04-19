@@ -25,6 +25,8 @@ namespace DeliveryService.ViewModel.Pages.Users
         private RelayCommand? _deleteUserCommand;
 
         private RelayCommand? _addUserCommand;
+
+        private string _textBoxSearch;
         #endregion
 
         #region Properties
@@ -35,6 +37,17 @@ namespace DeliveryService.ViewModel.Pages.Users
             {
                 _users = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string TextBoxSearch
+        {
+            get => _textBoxSearch;
+            set
+            {
+                _textBoxSearch = value;
+                OnPropertyChanged();
+                FilterTable();
             }
         }
 
@@ -93,6 +106,24 @@ namespace DeliveryService.ViewModel.Pages.Users
         private void UpdateData()
         {
             Users = new ObservableCollection<UserDTO>(_service.GetAll());
+        }
+
+        private void FilterTable()
+        {
+            if (_textBoxSearch != null)
+            {
+                Users = new ObservableCollection<UserDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
+                                                                                    || x.FirstName.Contains(_textBoxSearch)
+                                                                                    || x.LastName.Contains(_textBoxSearch)
+                                                                                    || (x.Patronymic != null && x.Patronymic.Contains(_textBoxSearch))
+                                                                                    || x.TelephoneNumber.Contains(_textBoxSearch)
+                                                                                    || (x.Address != null
+                                                                                        && ((x.Address.Country != null && x.Address.Country.Contains(_textBoxSearch))
+                                                                                            || (x.Address.City != null && x.Address.City.Contains(_textBoxSearch))
+                                                                                            || (x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch))
+                                                                                            || (x.Address.House != null && x.Address.House.Contains(_textBoxSearch))))));
+            }
+
         }
         #endregion
     }

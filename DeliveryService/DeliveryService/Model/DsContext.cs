@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DeliveryService.Model;
 
 public partial class DsContext : DbContext
 {
+
     public DsContext()
     {
     }
@@ -59,6 +62,7 @@ public partial class DsContext : DbContext
     {
         optionsBuilder.UseLazyLoadingProxies();
         optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
+        optionsBuilder.LogTo(message => Debug.WriteLine(message));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

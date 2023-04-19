@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj": {}
+    "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj": {
+    "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
+        "projectUniqueName": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
         "projectName": "CredentialChecker",
-        "projectPath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
+        "projectPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
         "packagesPath": "C:\\Users\\clash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\obj\\",
+        "outputPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj": {
+    "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+        "projectUniqueName": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
         "projectName": "DeliveryService",
-        "projectPath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+        "projectPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
         "packagesPath": "C:\\Users\\clash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\obj\\",
+        "outputPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\DeliveryService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -93,8 +93,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj": {
-                "projectPath": "C:\\Users\\clash\\OneDrive\\Документы\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj"
+              "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj": {
+                "projectPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj"
               }
             }
           }

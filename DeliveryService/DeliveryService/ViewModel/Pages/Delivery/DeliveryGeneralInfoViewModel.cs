@@ -24,6 +24,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         private RelayCommand? _deleteDeliveryCommand;
 
         private RelayCommand? _addDeliveryCommand;
+
+        private string _textBoxSearch;
         #endregion
 
         #region Properties
@@ -34,6 +36,17 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             {
                 _deliveries = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string TextBoxSearch
+        {
+            get => _textBoxSearch;
+            set
+            {
+                _textBoxSearch = value;
+                OnPropertyChanged();
+                FilterTable();
             }
         }
 
@@ -92,6 +105,26 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         private void UpdateData()
         {
             Deliveries = new ObservableCollection<DeliveryDTO>(_service.GetAll());
+        }
+
+        private void FilterTable()
+        {
+            if (_textBoxSearch != null)
+            {
+                Deliveries = new ObservableCollection<DeliveryDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
+                                                                                             || (x.Sender != null 
+                                                                                                && (x.Sender.Id.ToString().Contains(_textBoxSearch)
+                                                                                                 || x.Sender.FirstName.Contains(_textBoxSearch)
+                                                                                                 || x.Sender.LastName.Contains(_textBoxSearch)
+                                                                                                 || (x.Sender.Patronymic != null && x.Sender.Patronymic.Contains(_textBoxSearch))))
+                                                                                             || (x.Recipient != null
+                                                                                                && (x.Recipient.Id.ToString().Contains(_textBoxSearch)
+                                                                                                 || x.Recipient.FirstName.Contains(_textBoxSearch)
+                                                                                                 || x.Recipient.LastName.Contains(_textBoxSearch)
+                                                                                                 || (x.Recipient.Patronymic != null && x.Recipient.Patronymic.Contains(_textBoxSearch))))
+                                                                                             || (x.Price != null && x.Price.ToString().Contains(_textBoxSearch))));
+            }
+
         }
         #endregion
     }

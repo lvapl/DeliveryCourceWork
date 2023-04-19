@@ -26,6 +26,8 @@ namespace DeliveryService.Converters
                         return new UserPage();
                     case AppPages.Delivery:
                         return new DeliveryPage();
+                    case AppPages.Storage:
+                        return new StoragePage();
                     default:
                         return new EmptyPage();
                 }
@@ -45,6 +47,8 @@ namespace DeliveryService.Converters
                         return AppPages.User;
                     case DeliveryPage:
                         return AppPages.Delivery;
+                    case StoragePage:
+                        return AppPages.Storage;
                     default:
                         return null;
                 }
