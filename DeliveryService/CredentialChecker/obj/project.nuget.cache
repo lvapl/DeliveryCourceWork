@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "DZprQGr/XgDnDvZemqWWqQPBbflgziRB1G+0lZfO0rIGpsRjDU/t23rOw3ZPzvSjlkkvWGYmEsOEUeAVeuq1Jg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://packages.nuget.org/v1/FeedService.svc/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
+}
