@@ -1,5 +1,7 @@
 ﻿using DeliveryService.DTO;
+using DeliveryService.Enums;
 using DeliveryService.Services;
+using DeliveryService.View;
 using DeliveryService.View.Pages.Delivery;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +18,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
     {
         #region Private Fields
         private IDeliveryDTOService _service;
+
+        private IAuthenticationService _authenticationService;
 
         private ObservableCollection<DeliveryDTO>? _deliveries;
 
@@ -56,11 +60,19 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             {
                 return _editDeliveryCommand ?? (_editDeliveryCommand = new RelayCommand((obj) =>
                 {
-                    if (obj != null)
+                    if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
                     {
-                        Window window = new DeliveryEdit((int)obj);
+                        if (obj != null)
+                        {
+                            Window window = new DeliveryEdit((int)obj);
+                            window.ShowDialog();
+                            UpdateData();
+                        }
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
-                        UpdateData();
                     }
                 }));
             }
@@ -72,10 +84,18 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             {
                 return _deleteDeliveryCommand ?? (_deleteDeliveryCommand = new RelayCommand((obj) =>
                 {
-                    if (obj != null)
+                    if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
                     {
-                        _service.Remove((int)obj);
-                        UpdateData();
+                        if (obj != null)
+                        {
+                            _service.Remove((int)obj);
+                            UpdateData();
+                        }
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        window.ShowDialog();
                     }
                 }));
             }
@@ -87,9 +107,17 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             {
                 return _addDeliveryCommand ?? (_addDeliveryCommand = new RelayCommand((obj) =>
                 {
-                    Window window = new DeliveryEdit(null);
-                    window.ShowDialog();
-                    UpdateData();
+                    if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
+                    {
+                        Window window = new DeliveryEdit(null);
+                        window.ShowDialog();
+                        UpdateData();
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        window.ShowDialog();
+                    }
                 }));
             }
         }
@@ -98,6 +126,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         public DeliveryGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IDeliveryDTOService>();
+            _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
+
             UpdateData();
         }
 

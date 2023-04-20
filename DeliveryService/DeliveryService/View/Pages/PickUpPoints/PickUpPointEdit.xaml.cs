@@ -1,4 +1,4 @@
-﻿using DeliveryService.ViewModel.Pages;
+﻿using DeliveryService.ViewModel.Pages.PickUpPoints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DeliveryService.View
+namespace DeliveryService.View.Pages.PickUpPoints
 {
     /// <summary>
-    /// Логика взаимодействия для DeliveryPage.xaml
+    /// Логика взаимодействия для UserEdit.xaml
     /// </summary>
-    public partial class PickUpPointPage : Page
+    public partial class PickUpPointEdit : Window
     {
-        public PickUpPointPage()
+        public PickUpPointEdit(int? pointId)
         {
             InitializeComponent();
-            this.DataContext = new PickUpPointViewModel();
+            this.DataContext = new PickUpPointEditViewModel(this, pointId);
         }
     }
 }

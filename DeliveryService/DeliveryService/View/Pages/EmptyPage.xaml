@@ -19,7 +19,7 @@
                        HorizontalAlignment="Center"
                        Margin="0 5"/>
 
-            <TextBlock Text="Раздел не выбран или не существует"
+            <TextBlock Text="Раздел не выбран, не существует или не достаточно прав."
                        FontSize="14"
                        FontWeight="Medium"
                        Foreground="{StaticResource TextGrayColorBrush}"/>

@@ -1,9 +1,6 @@
-﻿using DeliveryService.Model;
-using DeliveryService.ViewModel;
-using DeliveryService.Services;
+﻿using DeliveryService.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DeliveryService.View
 {
     /// <summary>
-    /// Логика взаимодействия для LoginWindow.xaml
+    /// Логика взаимодействия для DeliveryPage.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class DeliveryPage : Page
     {
-        public LoginWindow(IAuthenticationService authenticationService, DsContext context, MainWindow mainWindow)
+        public DeliveryPage()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel(authenticationService, context, this, mainWindow);
+            this.DataContext = new DeliveryViewModel();
         }
     }
 }

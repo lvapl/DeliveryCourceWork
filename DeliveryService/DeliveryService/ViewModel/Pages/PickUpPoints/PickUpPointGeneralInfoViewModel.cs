@@ -3,7 +3,7 @@ using DeliveryService.Enums;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Delivery;
-using DeliveryService.View.Pages.Storages;
+using DeliveryService.View.Pages.PickUpPoints;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,33 +13,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DeliveryService.ViewModel.Pages.Storages
+namespace DeliveryService.ViewModel.Pages.PickUpPoints
 {
-    public class StorageGeneralInfoViewModel : ViewModelBase
+    public class PickUpPointGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
-        private IStorageDTOService _service;
+        private IPickUpPointDTOService _service;
 
         private IAuthenticationService _authenticationService;
 
-        private ObservableCollection<StorageDTO>? _storages;
+        private ObservableCollection<PickUpPointDTO>? _pickUpPoints;
 
-        private RelayCommand? _editStorageCommand;
+        private RelayCommand? _editPickUpPointCommand;
 
-        private RelayCommand? _deleteStorageCommand;
+        private RelayCommand? _deletePickUpPointCommand;
 
-        private RelayCommand? _addStorageCommand;
+        private RelayCommand? _addPickUpPointCommand;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
-        public ObservableCollection<StorageDTO>? Storages
+        public ObservableCollection<PickUpPointDTO>? PickUpPoints
         {
-            get => _storages;
+            get => _pickUpPoints;
             set
             {
-                _storages = value;
+                _pickUpPoints = value;
                 OnPropertyChanged();
             }
         }
@@ -55,17 +55,17 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
-        public RelayCommand? EditStorageCommand
+        public RelayCommand? EditPickUpPointCommand
         {
             get
             {
-                return _editStorageCommand ?? (_editStorageCommand = new RelayCommand((obj) =>
+                return _editPickUpPointCommand ?? (_editPickUpPointCommand = new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
                         if (obj != null)
                         {
-                            Window window = new StorageEdit((int)obj);
+                            Window window = new PickUpPointEdit((int)obj);
                             window.ShowDialog();
                             UpdateData();
                         }
@@ -79,13 +79,13 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
-        public RelayCommand? DeleteStorageCommand
+        public RelayCommand? DeletePickUpPointCommand
         {
             get
             {
-                return _deleteStorageCommand ?? (_deleteStorageCommand = new RelayCommand((obj) =>
+                return _deletePickUpPointCommand ?? (_deletePickUpPointCommand = new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
                         if (obj != null)
                         {
@@ -102,15 +102,15 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
-        public RelayCommand AddStorageCommand
+        public RelayCommand AddPickUpPointCommand
         {
             get
             {
-                return _addStorageCommand ?? (_addStorageCommand = new RelayCommand((obj) =>
+                return _addPickUpPointCommand ?? (_addPickUpPointCommand = new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
-                        Window window = new StorageEdit(null);
+                        Window window = new PickUpPointEdit(null);
                         window.ShowDialog();
                         UpdateData();
                     }
@@ -124,9 +124,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
         }
         #endregion
 
-        public StorageGeneralInfoViewModel()
+        public PickUpPointGeneralInfoViewModel()
         {
-            _service = App.ServiceProvider.GetRequiredService<IStorageDTOService>();
+            _service = App.ServiceProvider.GetRequiredService<IPickUpPointDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
 
             UpdateData();
@@ -135,21 +135,21 @@ namespace DeliveryService.ViewModel.Pages.Storages
         #region Methods
         private void UpdateData()
         {
-            Storages = new ObservableCollection<StorageDTO>(_service.GetAll());
+            PickUpPoints = new ObservableCollection<PickUpPointDTO>(_service.GetAll());
         }
 
         private void FilterTable()
         {
             if (_textBoxSearch != null)
             {
-                Storages = new ObservableCollection<StorageDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
-                                                                                          || (x.Title != null && x.Title.Contains(_textBoxSearch))
-                                                                                          || (x.Address != null
-                                                                                            && ((x.Address.Country != null && x.Address.Country.Contains(_textBoxSearch))
-                                                                                             || (x.Address.City != null && x.Address.City.Contains(_textBoxSearch))
-                                                                                             || (x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch))
-                                                                                             || (x.Address.House != null && x.Address.House.Contains(_textBoxSearch))))));
+                PickUpPoints = new ObservableCollection<PickUpPointDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
+                                                                                               || x.Address != null
+                                                                                                   && (x.Address.Country != null && x.Address.Country.Contains(_textBoxSearch)
+                                                                                                    || x.Address.City != null && x.Address.City.Contains(_textBoxSearch)
+                                                                                                    || x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch)
+                                                                                                    || x.Address.House != null && x.Address.House.Contains(_textBoxSearch))));
             }
+
         }
         #endregion
     }

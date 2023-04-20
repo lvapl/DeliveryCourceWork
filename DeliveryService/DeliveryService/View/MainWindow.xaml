@@ -124,7 +124,7 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Null}">
+                                         CommandParameter="{x:Static Pages:AppPages.PickUpPoint}">
                             <StackPanel Orientation="Horizontal">
                                 <Icons:PackIconMaterial Kind="StoreMarker"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>

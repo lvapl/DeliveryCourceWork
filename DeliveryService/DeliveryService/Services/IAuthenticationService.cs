@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DeliveryService.Enums;
+using DeliveryService.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +11,12 @@ namespace DeliveryService.Services
 {
     public interface IAuthenticationService
     {
-        public bool AuthenticateWorker(NetworkCredential credential);
+        public Worker? AuthenticateWorker(NetworkCredential credential);
+
+        public bool HasAccessToSection(AppPages section);
+
+        public bool HasAccessToSubSection<T>(T subSection) where T: System.Enum;
+
+        public bool HasPermissionToModifySubsection<T>(T DTOSubSection) where T : System.Enum;
     }
 }

@@ -1,4 +1,4 @@
-﻿using DeliveryService.ViewModel.Pages;
+﻿using DeliveryService.ViewModel.Pages.PickUpPoints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DeliveryService.View
+namespace DeliveryService.View.Pages.PickUpPoints
 {
     /// <summary>
-    /// Логика взаимодействия для DeliveryPage.xaml
+    /// Логика взаимодействия для DeliveryGeneralInfoPage.xaml
     /// </summary>
-    public partial class PickUpPointPage : Page
+    public partial class PickUpPointGeneralInfoPage : Page
     {
-        public PickUpPointPage()
+        public PickUpPointGeneralInfoPage()
         {
             InitializeComponent();
-            this.DataContext = new PickUpPointViewModel();
+            DataContext = new PickUpPointGeneralInfoViewModel();
         }
     }
 }

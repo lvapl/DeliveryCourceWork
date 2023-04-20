@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeliveryService.Enums
 {
-    public enum AppPages
+    public enum PickUpPointPages
     {
-        Worker,
-        User,
-        Delivery,
-        Storage,
-        PickUpPoint
+        PickUpPointGeneralInfo
     }
 }

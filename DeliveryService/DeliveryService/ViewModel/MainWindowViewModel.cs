@@ -1,6 +1,8 @@
 ﻿using DeliveryService.Enums;
 using DeliveryService.Model;
+using DeliveryService.Services;
 using DeliveryService.View;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,8 @@ namespace DeliveryService.ViewModel
     {
         #region Private Fields
         private Window _window;
+
+        private IAuthenticationService _authenticationService;
 
         private RelayCommand? _changePageCommand;
 
@@ -54,8 +58,14 @@ namespace DeliveryService.ViewModel
             {
                 return _changePageCommand ?? (_changePageCommand = new RelayCommand((obj) =>
                 {
-                    CurrentPage = (AppPages?)obj;
-
+                    if (obj != null && _authenticationService.HasAccessToSection((AppPages)obj))
+                    {
+                        CurrentPage = (AppPages)obj;
+                    }
+                    else
+                    {
+                        CurrentPage = null;
+                    }
                 }));
             }
         }
@@ -114,6 +124,8 @@ namespace DeliveryService.ViewModel
         public MainWindowViewModel(Window window)
         {
             _window = window;
+            
+            _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
         }
     }
 }

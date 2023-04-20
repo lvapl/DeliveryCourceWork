@@ -25,6 +25,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="View\Pages\PickUpPointPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Pages\Storages\StorageEdit.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -55,6 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\Storages\StorageEdit.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

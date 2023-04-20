@@ -1,27 +1,25 @@
 ﻿using DeliveryService.Enums;
 using DeliveryService.Services;
-using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages
 {
-    public class WorkerViewModel : ViewModelBase
+    public class PickUpPointViewModel : ViewModelBase
     {
         private IAuthenticationService _authenticationService;
 
-        private WorkerPages? _currentPage = WorkerPages.WorkerGeneralInfo;
+        private PickUpPointPages? _currentPage  = PickUpPointPages.PickUpPointGeneralInfo;
 
         private RelayCommand? _changePageCommand;
 
-        
 
-        public WorkerPages? CurrentPage
+
+        public PickUpPointPages? CurrentPage 
         {
             get => _currentPage;
             set
@@ -31,25 +29,24 @@ namespace DeliveryService.ViewModel.Pages
             }
         }
 
-        public RelayCommand ChangePageCommand
-        {
+        public RelayCommand ChangePageCommand { 
             get
             {
                 return _changePageCommand ?? (_changePageCommand = new RelayCommand((obj) =>
                 {
-                    if (obj != null && _authenticationService.HasAccessToSubSection((WorkerPages)obj))
+                    if (obj != null && _authenticationService.HasAccessToSubSection((PickUpPointPages)obj))
                     {
-                        CurrentPage = (WorkerPages)obj;
+                        CurrentPage = (PickUpPointPages)obj;
                     }
                     else
                     {
                         CurrentPage = null;
                     }
                 }));
-            }
+            } 
         }
 
-        public WorkerViewModel()
+        public PickUpPointViewModel()
         {
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
         }

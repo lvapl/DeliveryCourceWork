@@ -1,6 +1,8 @@
 ﻿using DeliveryService.DTO;
+using DeliveryService.Enums;
 using DeliveryService.Model;
 using DeliveryService.Services;
+using DeliveryService.View;
 using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
 {
     public class WorkerPasswordViewModel : ViewModelBase
     {
+        private IAuthenticationService _authenticationService;
+
         private IWorkerDTOService _service;
 
         private ObservableCollection<WorkerDTO>? _workers;
@@ -39,14 +43,22 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 return _editPasswordCommand ?? (_editPasswordCommand = new RelayCommand((obj) =>
                 {
-                    WorkerDTO worker = _service.GetById((int)(obj ?? 0));
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerPassword))
+                    {
+                        WorkerDTO worker = _service.GetById((int)(obj ?? 0));
 
-                    Window window = new WorkerEditPassword(worker);
-                    window.ShowDialog();
+                        Window window = new WorkerEditPassword(worker);
+                        window.ShowDialog();
 
-                    OnPropertyChanged(nameof(Workers));
+                        OnPropertyChanged(nameof(Workers));
 
-                    _service.Edit(worker);
+                        _service.Edit(worker);
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        window.ShowDialog();
+                    }
                 }));
             }
         }
@@ -55,6 +67,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
         public WorkerPasswordViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
+            _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
 
             Workers = new ObservableCollection<WorkerDTO>(_service.GetAll());
         }

@@ -49,6 +49,7 @@ namespace DeliveryService
             services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IDeliveryDTOService, DeliveryDTOService>();
             services.AddSingleton<IPickUpPointRepository, PickUpPointRepository>();
+            services.AddSingleton<IPickUpPointDTOService, PickUpPointDTOService>();
             services.AddSingleton<IStorageRepository, StorageRepository>();
             services.AddSingleton<IStorageDTOService, StorageDTOService>();
 

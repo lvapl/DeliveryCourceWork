@@ -29,10 +29,8 @@ namespace DeliveryService.ViewModel
         private RelayCommand _minimizeWindowCommand;
         private bool _errorMessageVisibility;
 
-        private MainWindow _mainWindow;
         private LoginWindow _loginWindow;
-
-        private MainWindowViewModel? _mainWindowViewModel;
+        private MainWindow _mainWindow;
 
         private IAuthenticationService _authenticationService;
         private DsContext _context;
@@ -58,13 +56,10 @@ namespace DeliveryService.ViewModel
                 ErrorMessageVisibility = false;
                 return _loginCommand ?? (_loginCommand = new RelayCommand((obj) =>
                 {
-                    var isValidWorker = _authenticationService.AuthenticateWorker(new System.Net.NetworkCredential(_login, (obj as PasswordBox).Password));
-                    if (isValidWorker)
+                    Worker? worker = _authenticationService.AuthenticateWorker(new System.Net.NetworkCredential(_login, (obj as PasswordBox).Password));
+                    if (worker != null)
                     {
-                        if (_mainWindowViewModel != null)
-                        {
-                            _mainWindowViewModel.CurrentWorker = _context.Workers.FirstOrDefault(x => x.Login == _login);
-                        }
+                        (_mainWindow.DataContext as MainWindowViewModel).CurrentWorker = worker;
                         ShowMainWindow();
                     }
                     else
@@ -108,13 +103,12 @@ namespace DeliveryService.ViewModel
         }
         #endregion
 
-        public LoginViewModel(IAuthenticationService authenticationService, DsContext context, MainWindow mainWindow, LoginWindow loginWindow)
+        public LoginViewModel(IAuthenticationService authenticationService, DsContext context, LoginWindow loginWindow, MainWindow mainWindow)
         {
             _authenticationService = authenticationService;
             _loginWindow = loginWindow;
-            _mainWindow = mainWindow;
             _context = context;
-            _mainWindowViewModel = (MainWindowViewModel?)mainWindow.DataContext;
+            _mainWindow = mainWindow;
         }
 
         #region Methods

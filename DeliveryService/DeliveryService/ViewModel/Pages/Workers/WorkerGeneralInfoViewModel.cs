@@ -1,5 +1,7 @@
 ﻿using DeliveryService.DTO;
+using DeliveryService.Enums;
 using DeliveryService.Services;
+using DeliveryService.View;
 using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +18,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
     {
         #region Private Fields
         private IWorkerDTOService _service;
+
+        private IAuthenticationService _authenticationService;
 
         private ObservableCollection<WorkerDTO>? _workers;
 
@@ -56,11 +60,19 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 return _editWorkerCommand ?? (_editWorkerCommand = new RelayCommand((obj) =>
                 {
-                    if (obj != null)
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
-                        Window window = new WorkerEdit((int)obj);
+                        if (obj != null)
+                        {
+                            Window window = new WorkerEdit((int)obj);
+                            window.ShowDialog();
+                            UpdateData();
+                        }
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
-                        UpdateData();
                     }
                 }));
             }
@@ -72,10 +84,18 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 return _deleteWorkerCommand ?? (_deleteWorkerCommand = new RelayCommand((obj) =>
                 {
-                    if (obj != null)
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
-                        _service.Remove((int)obj);
-                        UpdateData();
+                        if (obj != null)
+                        {
+                            _service.Remove((int)obj);
+                            UpdateData();
+                        }
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        window.ShowDialog();
                     }
                 }));
             }
@@ -87,9 +107,17 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
                 {
-                    Window window = new WorkerEdit(null);
-                    window.ShowDialog();
-                    UpdateData();
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
+                    {
+                        Window window = new WorkerEdit(null);
+                        window.ShowDialog();
+                        UpdateData();
+                    }
+                    else
+                    {
+                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        window.ShowDialog();
+                    }
                 }));
             }
         }
@@ -98,6 +126,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
         public WorkerGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
+            _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
             UpdateData();
         }
 

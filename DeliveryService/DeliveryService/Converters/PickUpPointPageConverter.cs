@@ -1,5 +1,7 @@
 ﻿using DeliveryService.Enums;
+using DeliveryService.Model;
 using DeliveryService.View;
+using DeliveryService.View.Pages.PickUpPoints;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,24 +14,16 @@ using System.Windows.Markup;
 
 namespace DeliveryService.Converters
 {
-    public class AppPageConverter : ConverterBase<AppPageConverter>
+    public class PickUpPointPageConverter : ConverterBase<PickUpPointPageConverter>
     {
         public override object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is AppPages)
+            if (value is PickUpPointPages)
             {
                 switch (value) 
                 {
-                    case AppPages.Worker:
-                        return new WorkerPage();
-                    case AppPages.User:
-                        return new UserPage();
-                    case AppPages.Delivery:
-                        return new DeliveryPage();
-                    case AppPages.Storage:
-                        return new StoragePage();
-                    case AppPages.PickUpPoint:
-                        return new PickUpPointPage();
+                    case PickUpPointPages.PickUpPointGeneralInfo:
+                        return new PickUpPointGeneralInfoPage();
                     default:
                         return new EmptyPage();
                 }
@@ -43,16 +37,8 @@ namespace DeliveryService.Converters
             {
                 switch(value)
                 {
-                    case WorkerPage:
-                        return AppPages.Worker;
-                    case UserPage:
-                        return AppPages.User;
-                    case DeliveryPage:
-                        return AppPages.Delivery;
-                    case StoragePage:
-                        return AppPages.Storage;
-                    case PickUpPointPage:
-                        return AppPages.PickUpPoint;
+                    case PickUpPointGeneralInfoPage:
+                        return PickUpPointPages.PickUpPointGeneralInfo;
                     default:
                         return null;
                 }
