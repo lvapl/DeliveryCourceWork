@@ -52,6 +52,7 @@ namespace DeliveryService
             services.AddSingleton<IPickUpPointDTOService, PickUpPointDTOService>();
             services.AddSingleton<IStorageRepository, StorageRepository>();
             services.AddSingleton<IStorageDTOService, StorageDTOService>();
+            services.AddSingleton<IPdfWriterService, PdfWriterService>();
 
             services.AddSingleton<AppPageConverter>();
 

@@ -159,11 +159,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="2"
-                Style="{StaticResource SelectionAddRowButton}"
-                HorizontalAlignment="Right"
-                Command="{Binding AddWorkerCommand}">
-
-        </Button>
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal"
+                    FlowDirection="RightToLeft">
+            <Button Style="{StaticResource SelectionAddRowButton}"
+                    HorizontalAlignment="Right"
+                    Command="{Binding AddWorkerCommand}"/>
+            <Button Style="{StaticResource EditButtons}"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    Margin="0"
+                    Command="{Binding CreatePdf}"
+                    Content="В PDF"
+                    FontSize="14"/>
+        </StackPanel>
+        
+        
     </Grid>
 </Page>

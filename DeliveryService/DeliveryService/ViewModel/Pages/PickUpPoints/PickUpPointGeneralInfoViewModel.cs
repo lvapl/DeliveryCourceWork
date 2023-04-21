@@ -22,6 +22,8 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
 
         private IAuthenticationService _authenticationService;
 
+        private IPdfWriterService _pdfWriterService;
+
         private ObservableCollection<PickUpPointDTO>? _pickUpPoints;
 
         private RelayCommand? _editPickUpPointCommand;
@@ -29,6 +31,8 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         private RelayCommand? _deletePickUpPointCommand;
 
         private RelayCommand? _addPickUpPointCommand;
+
+        private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
@@ -122,12 +126,29 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                 }));
             }
         }
+
+        public RelayCommand? CreatePdf
+        {
+            get
+            {
+                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                {
+                    _pdfWriterService.CreatePdfFile(new List<PickUpPointDTO>(_service.GetAll()),
+                                                    new Dictionary<string, string>
+                                                    {
+                                                        { "Id", "Id" },
+                                                        { "Address", "Адрес" },
+                                                    });
+                }));
+            }
+        }
         #endregion
 
         public PickUpPointGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IPickUpPointDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
+            _pdfWriterService = App.ServiceProvider.GetRequiredService<IPdfWriterService>();
 
             UpdateData();
         }

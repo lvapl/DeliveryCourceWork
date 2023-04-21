@@ -5,6 +5,7 @@ using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -84,15 +85,22 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
                 {
-                    if(_worker.Id != 0)
+                    if (IsFillRequiredFields())
                     {
-                        _workerService.Edit(_worker);
-                        _window.Close();
+                        if(_worker.Id != 0)
+                        {
+                            _workerService.Edit(_worker);
+                            _window.Close();
+                        }
+                        else
+                        {
+                            _workerService.Add(_worker);
+                            _window.Close();
+                        }
                     }
                     else
                     {
-                        _workerService.Add(_worker);
-                        _window.Close();
+                        throw new Exception("Обязательные к поля не заполнены!");
                     }
                 }));
             }
@@ -203,6 +211,19 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 _worker = _workerService.GetById((int)workerId);
             }
+        }
+
+
+        private bool IsFillRequiredFields()
+        {
+            return !string.IsNullOrWhiteSpace(Worker.FirstName)
+                && !string.IsNullOrWhiteSpace(Worker.LastName)
+                && !string.IsNullOrWhiteSpace(Worker.TelephoneNumber)
+                && !string.IsNullOrWhiteSpace(Worker.Login)
+                && Worker.PositionId != 0
+                && !string.IsNullOrWhiteSpace(Worker.Password.ToString())
+                && Worker.PassportSeries != 0
+                && Worker.PassportNumber != 0;
         }
     }
 }

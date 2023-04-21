@@ -75,15 +75,22 @@ namespace DeliveryService.ViewModel.Pages.Users
             {
                 return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
                 {
-                    if (_user.Id != 0)
+                    if (IsFillRequiredFields())
                     {
-                        _userService.Edit(_user);
-                        _window.Close();
+                        if (_user.Id != 0)
+                        {
+                            _userService.Edit(_user);
+                            _window.Close();
+                        }
+                        else
+                        {
+                            _userService.Add(_user);
+                            _window.Close();
+                        }
                     }
                     else
                     {
-                        _userService.Add(_user);
-                        _window.Close();
+                        throw new Exception("Обязательные к поля не заполнены!");
                     }
                 }));
             }
@@ -149,6 +156,16 @@ namespace DeliveryService.ViewModel.Pages.Users
             {
                 _user = _userService.GetById((int)userId);
             }
+        }
+
+
+        private bool IsFillRequiredFields()
+        {
+            return !string.IsNullOrWhiteSpace(User.FirstName)
+                && !string.IsNullOrWhiteSpace(User.LastName)
+                && !string.IsNullOrWhiteSpace(User.TelephoneNumber)
+                && User.PassportSeries != 0
+                && User.PassportNumber != 0;
         }
     }
 }

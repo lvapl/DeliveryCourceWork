@@ -22,6 +22,8 @@ namespace DeliveryService.ViewModel.Pages.Users
 
         private IAuthenticationService _authenticationService;
 
+        private IPdfWriterService _pdfWriterService;
+
         private ObservableCollection<UserDTO>? _users;
 
         private RelayCommand? _editUserCommand;
@@ -29,6 +31,8 @@ namespace DeliveryService.ViewModel.Pages.Users
         private RelayCommand? _deleteUserCommand;
 
         private RelayCommand? _addUserCommand;
+
+        private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
@@ -122,12 +126,36 @@ namespace DeliveryService.ViewModel.Pages.Users
                 }));
             }
         }
+
+        public RelayCommand? CreatePdf
+        {
+            get
+            {
+                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                {
+                    _pdfWriterService.CreatePdfFile(new List<UserDTO>(_service.GetAll()),
+                                                    new Dictionary<string, string>
+                                                    {
+                                                        { "Id", "Id" },
+                                                        { "FirstName", "Имя" },
+                                                        { "LastName", "Фамилия" },
+                                                        { "Patronymic", "Отчество" },
+                                                        { "PassportNumber", "Номер паспорта" },
+                                                        { "PassportSeries", "Серия паспорта" },
+                                                        { "TelephoneNumber", "Номер телефона" },
+                                                        { "Address", "Адрес проживания" },
+                                                        { "PassportAddress", "Адрес по паспорту" },
+                                                    });
+                }));
+            }
+        }
         #endregion
 
         public UserGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IUserDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
+            _pdfWriterService = App.ServiceProvider.GetRequiredService<IPdfWriterService>();
 
             UpdateData();
         }

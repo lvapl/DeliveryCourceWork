@@ -21,6 +21,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
 
         private IAuthenticationService _authenticationService;
 
+        private IPdfWriterService _pdfWriterService;
+
         private ObservableCollection<DeliveryDTO>? _deliveries;
 
         private RelayCommand? _editDeliveryCommand;
@@ -28,6 +30,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         private RelayCommand? _deleteDeliveryCommand;
 
         private RelayCommand? _addDeliveryCommand;
+
+        private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
@@ -121,12 +125,34 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                 }));
             }
         }
+
+        public RelayCommand? CreatePdf
+        {
+            get
+            {
+                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                {
+                    _pdfWriterService.CreatePdfFile(new List<DeliveryDTO>(_service.GetAll()),
+                                                    new Dictionary<string, string>
+                                                    {
+                                                        { "Id", "Id" },
+                                                        { "TariffTitle", "Тариф" },
+                                                        { "Price", "Цена" },
+                                                        { "Sender", "Отправитель" },
+                                                        { "Recipient", "Получатель" },
+                                                        { "PickPointId", "Точка получения" },
+                                                        { "UpPointId", "Точки выдачи" },
+                                                    });
+                }));
+            }
+        }
         #endregion
 
         public DeliveryGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IDeliveryDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
+            _pdfWriterService = App.ServiceProvider.GetRequiredService<IPdfWriterService>();
 
             UpdateData();
         }

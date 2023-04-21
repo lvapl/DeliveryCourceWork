@@ -22,6 +22,8 @@ namespace DeliveryService.ViewModel.Pages.Storages
 
         private IAuthenticationService _authenticationService;
 
+        private IPdfWriterService _pdfWriterService;
+
         private ObservableCollection<StorageDTO>? _storages;
 
         private RelayCommand? _editStorageCommand;
@@ -29,6 +31,8 @@ namespace DeliveryService.ViewModel.Pages.Storages
         private RelayCommand? _deleteStorageCommand;
 
         private RelayCommand? _addStorageCommand;
+
+        private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
@@ -122,12 +126,30 @@ namespace DeliveryService.ViewModel.Pages.Storages
                 }));
             }
         }
+
+        public RelayCommand? CreatePdf
+        {
+            get
+            {
+                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                {
+                    _pdfWriterService.CreatePdfFile(new List<StorageDTO>(_service.GetAll()),
+                                                    new Dictionary<string, string>
+                                                    {
+                                                        { "Id", "Id" },
+                                                        { "Title", "Номер склада" },
+                                                        { "Address", "Адрес" },
+                                                    });
+                }));
+            }
+        }
         #endregion
 
         public StorageGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IStorageDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
+            _pdfWriterService = App.ServiceProvider.GetRequiredService<IPdfWriterService>();
 
             UpdateData();
         }

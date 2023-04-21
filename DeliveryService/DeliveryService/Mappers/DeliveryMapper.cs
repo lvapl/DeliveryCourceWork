@@ -22,6 +22,7 @@ namespace DeliveryService.Mappers
             {
                 Id = delivery.Id,
                 TariffId = delivery.TariffId,
+                TariffTitle = delivery.Tariff == null ? null : delivery.Tariff.Title,
                 Price = delivery.Price,
                 SenderId = delivery.SenderId == null ? null : delivery.SenderId,
                 RecipientId = delivery.RecipientId == null ? null : delivery.RecipientId,
