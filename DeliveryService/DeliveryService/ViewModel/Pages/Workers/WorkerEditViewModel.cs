@@ -1,20 +1,15 @@
-﻿using DeliveryService.DTO;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Model;
 using DeliveryService.Repository;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
@@ -24,7 +19,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
         private WorkerDTO _worker;
 
         private IWorkerDTOService _workerService;
-        private IAddressDTOService _addressService;
+        
         private IPositionRepository _positionRepository;
 
         private Window _window;
@@ -61,10 +56,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -72,10 +67,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -83,7 +78,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     if (IsFillRequiredFields())
                     {
@@ -102,7 +97,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     {
                         throw new Exception("Обязательные к поля не заполнены!");
                     }
-                }));
+                });
             }
         }
 
@@ -110,10 +105,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _cancelWindowCommand ?? (_cancelWindowCommand = new RelayCommand((obj) =>
+                return _cancelWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -121,11 +116,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _editPasswordCommand ?? (_editPasswordCommand = new RelayCommand((obj) =>
+                return _editPasswordCommand ??= new RelayCommand((obj) =>
                 {
                     Window window = new WorkerEditPassword(_worker);
                     window.Show();
-                }));
+                });
             }
         }
 
@@ -133,17 +128,14 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _editAddressCommand ?? (_editAddressCommand = new RelayCommand((obj) =>
+                return _editAddressCommand ??= new RelayCommand((obj) =>
                 {
-                    if (Worker.Address == null)
-                    {
-                        Worker.Address = new AddressDTO();
-                    }
+                    Worker.Address ??= new AddressDTO();
 
                     Window window = new AddressEdit(Worker.Address);
                     window.ShowDialog();
                     OnPropertyChanged(nameof(Worker));
-                }));
+                });
             }
         }
 
@@ -151,46 +143,45 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _editPassportAddressCommand ?? (_editPassportAddressCommand = new RelayCommand((obj) =>
+                return _editPassportAddressCommand ??= new RelayCommand((obj) =>
                 {
-                    if (Worker.PassportAddress == null)
-                    {
-                        Worker.PassportAddress = new AddressDTO();
-                    }
+                    Worker.PassportAddress ??= new AddressDTO();
 
                     Window window = new AddressEdit(Worker.PassportAddress);
                     window.ShowDialog();
                     OnPropertyChanged(nameof(Worker));
-                }));
+                });
             }
         }
 
-        public ObservableCollection<Position>? Positions{ get => new ObservableCollection<Position>(_positionRepository.GetAll()); }
+        public ObservableCollection<Position> Positions => new ObservableCollection<Position>(_positionRepository.GetAll());
 
         public Position? Position
         {
             get => _worker.PositionId == 0 ? null : _positionRepository.GetById(_worker.PositionId);
             set
             {
-                _worker.PositionId = value == null ? _worker.PositionId : value.Id;
+                _worker.PositionId = value?.Id ?? _worker.PositionId;
                 OnPropertyChanged();
             }
         }
 
-        public RelayCommand? ChooseImageCommand
+        public RelayCommand ChooseImageCommand
         {
             get
             {
-                return _chooseImageCommand ?? (_chooseImageCommand = new RelayCommand((obj) =>
+                return _chooseImageCommand ??= new RelayCommand((obj) =>
                 {
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Image Files (*.png; *.bmp; *.jpg; *.gif; *.jpeg) | *.png; *.bmp; *.jpg; *.gif; *.jpeg | All files(*.*) | *.*";
+                    OpenFileDialog openFileDialog = new OpenFileDialog
+                    {
+                        Filter = "Image Files (*.png; *.bmp; *.jpg; *.gif; *.jpeg) | *.png; *.bmp; *.jpg; *.gif; *.jpeg | All files(*.*) | *.*"
+                    };
                     if (openFileDialog.ShowDialog() ?? false)
                     {
                         Worker.WorkerImage = File.ReadAllBytes(openFileDialog.FileName);
                     }
                     
-                }));
+                });
             }
         }
         #endregion
@@ -200,17 +191,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _window = window;
 
             _workerService = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
-            _addressService = App.ServiceProvider.GetRequiredService<IAddressDTOService>();
             _positionRepository = App.ServiceProvider.GetRequiredService<IPositionRepository>();
 
-            if (workerId == null)
-            {
-                _worker = new WorkerDTO();
-            }
-            else
-            {
-                _worker = _workerService.GetById((int)workerId);
-            }
+            _worker = workerId == null ? new WorkerDTO() : _workerService.GetById((int)workerId);
         }
 
 

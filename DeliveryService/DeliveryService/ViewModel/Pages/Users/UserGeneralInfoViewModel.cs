@@ -1,17 +1,14 @@
-﻿using DeliveryService.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Enums;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Users;
-using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Users
 {
@@ -59,11 +56,11 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
-        public RelayCommand? EditUserCommand
+        public RelayCommand EditUserCommand
         {
             get
             {
-                return _editUserCommand ?? (_editUserCommand = new RelayCommand((obj) =>
+                return _editUserCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(UserPages.UserGenerlaInfo))
                     {
@@ -79,15 +76,15 @@ namespace DeliveryService.ViewModel.Pages.Users
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? DeleteUserCommand
+        public RelayCommand DeleteUserCommand
         {
             get
             {
-                return _deleteUserCommand ?? (_deleteUserCommand = new RelayCommand((obj) =>
+                return _deleteUserCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(UserPages.UserGenerlaInfo))
                     {
@@ -102,7 +99,7 @@ namespace DeliveryService.ViewModel.Pages.Users
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
@@ -110,7 +107,7 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _addUserCommand ?? (_addUserCommand = new RelayCommand((obj) =>
+                return _addUserCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(UserPages.UserGenerlaInfo))
                     {
@@ -123,30 +120,30 @@ namespace DeliveryService.ViewModel.Pages.Users
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? CreatePdf
+        public RelayCommand CreatePdf
         {
             get
             {
-                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                return _createPdf ??= new RelayCommand((obj) =>
                 {
                     _pdfWriterService.CreatePdfFile(new List<UserDTO>(_service.GetAll()),
-                                                    new Dictionary<string, string>
-                                                    {
-                                                        { "Id", "Id" },
-                                                        { "FirstName", "Имя" },
-                                                        { "LastName", "Фамилия" },
-                                                        { "Patronymic", "Отчество" },
-                                                        { "PassportNumber", "Номер паспорта" },
-                                                        { "PassportSeries", "Серия паспорта" },
-                                                        { "TelephoneNumber", "Номер телефона" },
-                                                        { "Address", "Адрес проживания" },
-                                                        { "PassportAddress", "Адрес по паспорту" },
-                                                    });
-                }));
+                        new Dictionary<string, string>
+                        {
+                            { "Id", "Id" },
+                            { "FirstName", "Имя" },
+                            { "LastName", "Фамилия" },
+                            { "Patronymic", "Отчество" },
+                            { "PassportNumber", "Номер паспорта" },
+                            { "PassportSeries", "Серия паспорта" },
+                            { "TelephoneNumber", "Номер телефона" },
+                            { "Address", "Адрес проживания" },
+                            { "PassportAddress", "Адрес по паспорту" },
+                        });
+                });
             }
         }
         #endregion
@@ -168,7 +165,7 @@ namespace DeliveryService.ViewModel.Pages.Users
 
         private void FilterTable()
         {
-            if (_textBoxSearch != null)
+            if (_textBoxSearch != String.Empty)
             {
                 Users = new ObservableCollection<UserDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
                                                                                     || x.FirstName.Contains(_textBoxSearch)

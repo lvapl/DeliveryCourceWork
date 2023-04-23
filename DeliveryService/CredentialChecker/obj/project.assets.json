@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
+      "projectUniqueName": "\\\\wsl.localhost\\Ubuntu\\home\\lvapl\\DeliveryCourceWork\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
       "projectName": "CredentialChecker",
-      "projectPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
+      "projectPath": "\\\\wsl.localhost\\Ubuntu\\home\\lvapl\\DeliveryCourceWork\\DeliveryService\\CredentialChecker\\CredentialChecker.csproj",
       "packagesPath": "C:\\Users\\clash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\clash\\OneDrive\\Documents\\Work\\ISP\\3 course\\Course work\\DeliveryService\\CredentialChecker\\obj\\",
+      "outputPath": "\\\\wsl.localhost\\Ubuntu\\home\\lvapl\\DeliveryCourceWork\\DeliveryService\\CredentialChecker\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

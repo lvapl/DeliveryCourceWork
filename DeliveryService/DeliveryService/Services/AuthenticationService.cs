@@ -1,12 +1,8 @@
-﻿using DeliveryService.Enums;
+﻿using System;
+using System.Net;
+using DeliveryService.Enums;
 using DeliveryService.Model;
 using DeliveryService.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.Services
 {
@@ -60,7 +56,7 @@ namespace DeliveryService.Services
             
         }
 
-        public bool HasAccessToSubSection<T>(T subSection) where T: System.Enum
+        public bool HasAccessToSubSection<T>(T subSection) where T: Enum
         {
             if (_worker != null)
             {
@@ -93,7 +89,7 @@ namespace DeliveryService.Services
             return false;
         }
 
-        public bool HasPermissionToModifySubsection<T>(T DTOSubSection) where T : System.Enum
+        public bool HasPermissionToModifySubsection<T>(T dtoSubSection) where T : Enum
         {
             if (_worker != null)
             {
@@ -104,11 +100,11 @@ namespace DeliveryService.Services
                 else if (_worker.Position.Title == "Оператор пункта выдачи")
                 {
                     return typeof(T) == typeof(PickUpPointPages)
-                        || (typeof(T) == typeof(DeliveryPages) && DTOSubSection.Equals(DeliveryPages.DeliveryGeneralInfo));
+                        || (typeof(T) == typeof(DeliveryPages) && dtoSubSection.Equals(DeliveryPages.DeliveryGeneralInfo));
                 }
                 else if (_worker.Position.Title == "Работник склада")
                 {
-                    return typeof(T) == typeof(StoragePages) && DTOSubSection.Equals(StoragePages.StorageGeneralInfo);
+                    return typeof(T) == typeof(StoragePages) && dtoSubSection.Equals(StoragePages.StorageGeneralInfo);
                 }
                 else if (_worker.Position.Title == "Доставщик")
                 {

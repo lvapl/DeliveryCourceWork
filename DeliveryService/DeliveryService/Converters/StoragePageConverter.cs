@@ -1,20 +1,15 @@
-﻿using DeliveryService.Enums;
-using DeliveryService.View.Pages.Delivery;
-using DeliveryService.View;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DeliveryService.View.Pages.Storage;
 using System.Windows.Controls;
+using DeliveryService.Enums;
+using DeliveryService.View;
+using DeliveryService.View.Pages.Storage;
 
 namespace DeliveryService.Converters
 {
     public class StoragePageConverter : ConverterBase<StoragePageConverter>
     {
-        public override object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is StoragePages)
             {

@@ -1,16 +1,7 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using DeliveryService.Repository;
+﻿using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Services;
-using DeliveryService.View;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.PickUpPoints
 {
@@ -48,10 +39,10 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -59,10 +50,10 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -70,7 +61,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     if (_pickUpPoint.Id != 0)
                     {
@@ -82,7 +73,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                         _pickUpPointService.Add(_pickUpPoint);
                         _window.Close();
                     }
-                }));
+                });
             }
         }
 
@@ -90,10 +81,10 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand((obj) =>
+                return _cancelCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
         #endregion
@@ -104,19 +95,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
 
             _pickUpPointService = App.ServiceProvider.GetRequiredService<IPickUpPointDTOService>();
 
-            if (pointId == null)
-            {
-                _pickUpPoint = new PickUpPointDTO();
-            }
-            else
-            {
-                _pickUpPoint = _pickUpPointService.GetById((int)pointId);
-            }
+            _pickUpPoint = pointId == null ? new PickUpPointDTO() : _pickUpPointService.GetById((int)pointId);
 
-            if (_pickUpPoint.Address == null)
-            {
-                _pickUpPoint.Address = new AddressDTO();
-            }
+            _pickUpPoint.Address ??= new AddressDTO();
         }
     }
 }

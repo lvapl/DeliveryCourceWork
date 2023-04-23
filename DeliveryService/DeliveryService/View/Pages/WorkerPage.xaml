@@ -2,11 +2,9 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DeliveryService.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:converters="clr-namespace:DeliveryService.Converters"
-      xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:Pages="clr-namespace:DeliveryService.Enums"
+      xmlns:pages="clr-namespace:DeliveryService.Enums"
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1000"
       Title="WorkerPage">
@@ -34,7 +32,7 @@
                            Margin="25 0 0 0"
                            Style="{StaticResource SelectionTitle}"/>
 
-                <StackPanel Grid.Row="1"
+                <StackPanel Grid.Row="1" Grid.Column="0"
                             Orientation="Horizontal">
 
                     <RadioButton GroupName="SubSelection"
@@ -42,13 +40,13 @@
                                  IsChecked="True"
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
-                                 CommandParameter="{x:Static Pages:WorkerPages.WorkerGeneralInfo}"/>
+                                 CommandParameter="{x:Static pages:WorkerPages.WorkerGeneralInfo}"/>
 
                     <RadioButton GroupName="SubSelection"
                                  Content="Пароли"
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
-                                 CommandParameter="{x:Static Pages:WorkerPages.WorkerPassword}"/>
+                                 CommandParameter="{x:Static pages:WorkerPages.WorkerPassword}"/>
                 </StackPanel>
             </Grid>
 

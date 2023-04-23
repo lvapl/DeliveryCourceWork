@@ -1,17 +1,11 @@
-﻿using DeliveryService.DTO;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Enums;
-using DeliveryService.Model;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Workers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
@@ -37,11 +31,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
-        public RelayCommand? EditPasswordCommand
+        public RelayCommand EditPasswordCommand
         {
             get
             {
-                return _editPasswordCommand ?? (_editPasswordCommand = new RelayCommand((obj) =>
+                return _editPasswordCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerPassword))
                     {
@@ -59,7 +53,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 

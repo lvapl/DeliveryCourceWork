@@ -1,14 +1,11 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DeliveryService.DTO;
+using DeliveryService.Model;
 
 namespace DeliveryService.Mappers
 {
-    public class StorageMapper
+    public static class StorageMapper
     {
         public static StorageDTO Map(Storage storage)
         {
@@ -20,19 +17,19 @@ namespace DeliveryService.Mappers
             };
         }
 
-        public static void Map(StorageDTO storageDTO, Storage storage)
+        public static void Map(StorageDTO storageDto, Storage storage)
         {
-            storage.Title = storageDTO.Title;
+            storage.Title = storageDto.Title;
 
-            if (storageDTO.Address != null)
+            if (storageDto.Address != null)
             {
-                AddressMapper.Map(storageDTO.Address, storage.Address ?? (storage.Address = new Address()));
+                AddressMapper.Map(storageDto.Address, storage.Address ?? (storage.Address = new Address()));
             }  
         }
 
         public static IEnumerable<StorageDTO> MapAll(IEnumerable<Storage> storages)
         {
-            return storages.ToList().ConvertAll<StorageDTO>(x => Map(x));
+            return storages.ToList().ConvertAll(Map);
         }
     }
 }

@@ -1,16 +1,14 @@
-﻿using DeliveryService.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Enums;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
@@ -58,11 +56,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
-        public RelayCommand? EditWorkerCommand
+        public RelayCommand EditWorkerCommand
         {
             get
             {
-                return _editWorkerCommand ?? (_editWorkerCommand = new RelayCommand((obj) =>
+                return _editWorkerCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
@@ -78,15 +76,15 @@ namespace DeliveryService.ViewModel.Pages.Workers
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? DeleteWorkerCommand
+        public RelayCommand DeleteWorkerCommand
         {
             get
             {
-                return _deleteWorkerCommand ?? (_deleteWorkerCommand = new RelayCommand((obj) =>
+                return _deleteWorkerCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
@@ -101,15 +99,15 @@ namespace DeliveryService.ViewModel.Pages.Workers
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? AddWorkerCommand
+        public RelayCommand AddWorkerCommand
         {
             get
             {
-                return _addWorkerCommand ?? (_addWorkerCommand = new RelayCommand((obj) =>
+                return _addWorkerCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
@@ -122,32 +120,32 @@ namespace DeliveryService.ViewModel.Pages.Workers
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? CreatePdf
+        public RelayCommand CreatePdf
         {
             get
             {
-                return _createPdf ?? (_createPdf = new RelayCommand((obj) => 
+                return _createPdf ??= new RelayCommand((obj) => 
                 {
                     _pdfWriterService.CreatePdfFile(new List<WorkerDTO>(_service.GetAll()),
-                                                    new Dictionary<string, string>
-                                                    {
-                                                        { "Id", "Id" },
-                                                        { "FirstName", "Имя" },
-                                                        { "LastName", "Фамилия" },
-                                                        { "Patronymic", "Отчество" },
-                                                        { "Title", "Должность" },
-                                                        { "Login", "Логин" },
-                                                        { "PassportNumber", "Номер паспорта" },
-                                                        { "PassportSeries", "Серия паспорта" },
-                                                        { "TelephoneNumber", "Номер телефона" },
-                                                        { "Address", "Адрес проживания" },
-                                                        { "PassportAddress", "Адрес по паспорту" },
-                                                    });
-                }));
+                        new Dictionary<string, string>
+                        {
+                            { "Id", "Id" },
+                            { "FirstName", "Имя" },
+                            { "LastName", "Фамилия" },
+                            { "Patronymic", "Отчество" },
+                            { "Title", "Должность" },
+                            { "Login", "Логин" },
+                            { "PassportNumber", "Номер паспорта" },
+                            { "PassportSeries", "Серия паспорта" },
+                            { "TelephoneNumber", "Номер телефона" },
+                            { "Address", "Адрес проживания" },
+                            { "PassportAddress", "Адрес по паспорту" },
+                        });
+                });
             }
         }
         #endregion
@@ -168,7 +166,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
 
         private void FilterTable()
         {
-            if (_textBoxSearch != null)
+            if (_textBoxSearch != String.Empty)
             {
                 Workers = new ObservableCollection<WorkerDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
                                                                                         || x.FirstName.Contains(_textBoxSearch)

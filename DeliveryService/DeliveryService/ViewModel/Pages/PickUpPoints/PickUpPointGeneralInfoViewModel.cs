@@ -1,17 +1,14 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Enums;
-using DeliveryService.Services;
-using DeliveryService.View;
-using DeliveryService.View.Pages.Delivery;
-using DeliveryService.View.Pages.PickUpPoints;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using DeliveryService.DTO;
+using DeliveryService.Enums;
+using DeliveryService.Services;
+using DeliveryService.View;
+using DeliveryService.View.Pages.PickUpPoints;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.PickUpPoints
 {
@@ -59,11 +56,11 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
-        public RelayCommand? EditPickUpPointCommand
+        public RelayCommand EditPickUpPointCommand
         {
             get
             {
-                return _editPickUpPointCommand ?? (_editPickUpPointCommand = new RelayCommand((obj) =>
+                return _editPickUpPointCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
@@ -79,15 +76,15 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? DeletePickUpPointCommand
+        public RelayCommand DeletePickUpPointCommand
         {
             get
             {
-                return _deletePickUpPointCommand ?? (_deletePickUpPointCommand = new RelayCommand((obj) =>
+                return _deletePickUpPointCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
@@ -102,7 +99,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
@@ -110,7 +107,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         {
             get
             {
-                return _addPickUpPointCommand ?? (_addPickUpPointCommand = new RelayCommand((obj) =>
+                return _addPickUpPointCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
                     {
@@ -123,23 +120,23 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? CreatePdf
+        public RelayCommand CreatePdf
         {
             get
             {
-                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                return _createPdf ??= new RelayCommand((obj) =>
                 {
                     _pdfWriterService.CreatePdfFile(new List<PickUpPointDTO>(_service.GetAll()),
-                                                    new Dictionary<string, string>
-                                                    {
-                                                        { "Id", "Id" },
-                                                        { "Address", "Адрес" },
-                                                    });
-                }));
+                        new Dictionary<string, string>
+                        {
+                            { "Id", "Id" },
+                            { "Address", "Адрес" },
+                        });
+                });
             }
         }
         #endregion
@@ -161,7 +158,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
 
         private void FilterTable()
         {
-            if (_textBoxSearch != null)
+            if (_textBoxSearch != String.Empty)
             {
                 PickUpPoints = new ObservableCollection<PickUpPointDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
                                                                                                || x.Address != null

@@ -26,7 +26,7 @@ namespace DeliveryService.Resources.Behaviors
 
         private void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox passwordBox = sender as PasswordBox;
+            PasswordBox passwordBox = sender as PasswordBox ?? throw new InvalidOperationException();
             PasswordHelper.SetPassword(passwordBox, passwordBox.Password);
         }
     }

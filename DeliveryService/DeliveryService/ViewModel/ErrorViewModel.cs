@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace DeliveryService.ViewModel
 {
@@ -23,10 +18,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -34,10 +29,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 

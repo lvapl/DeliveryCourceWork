@@ -1,16 +1,14 @@
-﻿using DeliveryService.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Enums;
 using DeliveryService.Services;
 using DeliveryService.View;
 using DeliveryService.View.Pages.Delivery;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Delivery
 {
@@ -58,11 +56,11 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
-        public RelayCommand? EditDeliveryCommand
+        public RelayCommand EditDeliveryCommand
         {
             get
             {
-                return _editDeliveryCommand ?? (_editDeliveryCommand = new RelayCommand((obj) =>
+                return _editDeliveryCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
                     {
@@ -78,15 +76,15 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? DeleteDeliveryCommand
+        public RelayCommand DeleteDeliveryCommand
         {
             get
             {
-                return _deleteDeliveryCommand ?? (_deleteDeliveryCommand = new RelayCommand((obj) =>
+                return _deleteDeliveryCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
                     {
@@ -101,7 +99,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
@@ -109,7 +107,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         {
             get
             {
-                return _addDeliveryCommand ?? (_addDeliveryCommand = new RelayCommand((obj) =>
+                return _addDeliveryCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(DeliveryPages.DeliveryGeneralInfo))
                     {
@@ -122,28 +120,28 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? CreatePdf
+        public RelayCommand CreatePdf
         {
             get
             {
-                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                return _createPdf ??= new RelayCommand((obj) =>
                 {
                     _pdfWriterService.CreatePdfFile(new List<DeliveryDTO>(_service.GetAll()),
-                                                    new Dictionary<string, string>
-                                                    {
-                                                        { "Id", "Id" },
-                                                        { "TariffTitle", "Тариф" },
-                                                        { "Price", "Цена" },
-                                                        { "Sender", "Отправитель" },
-                                                        { "Recipient", "Получатель" },
-                                                        { "PickPointId", "Точка получения" },
-                                                        { "UpPointId", "Точки выдачи" },
-                                                    });
-                }));
+                        new Dictionary<string, string>
+                        {
+                            { "Id", "Id" },
+                            { "TariffTitle", "Тариф" },
+                            { "Price", "Цена" },
+                            { "Sender", "Отправитель" },
+                            { "Recipient", "Получатель" },
+                            { "PickPointId", "Точка получения" },
+                            { "UpPointId", "Точки выдачи" },
+                        });
+                });
             }
         }
         #endregion
@@ -165,7 +163,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
 
         private void FilterTable()
         {
-            if (_textBoxSearch != null)
+            if (_textBoxSearch != String.Empty)
             {
                 Deliveries = new ObservableCollection<DeliveryDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
                                                                                              || (x.Sender != null 
@@ -178,9 +176,8 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                                                                                                  || x.Recipient.FirstName.Contains(_textBoxSearch)
                                                                                                  || x.Recipient.LastName.Contains(_textBoxSearch)
                                                                                                  || (x.Recipient.Patronymic != null && x.Recipient.Patronymic.Contains(_textBoxSearch))))
-                                                                                             || (x.Price != null && x.Price.ToString().Contains(_textBoxSearch))));
+                                                                                             || (x.Price != null && x.Price.ToString()!.Contains(_textBoxSearch))));
             }
-
         }
         #endregion
     }

@@ -1,18 +1,13 @@
-﻿using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeliveryService.DTO;
 
 namespace DeliveryService.Services
 {
     public interface IUserDTOService
     {
-        public void Add(UserDTO userDTO);
+        public void Add(UserDTO userDto);
 
-        public void Edit(UserDTO userDTO);
+        public void Edit(UserDTO userDto);
 
         public void Remove(int id);
 

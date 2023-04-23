@@ -1,14 +1,11 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DeliveryService.DTO;
+using DeliveryService.Model;
 
 namespace DeliveryService.Mappers
 {
-    public class PickUpPointMapper
+    public static class PickUpPointMapper
     {
         public static PickUpPointDTO Map(PickUpPoint pickUpPoint)
         {
@@ -19,17 +16,17 @@ namespace DeliveryService.Mappers
             };
         }
 
-        public static void Map(PickUpPointDTO pickUpPointDTO, PickUpPoint pickUpPoint)
+        public static void Map(PickUpPointDTO pickUpPointDto, PickUpPoint pickUpPoint)
         {
-            if (pickUpPointDTO.Address != null)
+            if (pickUpPointDto.Address != null)
             {
-                AddressMapper.Map(pickUpPointDTO.Address, pickUpPoint.Address ?? (pickUpPoint.Address = new Address()));
+                AddressMapper.Map(pickUpPointDto.Address, pickUpPoint.Address ?? (pickUpPoint.Address = new Address()));
             }
         }
 
         public static IEnumerable<PickUpPointDTO> MapAll(IEnumerable<PickUpPoint> pickUpPoints)
         {
-            return pickUpPoints.ToList().ConvertAll<PickUpPointDTO>(x => Map(x));
+            return pickUpPoints.ToList().ConvertAll(Map);
         }
     }
 }

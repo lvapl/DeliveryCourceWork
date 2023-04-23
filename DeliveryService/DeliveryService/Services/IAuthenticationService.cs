@@ -1,11 +1,7 @@
-﻿using DeliveryService.Enums;
-using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using DeliveryService.Enums;
+using DeliveryService.Model;
 
 namespace DeliveryService.Services
 {
@@ -15,8 +11,8 @@ namespace DeliveryService.Services
 
         public bool HasAccessToSection(AppPages section);
 
-        public bool HasAccessToSubSection<T>(T subSection) where T: System.Enum;
+        public bool HasAccessToSubSection<T>(T subSection) where T: Enum;
 
-        public bool HasPermissionToModifySubsection<T>(T DTOSubSection) where T : System.Enum;
+        public bool HasPermissionToModifySubsection<T>(T dtoSubSection) where T : Enum;
     }
 }

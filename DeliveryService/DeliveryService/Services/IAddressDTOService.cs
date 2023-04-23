@@ -1,18 +1,13 @@
-﻿using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeliveryService.DTO;
 
 namespace DeliveryService.Services
 {
     public interface IAddressDTOService
     {
-        public void Add(AddressDTO addressDTO);
+        public void Add(AddressDTO addressDto);
 
-        public void Edit(AddressDTO addressDTO);
+        public void Edit(AddressDTO addressDto);
 
         public void Remove(int id);
 

@@ -1,16 +1,8 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using DeliveryService.Repository;
+﻿using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Services;
 using DeliveryService.View;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Storages
 {
@@ -49,10 +41,10 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -60,10 +52,10 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -71,17 +63,14 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _editAddressCommand ?? (_editAddressCommand = new RelayCommand((obj) =>
+                return _editAddressCommand ??= new RelayCommand((obj) =>
                 {
-                    if (Storage.Address == null)
-                    {
-                        Storage.Address = new AddressDTO();
-                    }
+                    Storage.Address ??= new AddressDTO();
 
                     Window window = new AddressEdit(Storage.Address);
                     window.ShowDialog();
                     OnPropertyChanged(nameof(Storage));
-                }));
+                });
             }
         }
 
@@ -89,19 +78,18 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     if (_storage.Id != 0)
                     {
                         _storageService.Edit(_storage);
-                        _window.Close();
                     }
                     else
                     {
                         _storageService.Add(_storage);
-                        _window.Close();
                     }
-                }));
+                    _window.Close();
+                });
             }
         }
 
@@ -109,10 +97,10 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand((obj) =>
+                return _cancelCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
         #endregion
@@ -123,14 +111,7 @@ namespace DeliveryService.ViewModel.Pages.Storages
 
             _storageService = App.ServiceProvider.GetRequiredService<IStorageDTOService>();
 
-            if (storageId == null)
-            {
-                _storage = new StorageDTO();
-            }
-            else
-            {
-                _storage = _storageService.GetById((int)storageId);
-            }
+            _storage = storageId == null ? new StorageDTO() : _storageService.GetById((int)storageId);
         }
     }
 }

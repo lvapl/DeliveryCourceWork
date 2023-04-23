@@ -1,40 +1,38 @@
 ﻿<Page x:Class="DeliveryService.View.PickUpPointPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DeliveryService.View"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:converters="clr-namespace:DeliveryService.Converters"
-      xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:Pages="clr-namespace:DeliveryService.Enums"
-      mc:Ignorable="d" 
+      xmlns:pages="clr-namespace:DeliveryService.Enums"
+      mc:Ignorable="d"
       d:DesignHeight="620" d:DesignWidth="1000"
       Title="WorkerPage">
 
     <Border BorderBrush="Transparent">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
-                <RowDefinition/>
+                <RowDefinition Height="150" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <!--Top Section-->
             <Grid Margin="20 0 15 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Точки выдачи"
                            Margin="25 0 0 0"
-                           Style="{StaticResource SelectionTitle}"/>
+                           Style="{StaticResource SelectionTitle}" />
 
-                <StackPanel Grid.Row="1"
+                <StackPanel Grid.Row="1" Grid.Column="0"
                             Orientation="Horizontal">
 
                     <RadioButton GroupName="SubSelection"
@@ -42,14 +40,14 @@
                                  IsChecked="True"
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
-                                 CommandParameter="{x:Static Pages:PickUpPointPages.PickUpPointGeneralInfo}"/>
+                                 CommandParameter="{x:Static pages:PickUpPointPages.PickUpPointGeneralInfo}" />
                 </StackPanel>
             </Grid>
 
             <Frame Grid.Row="1"
                    Content="{Binding CurrentPage, Converter={converters:PickUpPointPageConverter}}"
                    Margin="20 0 10 0"
-                   NavigationUIVisibility="Hidden"/>
+                   NavigationUIVisibility="Hidden" />
         </Grid>
     </Border>
 </Page>

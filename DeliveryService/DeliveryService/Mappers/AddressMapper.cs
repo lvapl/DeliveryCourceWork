@@ -1,15 +1,12 @@
 ﻿using DeliveryService.DTO;
 using DeliveryService.Model;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.Mappers
 {
-    public class AddressMapper
+    public static class AddressMapper
     {
         private static DsContext _context = App.ServiceProvider.GetRequiredService<DsContext>();
 
@@ -18,23 +15,23 @@ namespace DeliveryService.Mappers
             return new AddressDTO
             {
                 Id = address.Id,
-                Country = address.Country == null ? null : address.Country.Title,
-                City = address.City == null ? null : address.City.Title,
-                Street = address.Street == null ? null : address.Street.Title,
-                House = address.House == null ? null : address.House.Number,
+                Country = address.Country?.Title,
+                City = address.City?.Title,
+                Street = address.Street?.Title,
+                House = address.House?.Number,
                 Postcode = address.Postcode
             };
         }
 
-        public static void Map(AddressDTO addressDTO, Address address)
+        public static void Map(AddressDTO addressDto, Address address)
         {
-            address.Postcode = addressDTO.Postcode;
+            address.Postcode = addressDto.Postcode;
 
-            if (addressDTO.CountryId != null)
+            if (addressDto.CountryId != null)
             {
-                if (addressDTO.Country != null)
+                if (addressDto.Country != null)
                 {
-                    Country? country = _context.Countries.FirstOrDefault(x => x.Title == addressDTO.Country);
+                    Country? country = _context.Countries.FirstOrDefault(x => x.Title == addressDto.Country);
                     if (country != null)
                     {
                         address.CountryId = country.Id;
@@ -42,10 +39,10 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        country = _context.Countries.Find(addressDTO.CountryId);
+                        country = _context.Countries.Find(addressDto.CountryId);
                         if (country != null)
                         {
-                            country.Title = addressDTO.Country;
+                            country.Title = addressDto.Country;
 
                             _context.Countries.Update(country);
                             _context.SaveChanges();
@@ -55,7 +52,7 @@ namespace DeliveryService.Mappers
                         }
                         else
                         {
-                            country = new Country() { Title = addressDTO.Country };
+                            country = new Country() { Title = addressDto.Country };
 
                             _context.Countries.Add(country);
                             _context.SaveChanges();
@@ -67,7 +64,7 @@ namespace DeliveryService.Mappers
                 }
                 else
                 {
-                    Country? country = _context.Countries.Find(addressDTO.CountryId);
+                    Country? country = _context.Countries.Find(addressDto.CountryId);
                     if (country != null)
                     {
                         address.CountryId = country.Id;
@@ -82,9 +79,9 @@ namespace DeliveryService.Mappers
             }
             else
             {
-                if (addressDTO.Country != null)
+                if (addressDto.Country != null)
                 {
-                    Country? country = _context.Countries.FirstOrDefault(x => x.Title == addressDTO.Country);
+                    Country? country = _context.Countries.FirstOrDefault(x => x.Title == addressDto.Country);
                     if (country != null)
                     {
                         address.CountryId = country.Id;
@@ -92,7 +89,7 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        country = new Country() { Title = addressDTO.Country };
+                        country = new Country() { Title = addressDto.Country };
 
                         _context.Countries.Add(country);
                         _context.SaveChanges();
@@ -108,11 +105,11 @@ namespace DeliveryService.Mappers
                 }
             }
 
-            if (addressDTO.CityId != null)
+            if (addressDto.CityId != null)
             {
-                if (addressDTO.City != null)
+                if (addressDto.City != null)
                 {
-                    City? city = _context.Cities.FirstOrDefault(x => x.Title == addressDTO.City);
+                    City? city = _context.Cities.FirstOrDefault(x => x.Title == addressDto.City);
                     if (city != null)
                     {
                         address.CityId = city.Id;
@@ -120,10 +117,10 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        city = _context.Cities.Find(addressDTO.CityId);
+                        city = _context.Cities.Find(addressDto.CityId);
                         if (city != null)
                         {
-                            city.Title = addressDTO.City;
+                            city.Title = addressDto.City;
 
                             _context.Cities.Update(city);
                             _context.SaveChanges();
@@ -133,7 +130,7 @@ namespace DeliveryService.Mappers
                         }
                         else
                         {
-                            city = new City() { Title = addressDTO.City };
+                            city = new City() { Title = addressDto.City };
 
                             _context.Cities.Add(city);
                             _context.SaveChanges();
@@ -145,7 +142,7 @@ namespace DeliveryService.Mappers
                 }
                 else
                 {
-                    City? city = _context.Cities.Find(addressDTO.CityId);
+                    City? city = _context.Cities.Find(addressDto.CityId);
                     if (city != null)
                     {
                         address.CityId = city.Id;
@@ -160,9 +157,9 @@ namespace DeliveryService.Mappers
             }
             else
             {
-                if (addressDTO.City != null)
+                if (addressDto.City != null)
                 {
-                    City? city = _context.Cities.FirstOrDefault(x => x.Title == addressDTO.City);
+                    City? city = _context.Cities.FirstOrDefault(x => x.Title == addressDto.City);
                     if (city != null)
                     {
                         address.CityId = city.Id;
@@ -170,7 +167,7 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        city = new City() { Title = addressDTO.City };
+                        city = new City() { Title = addressDto.City };
 
                         _context.Cities.Add(city);
                         _context.SaveChanges();
@@ -186,11 +183,11 @@ namespace DeliveryService.Mappers
                 }
             }
 
-            if (addressDTO.StreetId != null)
+            if (addressDto.StreetId != null)
             {
-                if (addressDTO.Street != null)
+                if (addressDto.Street != null)
                 {
-                    Street? street = _context.Streets.FirstOrDefault(x => x.Title == addressDTO.Street);
+                    Street? street = _context.Streets.FirstOrDefault(x => x.Title == addressDto.Street);
                     if (street != null)
                     {
                         address.StreetId = street.Id;
@@ -198,10 +195,10 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        street = _context.Streets.Find(addressDTO.StreetId);
+                        street = _context.Streets.Find(addressDto.StreetId);
                         if (street != null)
                         {
-                            street.Title = addressDTO.Street;
+                            street.Title = addressDto.Street;
 
                             _context.Streets.Update(street);
                             _context.SaveChanges();
@@ -211,7 +208,7 @@ namespace DeliveryService.Mappers
                         }
                         else
                         {
-                            street = new Street() { Title = addressDTO.Street };
+                            street = new Street() { Title = addressDto.Street };
 
                             _context.Streets.Add(street);
                             _context.SaveChanges();
@@ -223,7 +220,7 @@ namespace DeliveryService.Mappers
                 }
                 else
                 {
-                    Street? street = _context.Streets.Find(addressDTO.StreetId);
+                    Street? street = _context.Streets.Find(addressDto.StreetId);
                     if (street != null)
                     {
                         address.StreetId = street.Id;
@@ -238,9 +235,9 @@ namespace DeliveryService.Mappers
             }
             else
             {
-                if (addressDTO.Street != null)
+                if (addressDto.Street != null)
                 {
-                    Street? street = _context.Streets.FirstOrDefault(x => x.Title == addressDTO.Street);
+                    Street? street = _context.Streets.FirstOrDefault(x => x.Title == addressDto.Street);
                     if (street != null)
                     {
                         address.StreetId = street.Id;
@@ -248,7 +245,7 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        street = new Street() { Title = addressDTO.Street };
+                        street = new Street() { Title = addressDto.Street };
 
                         _context.Streets.Add(street);
                         _context.SaveChanges();
@@ -264,11 +261,11 @@ namespace DeliveryService.Mappers
                 }
             }
 
-            if (addressDTO.HouseId != null)
+            if (addressDto.HouseId != null)
             {
-                if (addressDTO.House != null)
+                if (addressDto.House != null)
                 {
-                    House? house = _context.Houses.FirstOrDefault(x => x.Number == addressDTO.House);
+                    House? house = _context.Houses.FirstOrDefault(x => x.Number == addressDto.House);
                     if (house != null)
                     {
                         address.HouseId = house.Id;
@@ -276,10 +273,10 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        house = _context.Houses.Find(addressDTO.HouseId);
+                        house = _context.Houses.Find(addressDto.HouseId);
                         if (house != null)
                         {
-                            house.Number = addressDTO.House;
+                            house.Number = addressDto.House;
 
                             _context.Houses.Update(house);
                             _context.SaveChanges();
@@ -289,7 +286,7 @@ namespace DeliveryService.Mappers
                         }
                         else
                         {
-                            house = new House() { Number = addressDTO.House };
+                            house = new House() { Number = addressDto.House };
 
                             _context.Houses.Add(house);
                             _context.SaveChanges();
@@ -301,7 +298,7 @@ namespace DeliveryService.Mappers
                 }
                 else
                 {
-                    House? house = _context.Houses.Find(addressDTO.HouseId);
+                    House? house = _context.Houses.Find(addressDto.HouseId);
                     if (house != null)
                     {
                         address.HouseId = house.Id;
@@ -316,9 +313,9 @@ namespace DeliveryService.Mappers
             }
             else
             {
-                if (addressDTO.House != null)
+                if (addressDto.House != null)
                 {
-                    House? house = _context.Houses.FirstOrDefault(x => x.Number == addressDTO.House);
+                    House? house = _context.Houses.FirstOrDefault(x => x.Number == addressDto.House);
                     if (house != null)
                     {
                         address.HouseId = house.Id;
@@ -326,7 +323,7 @@ namespace DeliveryService.Mappers
                     }
                     else
                     {
-                        house = new House() { Number = addressDTO.House };
+                        house = new House() { Number = addressDto.House };
 
                         _context.Houses.Add(house);
                         _context.SaveChanges();
@@ -345,7 +342,7 @@ namespace DeliveryService.Mappers
 
         public static IEnumerable<AddressDTO> MapAll(IEnumerable<Address> addresses)
         {
-            return addresses.ToList().ConvertAll<AddressDTO>(x => Map(x));
+            return addresses.ToList().ConvertAll(Map);
         }
     }
 }

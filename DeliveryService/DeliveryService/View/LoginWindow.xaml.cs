@@ -1,20 +1,6 @@
-﻿using DeliveryService.Model;
-using DeliveryService.ViewModel;
+﻿using System.Windows;
 using DeliveryService.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using DeliveryService.ViewModel;
 
 namespace DeliveryService.View
 {
@@ -23,10 +9,10 @@ namespace DeliveryService.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow(IAuthenticationService authenticationService, DsContext context, MainWindow mainWindow)
+        public LoginWindow(IAuthenticationService authenticationService, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = new LoginViewModel(authenticationService, context, this, mainWindow);
+            DataContext = new LoginViewModel(authenticationService, this, mainWindow);
         }
     }
 }

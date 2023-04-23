@@ -1,12 +1,8 @@
-﻿using DeliveryService.DTO;
+﻿using System.Collections.Generic;
+using DeliveryService.DTO;
 using DeliveryService.Mappers;
 using DeliveryService.Model;
 using DeliveryService.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.Services
 {
@@ -19,19 +15,19 @@ namespace DeliveryService.Services
             _pickUpPointRepository = pickUpPointRepository;
         }
 
-        public void Add(PickUpPointDTO pickUpPointDTO)
+        public void Add(PickUpPointDTO pickUpPointDto)
         {
             PickUpPoint pickUpPoint = new PickUpPoint();
 
-            PickUpPointMapper.Map(pickUpPointDTO, pickUpPoint);
+            PickUpPointMapper.Map(pickUpPointDto, pickUpPoint);
             _pickUpPointRepository.Add(pickUpPoint);
         }
 
-        public void Edit(PickUpPointDTO pickUpPointDTO)
+        public void Edit(PickUpPointDTO pickUpPointDto)
         {
-            PickUpPoint pickUpPoint = _pickUpPointRepository.GetById(pickUpPointDTO.Id);
+            PickUpPoint pickUpPoint = _pickUpPointRepository.GetById(pickUpPointDto.Id);
 
-            PickUpPointMapper.Map(pickUpPointDTO, pickUpPoint);
+            PickUpPointMapper.Map(pickUpPointDto, pickUpPoint);
             _pickUpPointRepository.Edit(pickUpPoint);
         }
 

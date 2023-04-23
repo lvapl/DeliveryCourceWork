@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DeliveryService.View"
         xmlns:converters="clr-namespace:DeliveryService.Converters"
-        xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:Pages="clr-namespace:DeliveryService.Enums"
+        xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:pages="clr-namespace:DeliveryService.Enums"
         mc:Ignorable="d"
         Title="MainWindow"
         Style="{StaticResource WinChrome}"
@@ -37,13 +36,13 @@
             <Button Style="{StaticResource MenuButton}"
                         HorizontalAlignment="Left"
                         Margin="5 5 0 40">
-                <Icons:PackIconMaterial Kind="Menu" 
+                <icons:PackIconMaterial Kind="Menu" 
                                             Width="15"
                                             Height="15"/>
             </Button>
 
             <Border Grid.Row="1"
-                        Background="{StaticResource PrimaryColorBruh}"
+                        Background="{StaticResource PrimaryColorBrush}"
                         CornerRadius="0 50 0 17">
                 <DockPanel>
                     <!--Avatar-->
@@ -88,45 +87,45 @@
                     <StackPanel DockPanel.Dock="Top">
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Static Pages:AppPages.Worker}">
+                                         CommandParameter="{x:Static pages:AppPages.Worker}">
                             <StackPanel Orientation="Horizontal">
-                                <Icons:PackIconMaterial Kind="AccountDetails"
+                                <icons:PackIconMaterial Kind="AccountDetails"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                 <TextBlock Text="Сотрудники"/>
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Static Pages:AppPages.User}">
+                                         CommandParameter="{x:Static pages:AppPages.User}">
                             <StackPanel Orientation="Horizontal">
-                                <Icons:PackIconMaterial Kind="Account"
+                                <icons:PackIconMaterial Kind="Account"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                 <TextBlock Text="Пользователи"/>
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Static Pages:AppPages.Delivery}">
+                                         CommandParameter="{x:Static pages:AppPages.Delivery}">
                             <StackPanel Orientation="Horizontal">
-                                <Icons:PackIconMaterial Kind="TruckDelivery"
+                                <icons:PackIconMaterial Kind="TruckDelivery"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                 <TextBlock Text="Доставки"/>
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Static Pages:AppPages.Storage}">
+                                         CommandParameter="{x:Static pages:AppPages.Storage}">
                             <StackPanel Orientation="Horizontal">
-                                <Icons:PackIconMaterial Kind="Store24Hour"
+                                <icons:PackIconMaterial Kind="Store24Hour"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                 <TextBlock Text="Склады"/>
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource MenuSectionButton}"
                                          Command="{Binding ChangePageCommand}"
-                                         CommandParameter="{x:Static Pages:AppPages.PickUpPoint}">
+                                         CommandParameter="{x:Static pages:AppPages.PickUpPoint}">
                             <StackPanel Orientation="Horizontal">
-                                <Icons:PackIconMaterial Kind="StoreMarker"
+                                <icons:PackIconMaterial Kind="StoreMarker"
                                                             Style="{StaticResource MenuSectionButtonIcon}"/>
                                 <TextBlock Text="Точки выдачи"/>
                             </StackPanel>
@@ -151,21 +150,21 @@
                     <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlCloseColorBrush}"
                                 Command="{Binding CloseWindowCommand}">
-                        <Icons:PackIconMaterial Kind="Close"
+                        <icons:PackIconMaterial Kind="Close"
                                                     Width="10"
                                                     Height="10"/>
                     </Button>
                     <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlMaxColorBrush}"
                                 Command="{Binding MaximazeWindowCommand}">
-                        <Icons:PackIconMaterial Kind="SquareRoundedOutline"
+                        <icons:PackIconMaterial Kind="SquareRoundedOutline"
                                                     Width="10"
                                                     Height="10"/>
                     </Button>
                     <Button Style="{StaticResource ControlButton}"
                                 Background="{StaticResource ControlMinColorBrush}"
                                 Command="{Binding MinimizeWindowCommand}">
-                        <Icons:PackIconMaterial Kind="Minus"
+                        <icons:PackIconMaterial Kind="Minus"
                                                     Width="10"
                                                     Height="10"/>
                     </Button>

@@ -1,17 +1,10 @@
-﻿using CredentialChecker;
+﻿using System.Windows;
+using CredentialChecker;
 using CredentialChecker.Enums;
 using DeliveryService.DTO;
 using DeliveryService.Services;
 using DeliveryService.View;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
@@ -83,10 +76,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -94,10 +87,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -105,10 +98,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
         {
             get
             {
-                return _cancelWindowCommand ?? (_cancelWindowCommand = new RelayCommand((obj) =>
+                return _cancelWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
         #endregion
@@ -120,7 +113,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _service = App.ServiceProvider.GetRequiredService<IEncryptionService>();
         }
 
-        public void ShowValidationPassword()
+        private void ShowValidationPassword()
         {
             PasswordDifficulty passwordDifficulty = PasswordChecker.Check(_password);
 

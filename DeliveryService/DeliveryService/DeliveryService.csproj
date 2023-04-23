@@ -1,99 +1,99 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
-    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+        <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CredentialChecker\CredentialChecker.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CredentialChecker\CredentialChecker.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="View\Pages\PickUpPointPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Storages\StorageEdit.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\StoragePage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\DeliveryPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Delivery\DeliveryGeneralInfoPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Delivery\DeliveryEdit.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Storages\StorageGeneralInfoPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\UserPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
+    <ItemGroup>
+        <Page Update="View\Pages\PickUpPointPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\Storages\StorageEdit.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\StoragePage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\DeliveryPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\Delivery\DeliveryGeneralInfoPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\Delivery\DeliveryEdit.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\Storages\StorageGeneralInfoPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\UserPage.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        </Page>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\Storages\StorageEdit.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\Delivery\DeliveryGeneralInfoPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\Delivery\DeliveryEdit.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\Storages\StorageGeneralInfoPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\Storages\StorageEdit.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\Delivery\DeliveryGeneralInfoPage.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\Delivery\DeliveryEdit.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\Storages\StorageGeneralInfoPage.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
-  </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    </ItemGroup>
 
 </Project>

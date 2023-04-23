@@ -1,21 +1,9 @@
-﻿using DeliveryService.Model;
-using DeliveryService.Repository;
-using DeliveryService.Services;
-using DeliveryService.View;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using DeliveryService.Model;
+using DeliveryService.Services;
+using DeliveryService.View;
 
 namespace DeliveryService.ViewModel
 {
@@ -33,8 +21,6 @@ namespace DeliveryService.ViewModel
         private MainWindow _mainWindow;
 
         private IAuthenticationService _authenticationService;
-        private DsContext _context;
-
         #endregion
 
         #region Properties
@@ -54,9 +40,9 @@ namespace DeliveryService.ViewModel
             get
             {
                 ErrorMessageVisibility = false;
-                return _loginCommand ?? (_loginCommand = new RelayCommand((obj) =>
+                return _loginCommand ??= new RelayCommand((obj) =>
                 {
-                    Worker? worker = _authenticationService.AuthenticateWorker(new System.Net.NetworkCredential(_login, (obj as PasswordBox).Password));
+                    Worker? worker = _authenticationService.AuthenticateWorker(new NetworkCredential(_login, (obj as PasswordBox).Password));
                     if (worker != null)
                     {
                         (_mainWindow.DataContext as MainWindowViewModel).CurrentWorker = worker;
@@ -66,7 +52,7 @@ namespace DeliveryService.ViewModel
                     {
                         ErrorMessageVisibility = true;
                     }
-                }));
+                });
             }
         }
         
@@ -74,10 +60,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     App.Current.Shutdown();
-                }));
+                });
             }
         }
 
@@ -85,10 +71,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _loginWindow.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -103,11 +89,10 @@ namespace DeliveryService.ViewModel
         }
         #endregion
 
-        public LoginViewModel(IAuthenticationService authenticationService, DsContext context, LoginWindow loginWindow, MainWindow mainWindow)
+        public LoginViewModel(IAuthenticationService authenticationService, LoginWindow loginWindow, MainWindow mainWindow)
         {
             _authenticationService = authenticationService;
             _loginWindow = loginWindow;
-            _context = context;
             _mainWindow = mainWindow;
         }
 

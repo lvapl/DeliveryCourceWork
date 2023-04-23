@@ -1,18 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Windows;
+using System.Windows.Threading;
 using DeliveryService.Converters;
 using DeliveryService.Model;
-using DeliveryService.DTO;
 using DeliveryService.Repository;
 using DeliveryService.Services;
 using DeliveryService.View;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService
 {
@@ -41,7 +35,7 @@ namespace DeliveryService
             services.AddSingleton<IEncryptionService, EncryptionService>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IWorkerDTOService, WorkerDTOService>();
-            services.AddSingleton<IAddressRepository, AdderssRepository>();
+            services.AddSingleton<IAddressRepository, AddressRepository>();
             services.AddSingleton<IAddressDTOService, AddressDTOService>();
             services.AddSingleton<IPositionRepository, PositionRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
@@ -65,7 +59,7 @@ namespace DeliveryService
             loginWindow.Show();
         }
 
-        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
 
@@ -73,7 +67,7 @@ namespace DeliveryService
 
             switch (e.Exception)
             {
-                case Microsoft.Data.SqlClient.SqlException:
+                case SqlException:
                     message = "Возникли проблемы с подключением к базе данных. Обратитесь к администратору";
                     break;
                 default:

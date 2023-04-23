@@ -1,12 +1,8 @@
-﻿using DeliveryService.DTO;
+﻿using System.Collections.Generic;
+using DeliveryService.DTO;
 using DeliveryService.Mappers;
 using DeliveryService.Model;
 using DeliveryService.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.Services
 {
@@ -19,19 +15,19 @@ namespace DeliveryService.Services
             _storageRepository = storageRepository;
         }
 
-        public void Add(StorageDTO storageDTO)
+        public void Add(StorageDTO storageDto)
         {
             Storage storage = new Storage();
 
-            StorageMapper.Map(storageDTO, storage);
+            StorageMapper.Map(storageDto, storage);
             _storageRepository.Add(storage);
         }
 
-        public void Edit(StorageDTO storageDTO)
+        public void Edit(StorageDTO storageDto)
         {
-            Storage storage = _storageRepository.GetById(storageDTO.Id);
+            Storage storage = _storageRepository.GetById(storageDto.Id);
 
-            StorageMapper.Map(storageDTO, storage);
+            StorageMapper.Map(storageDto, storage);
             _storageRepository.Edit(storage);
         }
 

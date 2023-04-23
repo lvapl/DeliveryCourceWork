@@ -1,18 +1,15 @@
-﻿using DeliveryService.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
-    public class AdderssRepository : IAddressRepository
+    public class AddressRepository : IAddressRepository
     {
         private DsContext _context;
 
-        public AdderssRepository(DsContext context)
+        public AddressRepository(DsContext context)
         {
             _context = context;
         }

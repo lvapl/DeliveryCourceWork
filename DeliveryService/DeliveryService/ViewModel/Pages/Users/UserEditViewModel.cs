@@ -1,15 +1,9 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
+﻿using System;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Services;
 using DeliveryService.View;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Users
 {
@@ -51,10 +45,10 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -62,10 +56,10 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -73,7 +67,7 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     if (IsFillRequiredFields())
                     {
@@ -92,7 +86,7 @@ namespace DeliveryService.ViewModel.Pages.Users
                     {
                         throw new Exception("Обязательные к поля не заполнены!");
                     }
-                }));
+                });
             }
         }
 
@@ -100,10 +94,10 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _cancelWindowCommand ?? (_cancelWindowCommand = new RelayCommand((obj) =>
+                return _cancelWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -111,16 +105,13 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _editAddressCommand ?? (_editAddressCommand = new RelayCommand((obj) =>
+                return _editAddressCommand ??= new RelayCommand((obj) =>
                 {
-                    if (User.Address == null)
-                    {
-                        User.Address = new AddressDTO();
-                    }
+                    User.Address ??= new AddressDTO();
 
                     Window window = new AddressEdit(User.Address);
                     window.Show();
-                }));
+                });
             }
         }
 
@@ -128,16 +119,13 @@ namespace DeliveryService.ViewModel.Pages.Users
         {
             get
             {
-                return _editPassportAddressCommand ?? (_editPassportAddressCommand = new RelayCommand((obj) =>
+                return _editPassportAddressCommand ??= new RelayCommand((obj) =>
                 {
-                    if (User.PassportAddress == null)
-                    {
-                        User.PassportAddress = new AddressDTO();
-                    }
+                    User.PassportAddress ??= new AddressDTO();
 
                     Window window = new AddressEdit(User.PassportAddress);
                     window.Show();
-                }));
+                });
             }
         }
         #endregion
@@ -148,14 +136,7 @@ namespace DeliveryService.ViewModel.Pages.Users
 
             _userService = App.ServiceProvider.GetRequiredService<IUserDTOService>();
 
-            if (userId == null)
-            {
-                _user = new UserDTO();
-            }
-            else
-            {
-                _user = _userService.GetById((int)userId);
-            }
+            _user = userId == null ? new UserDTO() : _userService.GetById((int)userId);
         }
 
 

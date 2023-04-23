@@ -1,15 +1,8 @@
-﻿using DeliveryService.Enums;
+﻿using System.Windows;
+using DeliveryService.Enums;
 using DeliveryService.Model;
 using DeliveryService.Services;
-using DeliveryService.View;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace DeliveryService.ViewModel
 {
@@ -34,13 +27,7 @@ namespace DeliveryService.ViewModel
         #endregion
 
         #region Properties
-        public double MaxHight
-        {
-            get
-            {
-                return SystemParameters.MaximizedPrimaryScreenHeight;
-            }
-        }
+        public double MaxHight => SystemParameters.MaximizedPrimaryScreenHeight;
 
         public AppPages? CurrentPage
         {
@@ -56,7 +43,7 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _changePageCommand ?? (_changePageCommand = new RelayCommand((obj) =>
+                return _changePageCommand ??= new RelayCommand((obj) =>
                 {
                     if (obj != null && _authenticationService.HasAccessToSection((AppPages)obj))
                     {
@@ -66,7 +53,7 @@ namespace DeliveryService.ViewModel
                     {
                         CurrentPage = null;
                     }
-                }));
+                });
             }
         }
 
@@ -74,10 +61,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     App.Current.Shutdown();
-                }));
+                });
             }
         }
 
@@ -85,10 +72,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -96,17 +83,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _maximazeWindowCommand ?? (_maximazeWindowCommand = new RelayCommand((obj) =>
+                return _maximazeWindowCommand ??= new RelayCommand((obj) =>
                 {
-                    if (_window.WindowState == WindowState.Maximized)
-                    {
-                        _window.WindowState = WindowState.Normal;
-                    }
-                    else
-                    {
-                        _window.WindowState = WindowState.Maximized;
-                    }
-                }));
+                    _window.WindowState = _window.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                });
             }
         }
 

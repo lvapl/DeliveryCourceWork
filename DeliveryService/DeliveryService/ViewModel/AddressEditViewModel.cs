@@ -1,14 +1,5 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Mappers;
-using DeliveryService.Model;
-using DeliveryService.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
+using DeliveryService.DTO;
 
 namespace DeliveryService.ViewModel
 {
@@ -34,7 +25,7 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     _addressOriginal.Country = _address.Country;
                     _addressOriginal.CountryId = _address.CountryId;
@@ -47,7 +38,7 @@ namespace DeliveryService.ViewModel
                     _addressOriginal.Postcode = _address.Postcode;
 
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -55,10 +46,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -66,10 +57,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -77,10 +68,10 @@ namespace DeliveryService.ViewModel
         {
             get
             {
-                return _cancelWindowCommand ?? (_cancelWindowCommand = new RelayCommand((obj) =>
+                return _cancelWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 

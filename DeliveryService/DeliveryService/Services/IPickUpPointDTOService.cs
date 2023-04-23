@@ -1,18 +1,13 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DeliveryService.DTO;
 
 namespace DeliveryService.Services
 {
     public interface IPickUpPointDTOService
     {
-        public void Add(PickUpPointDTO pickUpPointDTO);
+        public void Add(PickUpPointDTO pickUpPointDto);
 
-        public void Edit(PickUpPointDTO pickUpPointDTO);
+        public void Edit(PickUpPointDTO pickUpPointDto);
 
         public void Remove(int id);
 

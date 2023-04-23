@@ -1,24 +1,29 @@
-﻿using DeliveryService.Enums;
-using DeliveryService.View;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Markup;
+using DeliveryService.Enums;
+using DeliveryService.View;
 
 namespace DeliveryService.Converters
 {
+    /// <summary>
+    /// Конвертер, преобразующий перечисление AppPages в соответствующие страницы приложения.
+    /// </summary>
     public class AppPageConverter : ConverterBase<AppPageConverter>
     {
-        public override object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <summary>
+        /// Преобразует перечисление AppPages в соответствующие страницы приложения.
+        /// </summary>
+        /// <param name="value">Значение, которое требуется преобразовать.</param>
+        /// <param name="targetType">Тип целевого свойства.</param>
+        /// <param name="parameter">Дополнительный параметр.</param>
+        /// <param name="culture">Языковые и региональные настройки.</param>
+        /// <returns>Соответствующую страницу приложения.</returns>
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is AppPages)
             {
-                switch (value) 
+                switch (value)
                 {
                     case AppPages.Worker:
                         return new WorkerPage();
@@ -34,14 +39,23 @@ namespace DeliveryService.Converters
                         return new EmptyPage();
                 }
             }
+
             return new EmptyPage();
         }
 
+        /// <summary>
+        /// Преобразует страницы приложения обратно в перечисление AppPages.
+        /// </summary>
+        /// <param name="value">Значение, которое требуется преобразовать.</param>
+        /// <param name="targetType">Тип целевого свойства.</param>
+        /// <param name="parameter">Дополнительный параметр.</param>
+        /// <param name="culture">Языковые и региональные настройки.</param>
+        /// <returns>Перечисление AppPages, соответствующее странице приложения.</returns>
         public override object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is Page)
             {
-                switch(value)
+                switch (value)
                 {
                     case WorkerPage:
                         return AppPages.Worker;

@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DeliveryService.View.Pages.PickUpPoints"
-        xmlns:Icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="UserEdit" Height="470" Width="275"
         Style="{StaticResource WinChrome}">
@@ -16,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!--#region Controls-->
-        <StackPanel x:Name="spControl">
+        <StackPanel x:Name="SpControl">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         Margin="10 8"
@@ -24,14 +23,14 @@
                 <Button Style="{StaticResource ControlButton}"
                         Background="{StaticResource ControlCloseColorBrush}"
                         Command="{Binding CloseWindowCommand}">
-                    <Icons:PackIconMaterial Kind="Close"
+                    <icons:PackIconMaterial Kind="Close"
                                             Width="10"
                                             Height="10"/>
                 </Button>
                 <Button Style="{StaticResource ControlButton}"
                         Background="{StaticResource ControlMinColorBrush}"
                         Command="{Binding MinimizeWindowCommand}">
-                    <Icons:PackIconMaterial Kind="Minus"
+                    <icons:PackIconMaterial Kind="Minus"
                                             Width="10"
                                             Height="10"/>
                 </Button>

@@ -1,13 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
 using DeliveryService.DTO;
 using DeliveryService.Mappers;
 using DeliveryService.Model;
 using DeliveryService.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.Services
 {
@@ -20,18 +15,18 @@ namespace DeliveryService.Services
             _userRepository = userRepository;
         }
 
-        public void Add(UserDTO userDTO)
+        public void Add(UserDTO userDto)
         {
             User user = new User();
 
-            UserMapper.Map(userDTO, user);
+            UserMapper.Map(userDto, user);
             _userRepository.Add(user);
         }
 
-        public void Edit(UserDTO userDTO)
+        public void Edit(UserDTO userDto)
         {
-            User user = _userRepository.GetById(userDTO.Id);
-            UserMapper.Map(userDTO, user);
+            User user = _userRepository.GetById(userDto.Id);
+            UserMapper.Map(userDto, user);
             _userRepository.Edit(user);
         }
 

@@ -1,16 +1,10 @@
-﻿using DeliveryService.DTO;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using DeliveryService.DTO;
 using DeliveryService.Model;
 using DeliveryService.Repository;
 using DeliveryService.Services;
-using DeliveryService.View;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages.Delivery
 {
@@ -50,14 +44,14 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
-        public ObservableCollection<User>? Users { get => new ObservableCollection<User>(_userRepository.GetAll()); }
+        public ObservableCollection<User> Users => new ObservableCollection<User>(_userRepository.GetAll());
 
         public User? Sender 
         {
             get => _delivery.SenderId == null ? null : _userRepository.GetById((int)_delivery.SenderId);
             set
             {
-                _delivery.SenderId = value == null ? null : value.Id;
+                _delivery.SenderId = value?.Id;
                 OnPropertyChanged();
             }
         }
@@ -67,19 +61,19 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             get => _delivery.RecipientId == null ? null : _userRepository.GetById((int)_delivery.RecipientId);
             set
             {
-                _delivery.RecipientId = value == null ? null : value.Id;
+                _delivery.RecipientId = value?.Id;
                 OnPropertyChanged();
             }
         }
 
-        public ObservableCollection<PickUpPoint>? PickUpPoints { get => new ObservableCollection<PickUpPoint>(_pointRepository.GetAll()); }
+        public ObservableCollection<PickUpPoint> PickUpPoints => new ObservableCollection<PickUpPoint>(_pointRepository.GetAll());
 
         public PickUpPoint? PickPoint
         {
             get => _delivery.PickPointId == null ? null : _pointRepository.GetById((int)_delivery.PickPointId);
             set
             {
-                _delivery.PickPointId = value == null ? null : value.Id;
+                _delivery.PickPointId = value?.Id;
                 OnPropertyChanged();
             }
         }
@@ -89,19 +83,19 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             get => _delivery.UpPointId == null ? null : _pointRepository.GetById((int)_delivery.UpPointId);
             set
             {
-                _delivery.UpPointId = value == null ? null : value.Id;
+                _delivery.UpPointId = value?.Id;
                 OnPropertyChanged();
             }
         }
 
-        public ObservableCollection<Tariff>? Tariffs { get => new ObservableCollection<Tariff>(_context.Tariffs); }
+        public ObservableCollection<Tariff> Tariffs => new ObservableCollection<Tariff>(_context.Tariffs);
 
         public Tariff? Tariff
         {
             get => _delivery.TariffId == null ? null : _context.Tariffs.Find((int)_delivery.TariffId);
             set
             {
-                _delivery.TariffId = value == null ? null : value.Id;
+                _delivery.TariffId = value?.Id;
                 OnPropertyChanged();
             }
         }
@@ -110,10 +104,10 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         {
             get
             {
-                return _closeWindowCommand ?? (_closeWindowCommand = new RelayCommand((obj) =>
+                return _closeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
 
@@ -121,10 +115,10 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         {
             get
             {
-                return _minimizeWindowCommand ?? (_minimizeWindowCommand = new RelayCommand((obj) =>
+                return _minimizeWindowCommand ??= new RelayCommand((obj) =>
                 {
                     _window.WindowState = WindowState.Minimized;
-                }));
+                });
             }
         }
 
@@ -132,7 +126,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand((obj) =>
+                return _saveCommand ??= new RelayCommand((obj) =>
                 {
                     if (_delivery.Id != 0)
                     {
@@ -144,7 +138,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                         _deliveryService.Add(_delivery);
                         _window.Close();
                     }
-                }));
+                });
             }
         }
 
@@ -152,10 +146,10 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand((obj) =>
+                return _cancelCommand ??= new RelayCommand((obj) =>
                 {
                     _window.Close();
-                }));
+                });
             }
         }
         #endregion
@@ -169,14 +163,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             _pointRepository = App.ServiceProvider.GetRequiredService<IPickUpPointRepository>();
             _context = App.ServiceProvider.GetRequiredService<DsContext>();
 
-            if (deliveryId == null)
-            {
-                _delivery = new DeliveryDTO();
-            }
-            else
-            {
-                _delivery = _deliveryService.GetById((int)deliveryId);
-            }
+            _delivery = deliveryId == null ? new DeliveryDTO() : _deliveryService.GetById((int)deliveryId);
         }
     }
 }

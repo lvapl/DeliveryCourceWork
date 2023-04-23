@@ -1,17 +1,14 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Enums;
-using DeliveryService.Services;
-using DeliveryService.View;
-using DeliveryService.View.Pages.Delivery;
-using DeliveryService.View.Pages.Storages;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using DeliveryService.DTO;
+using DeliveryService.Enums;
+using DeliveryService.Services;
+using DeliveryService.View;
+using DeliveryService.View.Pages.Storages;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Storages
 {
@@ -59,11 +56,11 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
-        public RelayCommand? EditStorageCommand
+        public RelayCommand EditStorageCommand
         {
             get
             {
-                return _editStorageCommand ?? (_editStorageCommand = new RelayCommand((obj) =>
+                return _editStorageCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
                     {
@@ -79,15 +76,15 @@ namespace DeliveryService.ViewModel.Pages.Storages
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? DeleteStorageCommand
+        public RelayCommand DeleteStorageCommand
         {
             get
             {
-                return _deleteStorageCommand ?? (_deleteStorageCommand = new RelayCommand((obj) =>
+                return _deleteStorageCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
                     {
@@ -102,7 +99,7 @@ namespace DeliveryService.ViewModel.Pages.Storages
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
@@ -110,7 +107,7 @@ namespace DeliveryService.ViewModel.Pages.Storages
         {
             get
             {
-                return _addStorageCommand ?? (_addStorageCommand = new RelayCommand((obj) =>
+                return _addStorageCommand ??= new RelayCommand((obj) =>
                 {
                     if (_authenticationService.HasPermissionToModifySubsection(StoragePages.StorageGeneralInfo))
                     {
@@ -123,24 +120,24 @@ namespace DeliveryService.ViewModel.Pages.Storages
                         Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
-                }));
+                });
             }
         }
 
-        public RelayCommand? CreatePdf
+        public RelayCommand CreatePdf
         {
             get
             {
-                return _createPdf ?? (_createPdf = new RelayCommand((obj) =>
+                return _createPdf ??= new RelayCommand((obj) =>
                 {
                     _pdfWriterService.CreatePdfFile(new List<StorageDTO>(_service.GetAll()),
-                                                    new Dictionary<string, string>
-                                                    {
-                                                        { "Id", "Id" },
-                                                        { "Title", "Номер склада" },
-                                                        { "Address", "Адрес" },
-                                                    });
-                }));
+                        new Dictionary<string, string>
+                        {
+                            { "Id", "Id" },
+                            { "Title", "Номер склада" },
+                            { "Address", "Адрес" },
+                        });
+                });
             }
         }
         #endregion
@@ -162,7 +159,7 @@ namespace DeliveryService.ViewModel.Pages.Storages
 
         private void FilterTable()
         {
-            if (_textBoxSearch != null)
+            if (_textBoxSearch != String.Empty)
             {
                 Storages = new ObservableCollection<StorageDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
                                                                                           || (x.Title != null && x.Title.Contains(_textBoxSearch))

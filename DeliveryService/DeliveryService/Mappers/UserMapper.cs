@@ -1,15 +1,11 @@
-﻿using DeliveryService.DTO;
-using DeliveryService.Model;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DeliveryService.DTO;
+using DeliveryService.Model;
 
 namespace DeliveryService.Mappers
 {
-    public class UserMapper
+    public static class UserMapper
     {
         public static UserDTO Map(User user)
         {
@@ -27,27 +23,27 @@ namespace DeliveryService.Mappers
             };
         }
 
-        public static void Map(UserDTO userDTO, User user)
+        public static void Map(UserDTO userDto, User user)
         {
-            user.Firstname = userDTO.FirstName;
-            user.Lastname = userDTO.LastName;
-            user.Patronymic = userDTO.Patronymic;
-            user.TelephoneNumber = userDTO.TelephoneNumber;
-            user.PassportSeries = userDTO.PassportSeries;
-            user.PassportNumber = userDTO.PassportNumber;
-            if (userDTO.Address != null)
+            user.Firstname = userDto.FirstName;
+            user.Lastname = userDto.LastName;
+            user.Patronymic = userDto.Patronymic;
+            user.TelephoneNumber = userDto.TelephoneNumber;
+            user.PassportSeries = userDto.PassportSeries;
+            user.PassportNumber = userDto.PassportNumber;
+            if (userDto.Address != null)
             {
-                AddressMapper.Map(userDTO.Address, (user.Address = new Address()));
+                AddressMapper.Map(userDto.Address, (user.Address = new Address()));
             }
-            if (userDTO.PassportAddress != null)
+            if (userDto.PassportAddress != null)
             {
-                AddressMapper.Map(userDTO.PassportAddress, (user.PassportAddressNavigation = new Address()));
+                AddressMapper.Map(userDto.PassportAddress, (user.PassportAddressNavigation = new Address()));
             }
         }
 
         public static IEnumerable<UserDTO> MapAll(IEnumerable<User> users)
         {
-            return users.ToList().ConvertAll<UserDTO>(x => Map(x));
+            return users.ToList().ConvertAll(Map);
         }
     }
 }

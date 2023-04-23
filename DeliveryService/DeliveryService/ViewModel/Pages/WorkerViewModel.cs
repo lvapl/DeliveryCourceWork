@@ -1,13 +1,6 @@
 ﻿using DeliveryService.Enums;
 using DeliveryService.Services;
-using DeliveryService.View.Workers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace DeliveryService.ViewModel.Pages
 {
@@ -35,7 +28,7 @@ namespace DeliveryService.ViewModel.Pages
         {
             get
             {
-                return _changePageCommand ?? (_changePageCommand = new RelayCommand((obj) =>
+                return _changePageCommand ??= new RelayCommand((obj) =>
                 {
                     if (obj != null && _authenticationService.HasAccessToSubSection((WorkerPages)obj))
                     {
@@ -45,7 +38,7 @@ namespace DeliveryService.ViewModel.Pages
                     {
                         CurrentPage = null;
                     }
-                }));
+                });
             }
         }
 
