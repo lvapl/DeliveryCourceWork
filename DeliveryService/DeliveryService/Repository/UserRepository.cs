@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="User"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class UserRepository : IUserRepository
     {
+        #region Private Fields
         private DsContext _context;
+        #endregion
 
         public UserRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(User user)
         {
             _context.Users.Add(user);
@@ -41,5 +47,6 @@ namespace DeliveryService.Repository
         {
             return _context.Users.Find(id) ?? throw new Exception();
         }
+        #endregion
     }
 }

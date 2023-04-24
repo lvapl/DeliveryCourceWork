@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="Storage"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class StorageRepository : IStorageRepository
     {
+        #region Private Fields
         private DsContext _context;
+        #endregion
 
         public StorageRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(Storage storage)
         {
             _context.Storages.Add(storage);
@@ -41,5 +47,6 @@ namespace DeliveryService.Repository
             _context.Storages.Remove(GetById(id));
             _context.SaveChanges();
         }
+        #endregion
     }
 }

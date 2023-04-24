@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="PickUpPoint"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class PickUpPointRepository : IPickUpPointRepository
     {
+        #region Private Fields
         private DsContext _context;
+        #endregion
 
         public PickUpPointRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(PickUpPoint point)
         {
             _context.PickUpPoints.Add(point);
@@ -40,5 +46,6 @@ namespace DeliveryService.Repository
         {
             _context.PickUpPoints.Remove(GetById(id));
         }
+        #endregion
     }
 }

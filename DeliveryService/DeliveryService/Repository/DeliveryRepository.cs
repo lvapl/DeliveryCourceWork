@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="Delivery"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class DeliveryRepository : IDeliveryRepository
     {
+        #region Private Fields
         private DsContext _context;
+        #endregion
 
         public DeliveryRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(Delivery delivery)
         {
             _context.Deliveries.Add(delivery);
@@ -41,5 +47,6 @@ namespace DeliveryService.Repository
             _context.Deliveries.Remove(GetById(id));
             _context.SaveChanges();
         }
+        #endregion
     }
 }

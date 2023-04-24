@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="Worker"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class WorkerRepository : IWorkerRepository
     {
+        #region Private Fields
         private DsContext _context;
+        #endregion
 
         public WorkerRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(Worker worker)
         {
             _context.Workers.Add(worker);
@@ -44,7 +50,8 @@ namespace DeliveryService.Repository
 
         public Worker? GetWorkerByLoginAndPassword(string login, byte[] password)
         {
-            return _context.Workers.Where(x => x.Login == login && x.Password == password).FirstOrDefault();
+            return _context.Workers.FirstOrDefault(x => x.Login == login && x.Password == password);
         }
+        #endregion
     }
 }

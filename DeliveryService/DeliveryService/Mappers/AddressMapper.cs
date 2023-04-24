@@ -6,10 +6,18 @@ using System.Linq;
 
 namespace DeliveryService.Mappers
 {
+    /// <summary>
+    /// Класс для преобразования модели <see cref="Address"/> в <see cref="AddressDTO"/> и обратно.
+    /// </summary>
     public static class AddressMapper
     {
         private static DsContext _context = App.ServiceProvider.GetRequiredService<DsContext>();
 
+        /// <summary>
+        /// Метод для преобразования <see cref="Address"/> в <see cref="AddressDTO"/>.
+        /// </summary>
+        /// <param name="address">Модель <see cref="Address"/> по которой нужно выполнить преобразование.</param>
+        /// <returns>DTO объект <see cref="AddressDTO"/>, полученный в результате преобразования.</returns>
         public static AddressDTO Map(Address address)
         {
             return new AddressDTO
@@ -23,6 +31,11 @@ namespace DeliveryService.Mappers
             };
         }
 
+        /// <summary>
+        /// Метод для преобразования объекта <see cref="AddressDTO"/> в <see cref="Address"/>.
+        /// </summary>
+        /// <param name="addressDto">DTO объект <see cref="AddressDTO"/> по которому нужно выполнить преобразование.</param>
+        /// <param name="address">Модель <see cref="Address"/>, полученная в результате преобразования.</param>
         public static void Map(AddressDTO addressDto, Address address)
         {
             address.Postcode = addressDto.Postcode;
@@ -340,6 +353,11 @@ namespace DeliveryService.Mappers
             }
         }
 
+        /// <summary>
+        /// Метод для преобразования коллекции <see cref="Address"/> в коллекцию <see cref="AddressDTO"/>.
+        /// </summary>
+        /// <param name="addresses">Коллекция <see cref="Address"/>, которую нужно отобразить.</param>
+        /// <returns>Коллекция <see cref="AddressDTO"/>, полученная в результате преобразования.</returns>
         public static IEnumerable<AddressDTO> MapAll(IEnumerable<Address> addresses)
         {
             return addresses.ToList().ConvertAll(Map);

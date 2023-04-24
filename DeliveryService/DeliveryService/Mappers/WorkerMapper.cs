@@ -6,10 +6,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.Mappers
 {
+    /// <summary>
+    /// Класс для преобразования модели <see cref="Worker"/> в <see cref="WorkerDTO"/> и обратно.
+    /// </summary>
     public static class WorkerMapper
     {
         private static DsContext _context = App.ServiceProvider.GetRequiredService<DsContext>();
 
+        /// <summary>
+        /// Метод для преобразования <see cref="Worker"/> в <see cref="WorkerDTO"/>.
+        /// </summary>
+        /// <param name="worker">Модель <see cref="Worker"/> по которой нужно выполнить преобразование.</param>
+        /// <returns>DTO объект <see cref="WorkerDTO"/>, полученный в результате преобразования.</returns>
         public static WorkerDTO Map(Worker worker)
         {
             return new WorkerDTO
@@ -31,6 +39,11 @@ namespace DeliveryService.Mappers
             };
         }
 
+        /// <summary>
+        /// Метод для преобразования объекта <see cref="WorkerDTO"/> в <see cref="Worker"/>.
+        /// </summary>
+        /// <param name="workerDto">DTO объект <see cref="WorkerDTO"/> по которому нужно выполнить преобразование.</param>
+        /// <param name="worker">Модель <see cref="Worker"/>, полученная в результате преобразования.</param>
         public static void Map(WorkerDTO workerDto, Worker worker)
         {
             worker.Login = workerDto.Login;
@@ -62,6 +75,11 @@ namespace DeliveryService.Mappers
             }
         }
 
+        /// <summary>
+        /// Метод для преобразования коллекции <see cref="Worker"/> в коллекцию <see cref="WorkerDTO"/>.
+        /// </summary>
+        /// <param name="workers">Коллекция <see cref="Worker"/>, которую нужно отобразить.</param>
+        /// <returns>Коллекция <see cref="WorkerDTO"/>, полученная в результате преобразования.</returns>
         public static IEnumerable<WorkerDTO> MapAll(IEnumerable<Worker> workers)
         {
             return workers.ToList().ConvertAll(Map);

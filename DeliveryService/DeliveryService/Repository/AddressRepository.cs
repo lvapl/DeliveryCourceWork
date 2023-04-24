@@ -5,15 +5,21 @@ using DeliveryService.Model;
 
 namespace DeliveryService.Repository
 {
+    /// <summary>
+    /// Репозиторий модели <see cref="Address"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
     public class AddressRepository : IAddressRepository
     {
+        #region Private Fields
         private DsContext _context;
-
+        #endregion
+        
         public AddressRepository(DsContext context)
         {
             _context = context;
         }
 
+        #region Methods
         public void Add(Address address)
         {
             _context.Addresses.Add(address);
@@ -41,5 +47,6 @@ namespace DeliveryService.Repository
             _context.Addresses.Remove(GetById(id));
             _context.SaveChanges();
         }
+        #endregion
     }
 }
