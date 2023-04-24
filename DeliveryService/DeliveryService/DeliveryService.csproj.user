@@ -30,6 +30,12 @@
     <Page Update="View\Pages\Storages\StorageGeneralInfoPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointEdit.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointGeneralInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Pages\Workers\WorkerPasswordPage.xaml">
       <SubType>Designer</SubType>
     </Page>

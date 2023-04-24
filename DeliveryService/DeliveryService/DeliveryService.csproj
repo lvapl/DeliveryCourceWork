@@ -70,6 +70,14 @@
         <Page Update="View\Pages\UserPage.xaml">
             <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
         </Page>
+        <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointEdit.xaml">
+          <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointGeneralInfoPage.xaml">
+          <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -90,6 +98,12 @@
         </Compile>
         <Compile Update="View\Pages\Storages\StorageGeneralInfoPage.xaml.cs">
             <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointEdit.xaml.cs">
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointGeneralInfoPage.xaml.cs">
+          <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
 

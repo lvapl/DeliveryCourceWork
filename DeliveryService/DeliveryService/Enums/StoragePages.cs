@@ -2,6 +2,7 @@
 {
     public enum StoragePages
     {
-        StorageGeneralInfo
+        StorageGeneralInfo,
+        WorkersInPickUpPionts
     }
 }
