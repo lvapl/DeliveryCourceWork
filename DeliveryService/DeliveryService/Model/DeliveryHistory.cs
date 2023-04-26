@@ -19,5 +19,5 @@ public partial class DeliveryHistory
 
     public virtual Delivery? Delivery { get; set; }
 
-    public virtual ICollection<Worker> Workers { get; } = new List<Worker>();
+    public virtual ICollection<WorkersInDelivery> WorkersInDeliveries { get; } = new List<WorkersInDelivery>();
 }

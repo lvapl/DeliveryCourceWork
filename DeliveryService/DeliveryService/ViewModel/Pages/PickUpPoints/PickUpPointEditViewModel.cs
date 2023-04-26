@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.PickUpPoints
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.PickUpPoint"/>.
+    /// </summary>
     public class PickUpPointEditViewModel : ViewModelBase
     {
         #region Private Fields
@@ -25,6 +28,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
 
 
         #region Properties
+        /// <summary>
+        /// Информация для редактирования, представленная в виде <see cref="PickUpPointDTO"/>.
+        /// </summary>
         public PickUpPointDTO PickUpPoint
         {
             get => _pickUpPoint;
@@ -35,6 +41,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -46,6 +55,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -57,6 +69,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -77,6 +92,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -89,6 +107,11 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="PickUpPointEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="pointId">Id пункта выдачи, если null, то создается новый объект.</param>
         public PickUpPointEditViewModel(Window window, int? pointId)
         {
             _window = window;

@@ -12,29 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.PickUpPoints
 {
+    /// <summary>
+    /// ViewModel для страницы "Общая информация" раздела "Пункты выдачи".
+    /// </summary>
     public class PickUpPointGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
         private IPickUpPointDTOService _service;
-
         private IAuthenticationService _authenticationService;
-
         private IPdfWriterService _pdfWriterService;
 
         private ObservableCollection<PickUpPointDTO>? _pickUpPoints;
 
         private RelayCommand? _editPickUpPointCommand;
-
         private RelayCommand? _deletePickUpPointCommand;
-
         private RelayCommand? _addPickUpPointCommand;
-
         private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Список пунктов выдачи <see cref="Model.PickUpPoint"/>
+        /// </summary>
         public ObservableCollection<PickUpPointDTO>? PickUpPoints
         {
             get => _pickUpPoints;
@@ -45,6 +46,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
         public string TextBoxSearch
         {
             get => _textBoxSearch;
@@ -56,13 +60,16 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования пункта выдачи.
+        /// </summary>
         public RelayCommand EditPickUpPointCommand
         {
             get
             {
                 return _editPickUpPointCommand ??= new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
                         if (obj != null)
                         {
@@ -80,13 +87,16 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для удаления пункта выдачи.
+        /// </summary>
         public RelayCommand DeletePickUpPointCommand
         {
             get
             {
                 return _deletePickUpPointCommand ??= new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
                         if (obj != null)
                         {
@@ -103,13 +113,16 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна добавления пункта выдачи.
+        /// </summary>
         public RelayCommand AddPickUpPointCommand
         {
             get
             {
                 return _addPickUpPointCommand ??= new RelayCommand((obj) =>
                 {
-                    if (_authenticationService.HasPermissionToModifySubsection(PickUpPointPages.PickUpPointGeneralInfo))
+                    if (_authenticationService.HasPermissionToModifySubsection(WorkerPages.WorkerGeneralInfo))
                     {
                         Window window = new PickUpPointEdit(null);
                         window.ShowDialog();
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
             }
         }
 
+        /// <summary>
+        /// Команда для создания PDF-файла.
+        /// </summary>
         public RelayCommand CreatePdf
         {
             get
@@ -141,6 +157,9 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="PickUpPointGeneralInfoViewModel"./>
+        /// </summary>
         public PickUpPointGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IPickUpPointDTOService>();
@@ -151,11 +170,17 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
         }
 
         #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
         private void UpdateData()
         {
             PickUpPoints = new ObservableCollection<PickUpPointDTO>(_service.GetAll());
         }
 
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
         private void FilterTable()
         {
             if (_textBoxSearch != String.Empty)

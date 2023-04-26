@@ -12,29 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
+    /// <summary>
+    /// ViewModel для страницы "Общая информация" раздела "Доставки".
+    /// </summary>
     public class WorkerGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
         private IWorkerDTOService _service;
-
         private IAuthenticationService _authenticationService;
-
         private IPdfWriterService _pdfWriterService;
 
         private ObservableCollection<WorkerDTO>? _workers;
 
         private RelayCommand? _editWorkerCommand;
-
         private RelayCommand? _addWorkerCommand;
-
         private RelayCommand? _deleteWorkerCommand;
-
         private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Список сотрудников <see cref="Model.Worker"/>
+        /// </summary>
         public ObservableCollection<WorkerDTO>? Workers
         {
             get => _workers;
@@ -45,6 +46,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
         public string TextBoxSearch
         {
             get => _textBoxSearch;
@@ -56,6 +60,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования сотрудника.
+        /// </summary>
         public RelayCommand EditWorkerCommand
         {
             get
@@ -80,6 +87,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для удаления сотрудника.
+        /// </summary>
         public RelayCommand DeleteWorkerCommand
         {
             get
@@ -103,6 +113,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна добавления сотрудника.
+        /// </summary>
         public RelayCommand AddWorkerCommand
         {
             get
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для создания PDF-файла.
+        /// </summary>
         public RelayCommand CreatePdf
         {
             get
@@ -150,6 +166,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="WorkerGeneralInfoViewModel"./>
+        /// </summary>
         public WorkerGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
@@ -159,11 +178,18 @@ namespace DeliveryService.ViewModel.Pages.Workers
             UpdateData();
         }
 
+        #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
         private void UpdateData()
         {
             Workers = new ObservableCollection<WorkerDTO>(_service.GetAll());
         }
 
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
         private void FilterTable()
         {
             if (_textBoxSearch != String.Empty)
@@ -182,5 +208,6 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
             
         }
+        #endregion
     }
 }

@@ -6,38 +6,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="View\Pages\Workers\WorkerPasswordPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="View\Pages\PickUpPointPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\PickUpPoints\PickUpPointEdit.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\PickUpPoints\PickUpPointGeneralInfoPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Storages\StorageEdit.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\StoragePage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Storages\StorageGeneralInfoPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointEdit.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\WorkersPickUpPoints\WorkerPickUpPointGeneralInfoPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Workers\WorkerPasswordPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
 </Project>

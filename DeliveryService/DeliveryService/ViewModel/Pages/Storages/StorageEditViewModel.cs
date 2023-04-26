@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Storages
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.Storage"/>.
+    /// </summary>
     public class StorageEditViewModel : ViewModelBase
     {
         #region Private Fields
@@ -16,17 +19,16 @@ namespace DeliveryService.ViewModel.Pages.Storages
         private Window _window;
 
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
-
         private RelayCommand? _saveCommand;
-
         private RelayCommand? _cancelCommand;
-
         private RelayCommand? _editAddressCommand;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Информация для редактирования, представленная в виде <see cref="StorageDTO"/>.
+        /// </summary>
         public StorageDTO Storage
         {
             get => _storage;
@@ -37,6 +39,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -48,6 +53,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -59,6 +67,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования адреса.
+        /// </summary>
         public RelayCommand EditAddressCommand
         {
             get
@@ -74,6 +85,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -93,6 +107,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -105,6 +122,11 @@ namespace DeliveryService.ViewModel.Pages.Storages
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="StorageEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="storageId">Id склада для редактирования, если null, то создается новый объект.</param>
         public StorageEditViewModel(Window window, int? storageId)
         {
             _window = window;

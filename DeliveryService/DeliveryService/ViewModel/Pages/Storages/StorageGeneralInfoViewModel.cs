@@ -12,29 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Storages
 {
+    /// <summary>
+    /// ViewModel для страницы "Общая информация" раздела "Склады".
+    /// </summary>
     public class StorageGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
         private IStorageDTOService _service;
-
         private IAuthenticationService _authenticationService;
-
         private IPdfWriterService _pdfWriterService;
 
         private ObservableCollection<StorageDTO>? _storages;
 
         private RelayCommand? _editStorageCommand;
-
         private RelayCommand? _deleteStorageCommand;
-
         private RelayCommand? _addStorageCommand;
-
         private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Список складов <see cref="Model.Storage"/>
+        /// </summary>
         public ObservableCollection<StorageDTO>? Storages
         {
             get => _storages;
@@ -45,6 +46,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
         public string TextBoxSearch
         {
             get => _textBoxSearch;
@@ -56,6 +60,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования склада
+        /// </summary>
         public RelayCommand EditStorageCommand
         {
             get
@@ -80,6 +87,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для удаления склада
+        /// </summary>
         public RelayCommand DeleteStorageCommand
         {
             get
@@ -103,6 +113,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна добавления склада.
+        /// </summary>
         public RelayCommand AddStorageCommand
         {
             get
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
             }
         }
 
+        /// <summary>
+        /// Команда для создания PDF-файла.
+        /// </summary>
         public RelayCommand CreatePdf
         {
             get
@@ -142,6 +158,9 @@ namespace DeliveryService.ViewModel.Pages.Storages
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="StorageGeneralInfoViewModel"./>
+        /// </summary>
         public StorageGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IStorageDTOService>();
@@ -152,11 +171,17 @@ namespace DeliveryService.ViewModel.Pages.Storages
         }
 
         #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
         private void UpdateData()
         {
             Storages = new ObservableCollection<StorageDTO>(_service.GetAll());
         }
 
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
         private void FilterTable()
         {
             if (_textBoxSearch != String.Empty)

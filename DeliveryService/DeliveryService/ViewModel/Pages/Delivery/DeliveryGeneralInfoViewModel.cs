@@ -12,29 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Delivery
 {
+    /// <summary>
+    /// ViewModel для страницы "Общая информация" раздела "Доставки".
+    /// </summary>
     public class DeliveryGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
         private IDeliveryDTOService _service;
-
         private IAuthenticationService _authenticationService;
-
         private IPdfWriterService _pdfWriterService;
 
         private ObservableCollection<DeliveryDTO>? _deliveries;
 
         private RelayCommand? _editDeliveryCommand;
-
         private RelayCommand? _deleteDeliveryCommand;
-
         private RelayCommand? _addDeliveryCommand;
-
         private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Список доставок <see cref="Model.Delivery"/>
+        /// </summary>
         public ObservableCollection<DeliveryDTO>? Deliveries
         {
             get => _deliveries;
@@ -45,6 +46,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
         public string TextBoxSearch
         {
             get => _textBoxSearch;
@@ -56,6 +60,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования доставки.
+        /// </summary>
         public RelayCommand EditDeliveryCommand
         {
             get
@@ -80,6 +87,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для удаления доставки.
+        /// </summary>
         public RelayCommand DeleteDeliveryCommand
         {
             get
@@ -103,6 +113,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна добавления доставки.
+        /// </summary>
         public RelayCommand AddDeliveryCommand
         {
             get
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для создания PDF-файла.
+        /// </summary>
         public RelayCommand CreatePdf
         {
             get
@@ -146,6 +162,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="DeliveryGeneralInfoViewModel"./>
+        /// </summary>
         public DeliveryGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IDeliveryDTOService>();
@@ -156,11 +175,17 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         }
 
         #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
         private void UpdateData()
         {
             Deliveries = new ObservableCollection<DeliveryDTO>(_service.GetAll());
         }
 
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
         private void FilterTable()
         {
             if (_textBoxSearch != String.Empty)

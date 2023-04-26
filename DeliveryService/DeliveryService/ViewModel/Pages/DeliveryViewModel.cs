@@ -4,16 +4,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages
 {
+    /// <summary>
+    /// Модель представления для страницы "Доставки".
+    /// </summary>
     public class DeliveryViewModel : ViewModelBase
     {
+        #region Private Fields
         private IAuthenticationService _authenticationService;
 
         private DeliveryPages? _currentPage  = DeliveryPages.DeliveryGeneralInfo;
 
         private RelayCommand? _changePageCommand;
+        #endregion
 
-
-
+        #region Properties
+        /// <summary>
+        /// Текущая страница в разделе "Доставки".
+        /// </summary>
         public DeliveryPages? CurrentPage 
         {
             get => _currentPage;
@@ -24,6 +31,9 @@ namespace DeliveryService.ViewModel.Pages
             }
         }
 
+        /// <summary>
+        /// Команда для перехода на другую страницу раздела "Доставки".
+        /// </summary>
         public RelayCommand ChangePageCommand { 
             get
             {
@@ -40,7 +50,11 @@ namespace DeliveryService.ViewModel.Pages
                 });
             } 
         }
+        #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="DeliveryViewModel"/>.
+        /// </summary>
         public DeliveryViewModel()
         {
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();

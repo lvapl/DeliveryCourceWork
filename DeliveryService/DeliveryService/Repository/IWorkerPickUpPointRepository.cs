@@ -1,42 +1,46 @@
-﻿using System.Collections.Generic;
-using DeliveryService.DTO;
+﻿using DeliveryService.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DeliveryService.Services
+namespace DeliveryService.Repository
 {
     /// <summary>
-    /// Интерфейс сервиса <see cref="WorkerDTO"/>.
+    /// Интерфейс репозитория модели <see cref="WorkersInPickUpPoint"/>.
     /// </summary>
-    public interface IWorkerDTOService
+    public interface IWorkerPickUpPointRepository
     {
         /// <summary>
         /// Добавляет новый элемент.
         /// </summary>
-        /// <param name="workerGeneralInfoDto">Добавляемый элемент.</param>
-        public void Add(WorkerDTO workerGeneralInfoDto);
+        /// <param name="workersInPickUpPoint">Добавляемый элемент.</param>
+        void Add(WorkersInPickUpPoint workersInPickUpPoint);
 
         /// <summary>
         /// Редактирует существующий элемент.
         /// </summary>
-        /// <param name="workerGeneralInfoDto">Редактирует существующий элемент.</param>
-        public void Edit(WorkerDTO workerGeneralInfoDto);
+        /// <param name="workersInPickUpPoint">Редактируемый элемент.</param>
+        void Edit(WorkersInPickUpPoint workersInPickUpPoint);
 
         /// <summary>
         /// Удаляет элемент по заданному идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор удаляемого элемента.</param>
-        public void Remove(int id);
+        void Remove(int id);
 
         /// <summary>
         /// Возвращает элемент по заданному идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор элемента.</param>
         /// <returns>Найденный элемент.</returns>
-        public WorkerDTO GetById(int id);
+        WorkersInPickUpPoint GetById(int id);
 
         /// <summary>
         /// Возвращает все элементы.
         /// </summary>
         /// <returns>Коллекция всех элементов.</returns>
-        public IEnumerable<WorkerDTO> GetAll();
+        IEnumerable<WorkersInPickUpPoint> GetAll();
     }
 }

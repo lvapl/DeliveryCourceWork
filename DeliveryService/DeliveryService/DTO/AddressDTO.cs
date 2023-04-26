@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DeliveryService.DTO
 {
+    /// <summary>
+    /// Объект служащий для отображения и изменения необходимых данных.
+    /// </summary>
     public class AddressDTO
     {
         public int Id { get; set; }

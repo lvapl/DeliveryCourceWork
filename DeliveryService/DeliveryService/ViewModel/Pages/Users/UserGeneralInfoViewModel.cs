@@ -12,29 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Users
 {
+    /// <summary>
+    /// ViewModel для страницы "Общая информация" раздела "Пользователи".
+    /// </summary>
     public class UserGeneralInfoViewModel : ViewModelBase
     {
         #region Private Fields
         private IUserDTOService _service;
-
         private IAuthenticationService _authenticationService;
-
         private IPdfWriterService _pdfWriterService;
 
         private ObservableCollection<UserDTO>? _users;
 
         private RelayCommand? _editUserCommand;
-
         private RelayCommand? _deleteUserCommand;
-
         private RelayCommand? _addUserCommand;
-
         private RelayCommand? _createPdf;
 
         private string _textBoxSearch;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Список пользователей <see cref="Model.User"/>
+        /// </summary>
         public ObservableCollection<UserDTO>? Users
         {
             get => _users;
@@ -45,6 +46,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
         public string TextBoxSearch
         {
             get => _textBoxSearch;
@@ -56,6 +60,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования пользователя.
+        /// </summary>
         public RelayCommand EditUserCommand
         {
             get
@@ -80,6 +87,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для удаления пользователя.
+        /// </summary>
         public RelayCommand DeleteUserCommand
         {
             get
@@ -103,6 +113,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна добавления пользователя.
+        /// </summary>
         public RelayCommand AddUserCommand
         {
             get
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для создания PDF-файла.
+        /// </summary>
         public RelayCommand CreatePdf
         {
             get
@@ -148,6 +164,9 @@ namespace DeliveryService.ViewModel.Pages.Users
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="UserGeneralInfoViewModel"./>
+        /// </summary>
         public UserGeneralInfoViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IUserDTOService>();
@@ -158,11 +177,17 @@ namespace DeliveryService.ViewModel.Pages.Users
         }
 
         #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
         private void UpdateData()
         {
             Users = new ObservableCollection<UserDTO>(_service.GetAll());
         }
 
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
         private void FilterTable()
         {
             if (_textBoxSearch != String.Empty)

@@ -13,35 +13,33 @@ using Microsoft.Win32;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.Worker"/>.
+    /// </summary>
     public class WorkerEditViewModel : ViewModelBase
     {
         #region Private Fields
         private WorkerDTO _worker;
 
         private IWorkerDTOService _workerService;
-        
         private IPositionRepository _positionRepository;
 
         private Window _window;
 
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
-
         private RelayCommand? _saveCommand;
-
         private RelayCommand? _cancelWindowCommand;
-
         private RelayCommand? _editPasswordCommand;
-
         private RelayCommand? _editAddressCommand;
-
         private RelayCommand? _editPassportAddressCommand;
-
         private RelayCommand? _chooseImageCommand;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Информация для редактирования, представленная в виде <see cref="WorkerDTO"/>.
+        /// </summary>
         public WorkerDTO Worker
         {
             get => _worker;
@@ -52,6 +50,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -63,6 +64,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -74,6 +78,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -101,6 +108,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -112,6 +122,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования пароля.
+        /// </summary>
         public RelayCommand EditPasswordCommand
         {
             get
@@ -124,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования адреса.
+        /// </summary>
         public RelayCommand EditAddressCommand
         {
             get
@@ -139,6 +155,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования адреса по паспорту.
+        /// </summary>
         public RelayCommand EditPassportAddressCommand
         {
             get
@@ -154,8 +173,14 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Список должностей <see cref="Model.Position"/>.
+        /// </summary>
         public ObservableCollection<Position> Positions => new ObservableCollection<Position>(_positionRepository.GetAll());
 
+        /// <summary>
+        /// Выбранная должность <see cref="Model.Worker.Position"/>.
+        /// </summary>
         public Position? Position
         {
             get => _worker.PositionId == 0 ? null : _positionRepository.GetById(_worker.PositionId);
@@ -166,6 +191,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна выбора изображения
+        /// </summary>
         public RelayCommand ChooseImageCommand
         {
             get
@@ -186,6 +214,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="WorkerEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="workerId">Id сотрудника для редактирования, если null, то создается новый объект.</param>
         public WorkerEditViewModel(Window window, int? workerId)
         {
             _window = window;
@@ -196,7 +229,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _worker = workerId == null ? new WorkerDTO() : _workerService.GetById((int)workerId);
         }
 
-
+        /// <summary>
+        /// Метод проверки заполненности обязательных полей.
+        /// </summary>
+        /// <returns>True - поля заполнены, false - не все поля заполнены.</returns>
         private bool IsFillRequiredFields()
         {
             return !string.IsNullOrWhiteSpace(Worker.FirstName)

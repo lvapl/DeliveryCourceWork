@@ -55,8 +55,14 @@
                   ColumnHeaderStyle="{DynamicResource DataGridModernColumnHeaderStyle}"
                   RowStyle="{DynamicResource DataGridModernRowStyle}"
                   Grid.Row="1"
-                  ItemsSource="{Binding WorkersInOickUpPoints}">
+                  ItemsSource="{Binding WorkersInPickUpPoints}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"
+                                    IsReadOnly="True"
+                                    MinWidth="50"
+                                    Width="50"
+                                    Binding="{Binding Id}"/>
+                
                 <DataGridTemplateColumn Header="Сотрудник"
                                         IsReadOnly="True"
                                         MinWidth="280">

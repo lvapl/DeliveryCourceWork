@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.Worker.Password"/>.
+    /// </summary>
     public class WorkerEditPasswordViewModel : ViewModelBase
     {
         #region Private Fields
@@ -18,11 +21,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
         private Window _window;
 
         private RelayCommand? _saveCommand;
-
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
-
         private RelayCommand? _cancelWindowCommand;
 
         private string? _password;
@@ -31,6 +31,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Информация для редактирования.
+        /// </summary>
         public string? Password
         {
             get => _password;
@@ -42,6 +45,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Заполеннность шкалы сложности пароля.
+        /// </summary>
         public int ProgressPassword
         {
             get => _progressPassword;
@@ -52,6 +58,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -72,6 +81,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -83,6 +95,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -94,6 +109,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -106,6 +124,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="DeliveryEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="worker">DTO сотрудника.</param>
         public WorkerEditPasswordViewModel(Window window, WorkerDTO worker)
         {
             _worker = worker;
@@ -113,6 +136,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _service = App.ServiceProvider.GetRequiredService<IEncryptionService>();
         }
 
+        /// <summary>
+        /// Метод изменяющий <see cref="ProgressPassword"/>.
+        /// </summary>
         private void ShowValidationPassword()
         {
             PasswordDifficulty passwordDifficulty = PasswordChecker.Check(_password);

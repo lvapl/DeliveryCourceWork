@@ -41,6 +41,12 @@
                                  Style="{StaticResource SubSectionButton}"
                                  Command="{Binding ChangePageCommand}"
                                  CommandParameter="{x:Static pages:PickUpPointPages.PickUpPointGeneralInfo}" />
+                    
+                    <RadioButton GroupName="SubSelection"
+                                 Content="Сотрудники в точках выдачи"
+                                 Style="{StaticResource SubSectionButton}"
+                                 Command="{Binding ChangePageCommand}"
+                                 CommandParameter="{x:Static pages:PickUpPointPages.WorkerPickUpPoint}" />
                 </StackPanel>
             </Grid>
 

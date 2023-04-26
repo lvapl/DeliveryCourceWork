@@ -21,9 +21,9 @@ public partial class Worker
 
     public virtual Position Position { get; set; } = null!;
 
+    public virtual ICollection<WorkersInDelivery> WorkersInDeliveries { get; } = new List<WorkersInDelivery>();
+
     public virtual ICollection<WorkersInPickUpPoint> WorkersInPickUpPoints { get; } = new List<WorkersInPickUpPoint>();
 
     public virtual ICollection<WorkersInStorage> WorkersInStorages { get; } = new List<WorkersInStorage>();
-
-    public virtual ICollection<DeliveryHistory> DeliveryHistories { get; } = new List<DeliveryHistory>();
 }

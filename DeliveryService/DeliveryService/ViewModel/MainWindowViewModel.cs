@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel
 {
+    /// <summary>
+    /// Модель представления главного окна.
+    /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
         #region Private Fields
@@ -14,11 +17,8 @@ namespace DeliveryService.ViewModel
         private IAuthenticationService _authenticationService;
 
         private RelayCommand? _changePageCommand;
-
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _maximazeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
 
         private AppPages? _currentPage;
@@ -27,8 +27,14 @@ namespace DeliveryService.ViewModel
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Максимальная высота главного окна.
+        /// </summary>
         public double MaxHight => SystemParameters.MaximizedPrimaryScreenHeight;
 
+        /// <summary>
+        /// Текущая страница приложения.
+        /// </summary>
         public AppPages? CurrentPage
         {
             get => _currentPage;
@@ -39,6 +45,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для изменения текущей страницы приложения.
+        /// </summary>
         public RelayCommand ChangePageCommand
         {
             get
@@ -57,6 +66,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия главного окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -68,6 +80,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания главного окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -79,6 +94,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для разворачивания/свертывания главного окна.
+        /// </summary>
         public RelayCommand MaximazeWindowCommand
         {
             get
@@ -90,6 +108,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Текущий работник.
+        /// </summary>
         public Worker? CurrentWorker
         {
             get => _currentWorker;
@@ -101,6 +122,10 @@ namespace DeliveryService.ViewModel
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="MainWindowViewModel"/>.
+        /// </summary>
+        /// <param name="window">Главное окно.</param>
         public MainWindowViewModel(Window window)
         {
             _window = window;

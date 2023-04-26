@@ -1,0 +1,50 @@
+﻿using DeliveryService.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DeliveryService.Repository
+{
+    /// <summary>
+    /// Репозиторий модели <see cref="WorkersInPickUpPoint"/>, реализует соответствующий интерфейс репозитория.
+    /// </summary>
+    public class WorkerPickUpPointRepository : IWorkerPickUpPointRepository
+    {
+        private DsContext _context;
+
+        public WorkerPickUpPointRepository(DsContext context)
+        {
+            _context = context;
+        }
+
+        public void Add(WorkersInPickUpPoint workersInPickUpPoint)
+        {
+            _context.WorkersInPickUpPoints.Add(workersInPickUpPoint);
+            _context.SaveChanges();
+        }
+
+        public void Edit(WorkersInPickUpPoint workersInPickUpPoint)
+        {
+            _context.WorkersInPickUpPoints.Update(workersInPickUpPoint);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<WorkersInPickUpPoint> GetAll()
+        {
+            return _context.WorkersInPickUpPoints.ToList();
+        }
+
+        public WorkersInPickUpPoint GetById(int id)
+        {
+            return _context.WorkersInPickUpPoints.Find(id) ?? throw new Exception();
+        }
+
+        public void Remove(int id)
+        {
+            _context.WorkersInPickUpPoints.Remove(GetById(id));
+            _context.SaveChanges();
+        }
+    }
+}

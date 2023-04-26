@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace DeliveryService.Model;
 
+/// <summary>
+/// Класс контекста базы данных. Содержит наборы объектов, которые используются для доступа к данным из базы данных.
+/// </summary>
 public partial class DsContext : DbContext
 {
-
+    /// <summary>
+    /// Конструктор по умолчанию.
+    /// </summary>
     public DsContext()
     {
     }
 
+    /// <summary>
+    /// Конструктор класса, использующий настройки контекста.
+    /// </summary>
+    /// <param name="options">Настройки контекста.</param>
     public DsContext(DbContextOptions<DsContext> options)
         : base(options)
     {
@@ -54,17 +61,27 @@ public partial class DsContext : DbContext
 
     public virtual DbSet<WorkerImage> WorkerImages { get; set; }
 
+    public virtual DbSet<WorkersInDelivery> WorkersInDeliveries { get; set; }
+
     public virtual DbSet<WorkersInPickUpPoint> WorkersInPickUpPoints { get; set; }
 
     public virtual DbSet<WorkersInStorage> WorkersInStorages { get; set; }
 
+    /// <summary>
+    /// Метод, вызывается при конфигурации контекста базы данных.
+    /// </summary>
+    /// <param name="optionsBuilder">Построитель опций контекста базы данных.</param>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseLazyLoadingProxies();
-        optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False;");
-        optionsBuilder.LogTo(message => Debug.WriteLine(message));
+        optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False");
     }
 
+    /// <summary>
+    /// Переопределенный метод, вызывается при создании модели.
+    /// В этом методе описываются сущности и их свойства, которые будут использоваться для создания моделей базы данных.
+    /// </summary>
+    /// <param name="modelBuilder">Построитель модели.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -214,7 +231,7 @@ public partial class DsContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title)
                 .HasMaxLength(50)
-                .IsFixedLength()
+                .IsUnicode(false)
                 .HasColumnName("title");
         });
 
@@ -298,7 +315,7 @@ public partial class DsContext : DbContext
 
             entity.ToTable("users");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd().HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AddressId).HasColumnName("address_id");
             entity.Property(e => e.Firstname)
                 .IsUnicode(false)
@@ -419,7 +436,7 @@ public partial class DsContext : DbContext
             entity.ToTable("workers");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.ImageId).HasColumnName("image_id");
             entity.Property(e => e.Login)
@@ -442,25 +459,6 @@ public partial class DsContext : DbContext
                 .HasForeignKey(d => d.PositionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__workers__positio__52593CB8");
-
-            entity.HasMany(d => d.DeliveryHistories).WithMany(p => p.Workers)
-                .UsingEntity<Dictionary<string, object>>(
-                    "WorkersInDelivery",
-                    r => r.HasOne<DeliveryHistory>().WithMany()
-                        .HasForeignKey("DeliveryHistoryId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_worker_in_delivery_delivery_history"),
-                    l => l.HasOne<Worker>().WithMany()
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__worker_in__worke__5165187F"),
-                    j =>
-                    {
-                        j.HasKey("WorkerId", "DeliveryHistoryId").HasName("PK__worker_i__175A4F48D5355379");
-                        j.ToTable("workers_in_delivery");
-                        j.IndexerProperty<int>("WorkerId").HasColumnName("worker_id");
-                        j.IndexerProperty<int>("DeliveryHistoryId").HasColumnName("delivery_history_id");
-                    });
         });
 
         modelBuilder.Entity<WorkerImage>(entity =>
@@ -473,14 +471,34 @@ public partial class DsContext : DbContext
             entity.Property(e => e.WorkerImage1).HasColumnName("worker_image");
         });
 
+        modelBuilder.Entity<WorkersInDelivery>(entity =>
+        {
+            entity.ToTable("workers_in_delivery");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.DeliveryHistoryId).HasColumnName("delivery_history_id");
+            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
+
+            entity.HasOne(d => d.DeliveryHistory).WithMany(p => p.WorkersInDeliveries)
+                .HasForeignKey(d => d.DeliveryHistoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_worker_in_delivery_delivery_history");
+
+            entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInDeliveries)
+                .HasForeignKey(d => d.WorkerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__worker_in__worke__5165187F");
+        });
+
         modelBuilder.Entity<WorkersInPickUpPoint>(entity =>
         {
-            entity.HasKey(e => new { e.WorkerId, e.PickUpPointId, e.WorkingShift });
+            entity.HasKey(e => e.Id).HasName("PK_workers_in_pick_up_points_1");
 
             entity.ToTable("workers_in_pick_up_points");
 
-            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.PickUpPointId).HasColumnName("pick_up_point_id");
+            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
             entity.Property(e => e.WorkingShift).HasColumnName("working_shift");
 
             entity.HasOne(d => d.PickUpPoint).WithMany(p => p.WorkersInPickUpPoints)
@@ -491,38 +509,39 @@ public partial class DsContext : DbContext
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInPickUpPoints)
                 .HasForeignKey(d => d.WorkerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__workers_i__worke__74AE54BC");
+                .HasConstraintName("FK_workers_in_pick_up_points_workers");
 
             entity.HasOne(d => d.WorkingShiftNavigation).WithMany(p => p.WorkersInPickUpPoints)
                 .HasForeignKey(d => d.WorkingShift)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__workers_i__worki__76969D2E");
+                .HasConstraintName("FK_workers_in_pick_up_points_shifts");
         });
 
         modelBuilder.Entity<WorkersInStorage>(entity =>
         {
-            entity.HasKey(e => new { e.WorkerId, e.StorageId, e.WorkingShift });
+            entity.HasKey(e => e.Id).HasName("PK_workers_in_storages_1");
 
             entity.ToTable("workers_in_storages");
 
-            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.StorageId).HasColumnName("storage_id");
+            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
             entity.Property(e => e.WorkingShift).HasColumnName("working_shift");
 
             entity.HasOne(d => d.Storage).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.StorageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__workers_i__stora__797309D9");
+                .HasConstraintName("FK_workers_in_storages_storages");
 
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.WorkerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__workers_i__worke__787EE5A0");
+                .HasConstraintName("FK_workers_in_storages_workers");
 
             entity.HasOne(d => d.WorkingShiftNavigation).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.WorkingShift)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__workers_i__worki__7A672E12");
+                .HasConstraintName("FK_workers_in_storages_shifts");
         });
 
         OnModelCreatingPartial(modelBuilder);

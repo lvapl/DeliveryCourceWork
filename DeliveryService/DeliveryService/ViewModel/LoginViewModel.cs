@@ -7,6 +7,9 @@ using DeliveryService.View;
 
 namespace DeliveryService.ViewModel
 {
+    /// <summary>
+    /// Модель представления для окна авторизации пользователя
+    /// </summary>
     public class LoginViewModel : ViewModelBase
     {
         #region Private Fields
@@ -24,7 +27,9 @@ namespace DeliveryService.ViewModel
         #endregion
 
         #region Properties
-
+        /// <summary>
+        /// Логин пользователя
+        /// </summary>
         public string Login
         {
             get => _login;
@@ -35,6 +40,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда авторизации пользователя
+        /// </summary>
         public RelayCommand LoginCommand
         {
             get
@@ -55,7 +63,10 @@ namespace DeliveryService.ViewModel
                 });
             }
         }
-        
+
+        /// <summary>
+        /// Команда закрытия окна
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -67,6 +78,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда сворачивания окна
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -78,6 +92,9 @@ namespace DeliveryService.ViewModel
             }
         }
 
+        /// <summary>
+        /// Флаг видимости сообщения об ошибке авторизации
+        /// </summary>
         public bool ErrorMessageVisibility
         {
             get => _errorMessageVisibility;
@@ -89,6 +106,12 @@ namespace DeliveryService.ViewModel
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="LoginViewModel"/>.
+        /// </summary>
+        /// <param name="authenticationService">Сервис аутентификации</param>
+        /// <param name="loginWindow">Окно авторизации</param>
+        /// <param name="mainWindow">Главное окно</param>
         public LoginViewModel(IAuthenticationService authenticationService, LoginWindow loginWindow, MainWindow mainWindow)
         {
             _authenticationService = authenticationService;
@@ -97,6 +120,9 @@ namespace DeliveryService.ViewModel
         }
 
         #region Methods
+        /// <summary>
+        /// Отображение главного окна при успешной авторизации
+        /// </summary>
         public void ShowMainWindow()
         {
             _mainWindow.Show();

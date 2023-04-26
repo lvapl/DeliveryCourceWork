@@ -11,6 +11,8 @@ public partial class WorkersInStorage
 
     public int WorkingShift { get; set; }
 
+    public int Id { get; set; }
+
     public virtual Storage Storage { get; set; } = null!;
 
     public virtual Worker Worker { get; set; } = null!;

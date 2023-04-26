@@ -44,7 +44,7 @@ namespace DeliveryService
             services.AddSingleton<LoginWindow>();
             services.AddSingleton<MainWindow>();
             #endregion
-            
+
             #region Repositories
             services.AddSingleton<IWorkerRepository, WorkerRepository>();
             services.AddSingleton<IStorageRepository, StorageRepository>();
@@ -53,6 +53,8 @@ namespace DeliveryService
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPositionRepository, PositionRepository>();
             services.AddSingleton<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IShiftRepository, ShiftRepository>();
+            services.AddSingleton<IWorkerPickUpPointRepository, WorkerPickUpPointRepository>();
             #endregion
 
             #region Services
@@ -68,6 +70,7 @@ namespace DeliveryService
             services.AddSingleton<IDeliveryDTOService, DeliveryDTOService>();
             services.AddSingleton<IPickUpPointDTOService, PickUpPointDTOService>();
             services.AddSingleton<IStorageDTOService, StorageDTOService>();
+            services.AddSingleton<IWorkerPickUpPointService, WorkerPickUpPointService>();
             #endregion
         }
 
@@ -101,7 +104,7 @@ namespace DeliveryService
                     message = e.Exception.Message;
                     break;
             }
-            
+
             Window window = new ErrorWindow(message);
             window.ShowDialog();
         }

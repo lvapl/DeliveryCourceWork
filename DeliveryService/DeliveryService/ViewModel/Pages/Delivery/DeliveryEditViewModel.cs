@@ -8,32 +8,31 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Delivery
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.Delivery"/>.
+    /// </summary>
     public class DeliveryEditViewModel : ViewModelBase
     {
         #region Private Fields
         private DeliveryDTO _delivery;
 
         private IDeliveryDTOService _deliveryService;
-
         private IUserRepository _userRepository;
-
         private IPickUpPointRepository _pointRepository;
-
         private DsContext _context;
 
         private Window _window;
 
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
-
         private RelayCommand? _saveCommand;
-
         private RelayCommand? _cancelCommand;
         #endregion
 
-
         #region Properties
+        /// <summary>
+        /// Информация для редактирования, представленная в виде <see cref="DeliveryDTO"/>.
+        /// </summary>
         public DeliveryDTO Delivery
         {
             get => _delivery;
@@ -44,8 +43,14 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Список пользователей <see cref="User"/>.
+        /// </summary>
         public ObservableCollection<User> Users => new ObservableCollection<User>(_userRepository.GetAll());
 
+        /// <summary>
+        /// Выбранный пользователь-отправитель <see cref="Model.Delivery.Sender"/>.
+        /// </summary>
         public User? Sender 
         {
             get => _delivery.SenderId == null ? null : _userRepository.GetById((int)_delivery.SenderId);
@@ -56,6 +61,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Выбранный пользователь-получатель <see cref="Model.Delivery.Recipient"/>.
+        /// </summary>
         public User? Recipient
         {
             get => _delivery.RecipientId == null ? null : _userRepository.GetById((int)_delivery.RecipientId);
@@ -66,8 +74,14 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Список пунктов выдачи <see cref="PickUpPoint"/>.
+        /// </summary>
         public ObservableCollection<PickUpPoint> PickUpPoints => new ObservableCollection<PickUpPoint>(_pointRepository.GetAll());
 
+        /// <summary>
+        /// Выбранный пункт получения <see cref="Model.Delivery.PickPoint"/>.
+        /// </summary>
         public PickUpPoint? PickPoint
         {
             get => _delivery.PickPointId == null ? null : _pointRepository.GetById((int)_delivery.PickPointId);
@@ -77,7 +91,10 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                 OnPropertyChanged();
             }
         }
-        
+
+        /// <summary>
+        /// Выбранный пункт приёма <see cref="Model.Delivery.UpPoint"/>.
+        /// </summary>
         public PickUpPoint? UpPoint
         {
             get => _delivery.UpPointId == null ? null : _pointRepository.GetById((int)_delivery.UpPointId);
@@ -88,8 +105,14 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Список тарифов <see cref="Model.Tariff"/>.
+        /// </summary>
         public ObservableCollection<Tariff> Tariffs => new ObservableCollection<Tariff>(_context.Tariffs);
 
+        /// <summary>
+        /// Выбранный тариф <see cref="Model.Delivery.Tariff"/>.
+        /// </summary>
         public Tariff? Tariff
         {
             get => _delivery.TariffId == null ? null : _context.Tariffs.Find((int)_delivery.TariffId);
@@ -100,6 +123,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -111,6 +137,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -122,6 +151,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -142,6 +174,9 @@ namespace DeliveryService.ViewModel.Pages.Delivery
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -154,6 +189,11 @@ namespace DeliveryService.ViewModel.Pages.Delivery
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="DeliveryEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="deliveryId">Id доставки для редактирования, если null, то создается новый объект.</param>
         public DeliveryEditViewModel(Window window, int? deliveryId)
         {
             _window = window;

@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Users
 {
+    /// <summary>
+    /// ViewModel для редактирования/добавления <see cref="Model.User"/>.
+    /// </summary>
     public class UserEditViewModel : ViewModelBase
     {
         #region Private Fields
@@ -17,20 +20,17 @@ namespace DeliveryService.ViewModel.Pages.Users
         private Window _window;
 
         private RelayCommand? _closeWindowCommand;
-
         private RelayCommand? _minimizeWindowCommand;
-
         private RelayCommand? _saveCommand;
-
         private RelayCommand? _cancelWindowCommand;
-
         private RelayCommand? _editAddressCommand;
-
         private RelayCommand? _editPassportAddressCommand;
         #endregion
 
-
         #region Properties
+        /// <summary>
+        /// Информация для редактирования, представленная в виде <see cref="UserDTO"/>.
+        /// </summary>
         public UserDTO User
         {
             get => _user;
@@ -41,6 +41,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для закрытия окна.
+        /// </summary>
         public RelayCommand CloseWindowCommand
         {
             get
@@ -52,6 +55,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для сворачивания окна.
+        /// </summary>
         public RelayCommand MinimizeWindowCommand
         {
             get
@@ -63,6 +69,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для сохранения.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -90,6 +99,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для отмены изменений и закрытия окна.
+        /// </summary>
         public RelayCommand CancelCommand
         {
             get
@@ -101,6 +113,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования адреса.
+        /// </summary>
         public RelayCommand EditAddressCommand
         {
             get
@@ -115,6 +130,9 @@ namespace DeliveryService.ViewModel.Pages.Users
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования адреса по паспорту.
+        /// </summary>
         public RelayCommand EditPassportAddressCommand
         {
             get
@@ -130,6 +148,11 @@ namespace DeliveryService.ViewModel.Pages.Users
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор класса <see cref="DeliveryEditViewModel"/>.
+        /// </summary>
+        /// <param name="window">Окно для редактирования данных.</param>
+        /// <param name="userId">Id пользователя для редактирования, если null, то создается новый объект.</param>
         public UserEditViewModel(Window window, int? userId)
         {
             _window = window;
@@ -139,7 +162,10 @@ namespace DeliveryService.ViewModel.Pages.Users
             _user = userId == null ? new UserDTO() : _userService.GetById((int)userId);
         }
 
-
+        /// <summary>
+        /// Метод проверки заполненности обязательных полей.
+        /// </summary>
+        /// <returns>True - поля заполнены, false - не все поля заполнены.</returns>
         private bool IsFillRequiredFields()
         {
             return !string.IsNullOrWhiteSpace(User.FirstName)

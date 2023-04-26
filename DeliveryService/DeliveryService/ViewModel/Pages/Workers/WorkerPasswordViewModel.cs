@@ -9,18 +9,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryService.ViewModel.Pages.Workers
 {
+    /// <summary>
+    /// ViewModel для страницы "Пароли" раздела "Сотрудники".
+    /// </summary>
     public class WorkerPasswordViewModel : ViewModelBase
     {
+        #region Private Fields
         private IAuthenticationService _authenticationService;
-
         private IWorkerDTOService _service;
 
         private ObservableCollection<WorkerDTO>? _workers;
 
         private RelayCommand? _editPasswordCommand;
+        #endregion
 
-
-
+        #region Properties
+        /// <summary>
+        /// Список сотрудников <see cref="Model.Worker"/>
+        /// </summary>
         public ObservableCollection<WorkerDTO>? Workers
         {
             get => _workers;
@@ -31,6 +37,9 @@ namespace DeliveryService.ViewModel.Pages.Workers
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна редактирования пароля.
+        /// </summary>
         public RelayCommand EditPasswordCommand
         {
             get
@@ -56,8 +65,11 @@ namespace DeliveryService.ViewModel.Pages.Workers
                 });
             }
         }
+        #endregion
 
-
+        /// <summary>
+        /// Конструктор класса <see cref="WorkerPasswordViewModel"./>
+        /// </summary>
         public WorkerPasswordViewModel()
         {
             _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();

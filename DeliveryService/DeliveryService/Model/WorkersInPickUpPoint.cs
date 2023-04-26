@@ -11,6 +11,8 @@ public partial class WorkersInPickUpPoint
 
     public int WorkingShift { get; set; }
 
+    public int Id { get; set; }
+
     public virtual PickUpPoint PickUpPoint { get; set; } = null!;
 
     public virtual Worker Worker { get; set; } = null!;

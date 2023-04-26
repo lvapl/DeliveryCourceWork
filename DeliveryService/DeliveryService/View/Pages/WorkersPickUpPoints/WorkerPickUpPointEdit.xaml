@@ -53,11 +53,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Id}"
                                     Margin="5 0 0 0"/>
-                                <TextBlock Text="{Binding Firstname}"
+                                <TextBlock Text="{Binding IdNavigation.Firstname}"
                                     Margin="5 0 0 0"/>
-                                <TextBlock Text="{Binding Lastname}"
+                                <TextBlock Text="{Binding IdNavigation.Lastname}"
                                     Margin="5 0 0 0"/>
-                                <TextBlock Text="{Binding Patronymic}"
+                                <TextBlock Text="{Binding IdNavigation.Patronymic}"
                                     Margin="5 0 0 0"/>
                             </StackPanel>
                         </DataTemplate>
@@ -103,6 +103,10 @@
                                         Margin="5 0 0 0"/>
                                 <TextBlock Text="{Binding StartedShiftAt}"
                                         Margin="5 0 0 0"/>
+                                <TextBlock Text="-"
+                                        Margin="5 0 0 0"/>
+                                <TextBlock Text="{Binding EndedShiftAt}"
+                                        Margin="5 0 0 0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
@@ -123,12 +127,14 @@
                 Grid.Row="2"
                 Style="{StaticResource EditButtons}"
                 HorizontalAlignment="Left"
+                Margin="20 0"
                 Command="{Binding SaveCommand}"/>
 
         <Button Grid.Row="2"
                 Style="{StaticResource EditButtons}"
                 Content="Отмена"
                 HorizontalAlignment="Right"
+                Margin="20 0"
                 Command="{Binding CancelCommand}"/>
         <!--#endregion-->
     </Grid>

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using DeliveryService.Enums;
 using DeliveryService.View;
 using DeliveryService.View.Pages.PickUpPoints;
+using DeliveryService.View.Pages.WorkersPickUpPoints;
 
 namespace DeliveryService.Converters
 {
@@ -28,6 +29,8 @@ namespace DeliveryService.Converters
                 {
                     case PickUpPointPages.PickUpPointGeneralInfo:
                         return new PickUpPointGeneralInfoPage();
+                    case PickUpPointPages.WorkerPickUpPoint:
+                        return new WorkerPickUpPointGeneralInfoPage();
                     default:
                         return new EmptyPage();
                 }
@@ -51,6 +54,8 @@ namespace DeliveryService.Converters
                 {
                     case PickUpPointGeneralInfoPage:
                         return PickUpPointPages.PickUpPointGeneralInfo;
+                    case WorkerPickUpPointGeneralInfoPage:
+                        return PickUpPointPages.WorkerPickUpPoint;
                     default:
                         return null;
                 }

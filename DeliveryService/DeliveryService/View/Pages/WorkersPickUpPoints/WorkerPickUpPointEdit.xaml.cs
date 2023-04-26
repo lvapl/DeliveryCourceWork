@@ -1,4 +1,4 @@
-﻿using DeliveryService.ViewModel.Pages.Delivery;
+﻿using DeliveryService.ViewModel.Pages.WorkersPickUpPoints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace DeliveryService.View.Pages.WorkersPickUpPoints
 {
     /// <summary>
-    /// Логика взаимодействия для UserEdit.xaml
+    /// Логика взаимодействия для WorkerPickUpPointEdit.xaml
     /// </summary>
     public partial class WorkerPickUpPointEdit : Window
     {
-        public WorkerPickUpPointEdit(int? deliveryId)
+        public WorkerPickUpPointEdit(int? id)
         {
             InitializeComponent();
-            this.DataContext = new DeliveryEditViewModel(this, deliveryId);
+            this.DataContext = new WorkerPickUpPointEditViewModel(this, id);
         }
     }
 }

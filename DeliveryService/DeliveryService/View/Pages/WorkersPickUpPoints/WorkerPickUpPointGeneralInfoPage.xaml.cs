@@ -1,4 +1,5 @@
 ﻿using DeliveryService.ViewModel.Pages.Delivery;
+using DeliveryService.ViewModel.Pages.WorkersPickUpPoints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace DeliveryService.View.Pages.WorkersPickUpPoints
         public WorkerPickUpPointGeneralInfoPage()
         {
             InitializeComponent();
-            DataContext = new DeliveryGeneralInfoViewModel();
+            DataContext = new WorkerPickUpPointGeneralInfoViewModel();
         }
     }
 }
