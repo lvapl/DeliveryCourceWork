@@ -9,6 +9,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\Images\DeliveryService.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
         <PackageReference Include="iTextSharp" Version="5.5.13.3" />
         <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
@@ -24,6 +28,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\CredentialChecker\CredentialChecker.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Resources\Images\DeliveryService.ico" />
     </ItemGroup>
 
     <ItemGroup>

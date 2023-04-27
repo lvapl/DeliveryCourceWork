@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DeliveryService.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DeliveryService.Repository
 {
@@ -44,7 +45,18 @@ namespace DeliveryService.Repository
 
         public void Remove(int id)
         {
-            _context.PickUpPoints.Remove(GetById(id));
+            PickUpPoint point = GetById(id);
+            EntityEntry<PickUpPoint> entry = _context.Entry(point);
+            try
+            {
+                _context.PickUpPoints.Remove(GetById(id));
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+            }
         }
         #endregion
     }

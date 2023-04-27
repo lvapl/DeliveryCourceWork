@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DeliveryService.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DeliveryService.Repository
 {
@@ -22,8 +23,17 @@ namespace DeliveryService.Repository
         #region Methods
         public void Add(Address address)
         {
-            _context.Addresses.Add(address);
-            _context.SaveChanges();
+            EntityEntry<Address> entry = _context.Entry(address);
+            try
+            {
+                _context.Addresses.Add(address);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+            }
         }
 
         public void Edit(Address address)

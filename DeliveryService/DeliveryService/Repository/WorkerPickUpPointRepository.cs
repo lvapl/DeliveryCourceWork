@@ -1,4 +1,5 @@
 ﻿using DeliveryService.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,8 +44,18 @@ namespace DeliveryService.Repository
 
         public void Remove(int id)
         {
-            _context.WorkersInPickUpPoints.Remove(GetById(id));
-            _context.SaveChanges();
+            WorkersInPickUpPoint workerPoint = GetById(id);
+            EntityEntry<WorkersInPickUpPoint> entry = _context.Entry(workerPoint);
+            try
+            {
+                _context.WorkersInPickUpPoints.Remove(workerPoint);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+            }
         }
     }
 }

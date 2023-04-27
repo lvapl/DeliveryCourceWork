@@ -24,7 +24,7 @@
     <Color x:Key="TextBlackColor">#000</Color>
     <SolidColorBrush x:Key="TextBlackColorBrush" Color="{StaticResource TextBlackColor}"/>
 
-    <Color x:Key="TextGrayColor">#888</Color>
+    <Color x:Key="TextGrayColor">#666</Color>
     <SolidColorBrush x:Key="TextGrayColorBrush" Color="{StaticResource TextGrayColor}"/>
 
     <Color x:Key="ControlCloseColor">#F17979</Color>
