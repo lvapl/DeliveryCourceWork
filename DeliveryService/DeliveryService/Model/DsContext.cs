@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryService.Model;
@@ -74,7 +75,7 @@ public partial class DsContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseLazyLoadingProxies();
-        optionsBuilder.UseSqlServer("Server=NONSTOP; Database=DSe; Trusted_Connection=True; Encrypt=False");
+        optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
     }
 
     /// <summary>
@@ -448,7 +449,7 @@ public partial class DsContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Worker)
                 .HasForeignKey<Worker>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_wuz");
 
             entity.HasOne(d => d.Image).WithMany(p => p.Workers)
@@ -457,7 +458,7 @@ public partial class DsContext : DbContext
 
             entity.HasOne(d => d.Position).WithMany(p => p.Workers)
                 .HasForeignKey(d => d.PositionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK__workers__positio__52593CB8");
         });
 
@@ -481,12 +482,12 @@ public partial class DsContext : DbContext
 
             entity.HasOne(d => d.DeliveryHistory).WithMany(p => p.WorkersInDeliveries)
                 .HasForeignKey(d => d.DeliveryHistoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_worker_in_delivery_delivery_history");
 
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInDeliveries)
                 .HasForeignKey(d => d.WorkerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK__worker_in__worke__5165187F");
         });
 
@@ -503,17 +504,17 @@ public partial class DsContext : DbContext
 
             entity.HasOne(d => d.PickUpPoint).WithMany(p => p.WorkersInPickUpPoints)
                 .HasForeignKey(d => d.PickUpPointId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK__workers_i__pick___75A278F5");
 
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInPickUpPoints)
                 .HasForeignKey(d => d.WorkerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_workers_in_pick_up_points_workers");
 
             entity.HasOne(d => d.WorkingShiftNavigation).WithMany(p => p.WorkersInPickUpPoints)
                 .HasForeignKey(d => d.WorkingShift)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_workers_in_pick_up_points_shifts");
         });
 
@@ -530,17 +531,17 @@ public partial class DsContext : DbContext
 
             entity.HasOne(d => d.Storage).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.StorageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_workers_in_storages_storages");
 
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.WorkerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_workers_in_storages_workers");
 
             entity.HasOne(d => d.WorkingShiftNavigation).WithMany(p => p.WorkersInStorages)
                 .HasForeignKey(d => d.WorkingShift)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasConstraintName("FK_workers_in_storages_shifts");
         });
 

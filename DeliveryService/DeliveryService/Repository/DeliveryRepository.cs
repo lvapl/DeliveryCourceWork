@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DeliveryService.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DeliveryService.Repository
 {
@@ -22,14 +23,32 @@ namespace DeliveryService.Repository
         #region Methods
         public void Add(Delivery delivery)
         {
-            _context.Deliveries.Add(delivery);
-            _context.SaveChanges();
+            EntityEntry<Delivery> entry = _context.Entry(delivery);
+            try
+            {
+                _context.Deliveries.Add(delivery);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось добавить запись.");
+            }
         }
 
         public void Edit(Delivery delivery)
         {
-            _context.Deliveries.Update(delivery);
-            _context.SaveChanges();
+            EntityEntry<Delivery> entry = _context.Entry(delivery);
+            try
+            {
+                _context.Deliveries.Update(delivery);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось изменить запись.");
+            }
         }
 
         public IEnumerable<Delivery> GetAll()
@@ -44,8 +63,18 @@ namespace DeliveryService.Repository
 
         public void Remove(int id)
         {
-            _context.Deliveries.Remove(GetById(id));
-            _context.SaveChanges();
+            Delivery delivery = GetById(id);
+            EntityEntry<Delivery> entry = _context.Entry(delivery);
+            try
+            {
+                _context.Deliveries.Remove(delivery);
+                _context.SaveChanges();
+            }
+            catch 
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно присутствуют связи с другими записями.");
+            }
         }
         #endregion
     }

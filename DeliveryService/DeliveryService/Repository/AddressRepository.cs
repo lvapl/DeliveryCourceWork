@@ -32,14 +32,23 @@ namespace DeliveryService.Repository
             catch
             {
                 entry.Reload();
-                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+                throw new Exception("Не удалось добавить запись.");
             }
         }
 
         public void Edit(Address address)
         {
-            _context.Addresses.Update(address);
-            _context.SaveChanges();
+            EntityEntry<Address> entry = _context.Entry(address);
+            try
+            {
+                _context.Addresses.Update(address);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось изменить запись.");
+            }
         }
 
         public IEnumerable<Address> GetAll()
@@ -54,8 +63,18 @@ namespace DeliveryService.Repository
 
         public void Remove(int id)
         {
-            _context.Addresses.Remove(GetById(id));
-            _context.SaveChanges();
+            Address address = GetById(id);
+            EntityEntry<Address> entry = _context.Entry(address);
+            try
+            {
+                _context.Addresses.Remove(address);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно присутствуют связи с другими записями.");
+            }
         }
         #endregion
     }

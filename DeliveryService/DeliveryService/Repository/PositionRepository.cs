@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DeliveryService.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DeliveryService.Repository
 {
@@ -22,14 +23,32 @@ namespace DeliveryService.Repository
         #region Methods
         public void Add(Position position)
         {
-            _context.Positions.Add(position);
-            _context.SaveChanges();
+            EntityEntry<Position> entry = _context.Entry(position);
+            try
+            {
+                _context.Positions.Add(position);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось добавить запись.");
+            }
         }
 
         public void Edit(Position position)
         {
-            _context.Positions.Update(position);
-            _context.SaveChanges();
+            EntityEntry<Position> entry = _context.Entry(position);
+            try
+            {
+                _context.Positions.Update(position);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось изменить запись.");
+            }
         }
 
         public IEnumerable<Position> GetAll()
@@ -44,8 +63,18 @@ namespace DeliveryService.Repository
 
         public void Remove(int id)
         {
-            _context.Remove(GetById(id));
-            _context.SaveChanges();
+            Position position = GetById(id);
+            EntityEntry<Position> entry = _context.Entry(position);
+            try
+            {
+                _context.Remove(position);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось удалить запись. Возможно присутствуют связи с другими записями.");
+            }
         }
         #endregion
     }

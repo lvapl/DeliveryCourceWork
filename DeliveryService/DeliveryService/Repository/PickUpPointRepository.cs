@@ -23,14 +23,32 @@ namespace DeliveryService.Repository
         #region Methods
         public void Add(PickUpPoint point)
         {
-            _context.PickUpPoints.Add(point);
-            _context.SaveChanges();
+            EntityEntry<PickUpPoint> entry = _context.Entry(point);
+            try
+            {
+                _context.PickUpPoints.Add(point);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось добавить запись.");
+            }
         }
 
         public void Edit(PickUpPoint point)
         {
-            _context.PickUpPoints.Update(point);
-            _context.SaveChanges();
+            EntityEntry<PickUpPoint> entry = _context.Entry(point);
+            try
+            {
+                _context.PickUpPoints.Update(point);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось изменить запись.");
+            }
         }
 
         public IEnumerable<PickUpPoint> GetAll()
@@ -49,13 +67,13 @@ namespace DeliveryService.Repository
             EntityEntry<PickUpPoint> entry = _context.Entry(point);
             try
             {
-                _context.PickUpPoints.Remove(GetById(id));
+                _context.PickUpPoints.Remove(point);
                 _context.SaveChanges();
             }
             catch
             {
                 entry.Reload();
-                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+                throw new Exception("Не удалось удалить запись. Возможно присутствуют связи с другими записями.");
             }
         }
         #endregion

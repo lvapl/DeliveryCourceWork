@@ -22,14 +22,32 @@ namespace DeliveryService.Repository
 
         public void Add(WorkersInPickUpPoint workersInPickUpPoint)
         {
-            _context.WorkersInPickUpPoints.Add(workersInPickUpPoint);
-            _context.SaveChanges();
+            EntityEntry<WorkersInPickUpPoint> entry = _context.Entry(workersInPickUpPoint);
+            try
+            {
+                _context.WorkersInPickUpPoints.Add(workersInPickUpPoint);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось добавить запись.");
+            }
         }
 
         public void Edit(WorkersInPickUpPoint workersInPickUpPoint)
         {
-            _context.WorkersInPickUpPoints.Update(workersInPickUpPoint);
-            _context.SaveChanges();
+            EntityEntry<WorkersInPickUpPoint> entry = _context.Entry(workersInPickUpPoint);
+            try
+            {
+                _context.WorkersInPickUpPoints.Update(workersInPickUpPoint);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                entry.Reload();
+                throw new Exception("Не удалось изменить запись.");
+            }
         }
 
         public IEnumerable<WorkersInPickUpPoint> GetAll()
@@ -54,7 +72,7 @@ namespace DeliveryService.Repository
             catch
             {
                 entry.Reload();
-                throw new Exception("Не удалось удалить запись. Возможно есть связи с другими записями.");
+                throw new Exception("Не удалось удалить запись. Возможно присутствуют связи с другими записями.");
             }
         }
     }
