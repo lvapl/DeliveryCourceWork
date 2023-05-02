@@ -67,15 +67,14 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                     {
                         if (obj != null)
                         {
-                            WorkersInPickUpPointsDTO workersInPoint = obj as WorkersInPickUpPointsDTO ?? throw new Exception("Не удалось идентифицировать запись");
-                            Window window = new WorkerPickUpPointEdit(workersInPoint.Id);
+                            Window window = new WorkerPickUpPointEdit((int)obj);
                             window.ShowDialog();
                             UpdateData();
                         }
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -92,14 +91,13 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                     {
                         if (obj != null)
                         {
-                            WorkersInPickUpPointsDTO workersInPoint = obj as WorkersInPickUpPointsDTO ?? throw new Exception("Не удалось идентифицировать запись");
-                            _service.Remove(workersInPoint.Id);
+                            _service.Remove((int)obj);
                             UpdateData();
                         }
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -120,7 +118,7 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -185,7 +183,10 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                                                                                                                           || x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch)
                                                                                                                           || x.Address.House != null && x.Address.House.Contains(_textBoxSearch))));
             }
-
+            else
+            {
+                UpdateData();
+            }
         }
         #endregion
     }

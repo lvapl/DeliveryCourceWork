@@ -80,7 +80,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -106,7 +106,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -130,7 +130,7 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -202,6 +202,10 @@ namespace DeliveryService.ViewModel.Pages.Delivery
                                                                                                  || x.Recipient.LastName.Contains(_textBoxSearch)
                                                                                                  || (x.Recipient.Patronymic != null && x.Recipient.Patronymic.Contains(_textBoxSearch))))
                                                                                              || (x.Price != null && x.Price.ToString()!.Contains(_textBoxSearch))));
+            }
+            else
+            {
+                UpdateData();
             }
         }
         #endregion

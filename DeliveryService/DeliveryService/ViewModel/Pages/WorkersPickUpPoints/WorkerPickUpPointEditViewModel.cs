@@ -108,8 +108,16 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                 {
                     if (_workersInPickUpPointsDTO.WorkerIdOriginal != 0)
                     {
-                        _workerPointService.Edit(_workersInPickUpPointsDTO);
-                        _window.Close();
+                        if (IsFillRequiredFields())
+                        {
+                            _workerPointService.Edit(_workersInPickUpPointsDTO);
+                            _window.Close();
+                        }
+                        else
+                        {
+                            Window window = new ErrorWindow("Обязательные поля не заполнены!");
+                            window.ShowDialog();
+                        }
                     }
                     else
                     {
@@ -117,8 +125,16 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
                                                                             && x.PickUpPointId == _workersInPickUpPointsDTO.PickUpPointId
                                                                             && x.WorkingShift == _workersInPickUpPointsDTO.ShiftId) == null)
                         {
-                            _workerPointService.Add(_workersInPickUpPointsDTO);
-                            _window.Close();
+                            if (IsFillRequiredFields())
+                            {
+                                _workerPointService.Add(_workersInPickUpPointsDTO);
+                                _window.Close();
+                            }
+                            else
+                            {
+                                Window window = new ErrorWindow("Обязательные поля не заполнены!");
+                                window.ShowDialog();
+                            }
                         }
                         else
                         {
@@ -156,5 +172,18 @@ namespace DeliveryService.ViewModel.Pages.WorkersPickUpPoints
 
             _workersInPickUpPointsDTO = id == null ? new WorkersInPickUpPointsDTO() : _workerPointService.GetById((int)id);
         }
+
+        #region Methods
+        /// <summary>
+        /// Метод проверки заполненности обязательных полей.
+        /// </summary>
+        /// <returns>True - поля заполнены, false - не все поля заполнены.</returns>
+        private bool IsFillRequiredFields()
+        {
+            return WorkersInPickUpPointsDTO.WorkerId != 0
+                && WorkersInPickUpPointsDTO.PickUpPointId != 0
+                && WorkersInPickUpPointsDTO.ShiftId != 0;
+        }
+        #endregion
     }
 }

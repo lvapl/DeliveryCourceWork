@@ -14,17 +14,17 @@ namespace DeliveryService.Services
     {
         public void CreatePdfFile<T>(IEnumerable<T> data, Dictionary<string, string> propertyTranslations) where T : class
         {
-            // Create a file dialog to allow the user to choose the destination file
+            // Создаёт диалоговое окно создания файла
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "PDF files (*.pdf)|*.pdf"
             };
             if (saveFileDialog.ShowDialog() != true)
             {
-                return; // User canceled the dialog
+                return; // Пользователь отменил диалоговое окно
             }
 
-            // Create a PDF document
+            // Создаёт PDF документ
             Document doc = new Document(new Rectangle(PageSize.A4.Height, PageSize.A4.Width), 10f, 10f, 10f, 10f);
             PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
             doc.Open();
@@ -35,10 +35,10 @@ namespace DeliveryService.Services
                 BaseFont baseFont = BaseFont.CreateFont(Path.Combine(path, "Resources", "Fonts", "Roboto-Medium.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
                 Font font = new Font(baseFont, 12, Font.NORMAL);
 
-                // Create a table
+                // Создание таблицы
                 PdfPTable table = new PdfPTable(typeof(T).GetProperties().Count(x => propertyTranslations.ContainsKey(x.Name)));
 
-                // Add table header
+                // Добавление заголовков столбцов
                 foreach (PropertyInfo prop in typeof(T).GetProperties())
                 {
                     if (propertyTranslations.ContainsKey(prop.Name))
@@ -56,7 +56,7 @@ namespace DeliveryService.Services
                     }
                 }
 
-                // Add table data
+                // Добавляет данные в таблицу
                 foreach (T item in data)
                 {
                     foreach (PropertyInfo prop in typeof(T).GetProperties())
@@ -78,7 +78,7 @@ namespace DeliveryService.Services
                                 if (prop.PropertyType == typeof(AddressDTO))
                                 {
                                     string cellText = "";
-                                    // If the property type is a complex type, recursively add its nested properties to the table
+                                    // Если свойство комплексное, то оно заполняет по другому
                                     foreach (PropertyInfo nestedProp in prop.PropertyType.GetProperties())
                                     {
                                         if (!(nestedProp.Name != "Id" && nestedProp.Name.Contains("Id")))
@@ -99,7 +99,7 @@ namespace DeliveryService.Services
                                 {
                                     string cellText = "";
 
-                                    // If the property type is a complex type, recursively add its nested properties to the table
+                                    // Если свойство комплексное, то оно заполняет по другому
                                     foreach (PropertyInfo nestedProp in prop.PropertyType.GetProperties())
                                     {
                                         if (nestedProp.Name == "Id"

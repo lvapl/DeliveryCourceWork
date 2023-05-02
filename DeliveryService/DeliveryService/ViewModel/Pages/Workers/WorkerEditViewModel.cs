@@ -102,7 +102,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
                     else
                     {
-                        throw new Exception("Обязательные к поля не заполнены!");
+                        throw new Exception("Обязательные поля не заполнены!");
                     }
                 });
             }

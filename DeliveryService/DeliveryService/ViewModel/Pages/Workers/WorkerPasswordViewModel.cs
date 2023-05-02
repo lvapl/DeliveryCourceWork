@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using DeliveryService.DTO;
 using DeliveryService.Enums;
@@ -21,6 +23,8 @@ namespace DeliveryService.ViewModel.Pages.Workers
         private ObservableCollection<WorkerDTO>? _workers;
 
         private RelayCommand? _editPasswordCommand;
+
+        private string _textBoxSearch;
         #endregion
 
         #region Properties
@@ -34,6 +38,20 @@ namespace DeliveryService.ViewModel.Pages.Workers
             {
                 _workers = value;
                 OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Строка для поиска (фильтрации).
+        /// </summary>
+        public string TextBoxSearch
+        {
+            get => _textBoxSearch;
+            set
+            {
+                _textBoxSearch = value;
+                OnPropertyChanged();
+                FilterTable();
             }
         }
 
@@ -59,7 +77,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -75,7 +93,35 @@ namespace DeliveryService.ViewModel.Pages.Workers
             _service = App.ServiceProvider.GetRequiredService<IWorkerDTOService>();
             _authenticationService = App.ServiceProvider.GetRequiredService<IAuthenticationService>();
 
+            UpdateData();
+        }
+
+        #region Methods
+        /// <summary>
+        /// Метод обновления данных.
+        /// </summary>
+        private void UpdateData()
+        {
             Workers = new ObservableCollection<WorkerDTO>(_service.GetAll());
         }
+
+        /// <summary>
+        /// Метод фильтрации записей. Вызывается при обновлении строки поиска.
+        /// </summary>
+        private void FilterTable()
+        {
+            if (_textBoxSearch != String.Empty)
+            {
+                Workers = new ObservableCollection<WorkerDTO>(_service.GetAll().Where(x => x.Id.ToString().Contains(_textBoxSearch)
+                                                                                        || x.FirstName.Contains(_textBoxSearch)
+                                                                                        || x.LastName.Contains(_textBoxSearch)
+                                                                                        || (x.Patronymic != null && x.Patronymic.Contains(_textBoxSearch))));
+            }
+            else
+            {
+                UpdateData();
+            }
+        }
+        #endregion
     }
 }

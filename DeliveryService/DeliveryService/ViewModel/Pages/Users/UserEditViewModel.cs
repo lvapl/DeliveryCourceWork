@@ -93,7 +93,7 @@ namespace DeliveryService.ViewModel.Pages.Users
                     }
                     else
                     {
-                        throw new Exception("Обязательные к поля не заполнены!");
+                        throw new Exception("Обязательные поля не заполнены!");
                     }
                 });
             }

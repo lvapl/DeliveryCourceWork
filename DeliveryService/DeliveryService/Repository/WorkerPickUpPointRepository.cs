@@ -31,6 +31,7 @@ namespace DeliveryService.Repository
             catch
             {
                 entry.Reload();
+                entry.State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                 throw new Exception("Не удалось добавить запись.");
             }
         }

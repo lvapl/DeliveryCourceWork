@@ -81,7 +81,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -107,7 +107,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -131,7 +131,7 @@ namespace DeliveryService.ViewModel.Pages.Workers
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -207,7 +207,10 @@ namespace DeliveryService.ViewModel.Pages.Workers
                                                                                              || (x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch))
                                                                                              || (x.Address.House != null && x.Address.House.Contains(_textBoxSearch))))));
             }
-            
+            else
+            {
+                UpdateData();
+            }
         }
         #endregion
     }

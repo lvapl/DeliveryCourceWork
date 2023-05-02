@@ -80,7 +80,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -106,7 +106,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -130,7 +130,7 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                     }
                     else
                     {
-                        Window window = new ErrorWindow("Не у далось выполнить действие. Недостаточно прав.");
+                        Window window = new ErrorWindow("Не удалось выполнить действие. Недостаточно прав.");
                         window.ShowDialog();
                     }
                 });
@@ -192,7 +192,10 @@ namespace DeliveryService.ViewModel.Pages.PickUpPoints
                                                                                                     || x.Address.Street != null && x.Address.Street.Contains(_textBoxSearch)
                                                                                                     || x.Address.House != null && x.Address.House.Contains(_textBoxSearch))));
             }
-
+            else
+            {
+                UpdateData();
+            }
         }
         #endregion
     }
