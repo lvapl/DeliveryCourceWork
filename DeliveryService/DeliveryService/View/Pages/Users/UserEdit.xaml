@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:DeliveryService.Resources.Behaviors"
         mc:Ignorable="d"
         Title="UserEdit" Height="550" Width="500"
         Style="{StaticResource WinChrome}">
@@ -74,7 +76,11 @@
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
                                 Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.TelephoneNumber}"/>
+                                Text="{Binding User.TelephoneNumber}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:NumericTextBoxBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </StackPanel>
             </StackPanel>
 
@@ -85,7 +91,11 @@
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
                                 Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.PassportNumber}"/>
+                                Text="{Binding User.PassportNumber}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:NumericTextBoxBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 10">
@@ -93,7 +103,11 @@
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
                                 Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.PassportSeries}"/>
+                                Text="{Binding User.PassportSeries}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:NumericTextBoxBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 10">

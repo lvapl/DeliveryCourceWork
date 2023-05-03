@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:DeliveryService.Resources.Behaviors"
         mc:Ignorable="d"
         Title="UserEdit" Height="470" Width="275"
         Style="{StaticResource WinChrome}">
@@ -78,7 +80,11 @@
                            Style="{StaticResource EditField}"/>
                 <TextBox Text="{Binding PickUpPoint.Address.Postcode}"
                          Width="200"
-                         Style="{StaticResource TextBoxSearch}"/>
+                         Style="{StaticResource TextBoxSearch}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:NumericTextBoxBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
             </StackPanel>
         </StackPanel>
         <!--#endregion-->
