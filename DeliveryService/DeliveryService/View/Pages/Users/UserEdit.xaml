@@ -75,8 +75,9 @@
                     <TextBlock Text="Номер телефона*"
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
-                                Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.TelephoneNumber}">
+                             Style="{StaticResource TextBoxSearch}"
+                             Text="{Binding User.TelephoneNumber}"
+                             MaxLength="25">
                         <i:Interaction.Behaviors>
                             <behaviors:NumericTextBoxBehavior/>
                         </i:Interaction.Behaviors>
@@ -91,7 +92,8 @@
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
                                 Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.PassportNumber}">
+                                Text="{Binding User.PassportNumber}"
+                             MaxLength="6">
                         <i:Interaction.Behaviors>
                             <behaviors:NumericTextBoxBehavior/>
                         </i:Interaction.Behaviors>
@@ -103,7 +105,8 @@
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
                                 Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding User.PassportSeries}">
+                                Text="{Binding User.PassportSeries}"
+                             MaxLength="4">
                         <i:Interaction.Behaviors>
                             <behaviors:NumericTextBoxBehavior/>
                         </i:Interaction.Behaviors>

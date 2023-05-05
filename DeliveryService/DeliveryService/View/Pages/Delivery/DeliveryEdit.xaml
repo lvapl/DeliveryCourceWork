@@ -171,8 +171,9 @@
                     <TextBlock Text="Цена"
                                 Style="{StaticResource EditField}"/>
                     <TextBox Width="200"
-                                Style="{StaticResource TextBoxSearch}"
-                                Text="{Binding Delivery.Price}">
+                             Style="{StaticResource TextBoxSearch}"
+                             Text="{Binding Delivery.Price, Mode=TwoWay}"
+                             MaxLength="18">
                         <i:Interaction.Behaviors>
                             <behaviors:NumericTextBoxBehavior/>
                         </i:Interaction.Behaviors>

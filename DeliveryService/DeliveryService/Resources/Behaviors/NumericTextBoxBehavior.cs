@@ -16,45 +16,110 @@ namespace DeliveryService.Resources.Behaviors
     /// </summary>
     public class NumericTextBoxBehavior : Behavior<TextBox>
     {
-        /// <summary>
-        /// Вызывается при добавлении данного поведения к объекту.
-        /// </summary>
+        private bool _userTextChanged = true;
+
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PreviewTextInput += AssociatedObject_PreviewTextInput;
-            AssociatedObject.PreviewKeyDown += AssociatedObject_PreviewKeyDown;
+            AssociatedObject.TextChanged += OnTextChanged;
+            AssociatedObject.PreviewTextInput += OnPreviewTextInput;
+            DataObject.AddPastingHandler(AssociatedObject, OnPaste);
         }
 
-        /// <summary>
-        /// Вызывается при удалении данного поведения из объекта.
-        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PreviewTextInput -= AssociatedObject_PreviewTextInput;
-            AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
+            AssociatedObject.TextChanged -= OnTextChanged;
+            AssociatedObject.PreviewTextInput -= OnPreviewTextInput;
+            DataObject.RemovePastingHandler(AssociatedObject, OnPaste);
         }
 
-        /// <summary>
-        /// Обработчик события PreviewTextInput, который предотвращает ввод нечисловых значений.
-        /// </summary>
-        /// <param name="sender">Объект, генерирующий событие.</param>
-        /// <param name="e">Аргументы события.</param>
-        private void AssociatedObject_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(e.Text, out int result) || e.Text.Last() == ' ')
+            if (!_userTextChanged) return;
+
+            _userTextChanged = false;
+
+            if (double.TryParse(AssociatedObject.Text, out double result))
             {
+                NumericValue = result;
+            }
+            else
+            {
+                NumericValue = default(double);
+
+                if (string.IsNullOrEmpty(AssociatedObject.Text))
+                {
+                    AssociatedObject.Text = "0";
+                    _userTextChanged = true;
+                    AssociatedObject.CaretIndex = 1;
+                }
+            }
+
+            _userTextChanged = true;
+        }
+
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsTextAllowed(e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Text != "0" && AssociatedObject.Text == "0")
+            {
+                // если пользователь начал вводить число, удаляем автоматически подставленный ноль
+                AssociatedObject.Text = e.Text;
+                AssociatedObject.CaretIndex = 1;
                 e.Handled = true;
             }
         }
 
-        private void AssociatedObject_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
-            if (e.Key == Key.Space)
+            if (e.DataObject.GetDataPresent(typeof(string)))
             {
-                e.Handled = true;
+                var pastedText = (string)e.DataObject.GetData(typeof(string));
+
+                if (!IsTextAllowed(pastedText))
+                {
+                    e.CancelCommand();
+                }
+                else if (AssociatedObject.Text.Length == 0)
+                {
+                    // если вставляем текст и строка пустая, подставляем 0
+                    AssociatedObject.Text = "0";
+                }
             }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            return !string.IsNullOrEmpty(text) && text.All(char.IsDigit);
+        }
+
+        public static readonly DependencyProperty NumericValueProperty =
+        DependencyProperty.Register("NumericValue", typeof(double), typeof(NumericTextBoxBehavior), new PropertyMetadata(default(double), OnNumericValueChanged));
+
+        private static void OnNumericValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var behavior = d as NumericTextBoxBehavior;
+
+            if (behavior._userTextChanged) // только если изменение вызвано пользователем
+            {
+                behavior.AssociatedObject.Text = e.NewValue.ToString();
+            }
+        }
+
+        public double NumericValue
+        {
+            get { return (double)GetValue(NumericValueProperty); }
+            set { SetValue(NumericValueProperty, value); }
         }
     }
 }
